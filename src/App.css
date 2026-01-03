@@ -1,0 +1,15 @@
+:root {
+  --brand-red: #dc2626;
+  --brand-red-dark: #b91c1c;
+  --brand-red-light: #ef4444;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --bg-white: #ffffff;
+  --bg-gray: #f9fafb;
+  --border-gray: #e5e7eb;
+}
+
+.app {
+  min-height: 100vh;
+}
+
