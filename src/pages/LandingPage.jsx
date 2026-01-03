@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext.jsx'
 import Navbar from '../components/Navbar.jsx'
+import Logo from '../components/Logo.jsx'
 import './LandingPage.css'
 
 const LandingPage = () => {
@@ -12,9 +13,10 @@ const LandingPage = () => {
       <main className="landing-main">
         <section className="hero">
           <div className="hero-content">
+            <div className="hero-logo">
+              <Logo size="large" showText={true} color="white" />
+            </div>
             <h1 className="hero-title">
-              <span className="brand-highlight">Trader's Mark</span>
-              <br />
               자동매매의 새로운 기준
             </h1>
             <p className="hero-description">

@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext.jsx'
+import Logo from './Logo.jsx'
 import './Navbar.css'
 
 const Navbar = () => {
@@ -15,7 +16,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-brand">
-          <span className="brand-name">Trader's Mark</span>
+          <Logo size="medium" showText={true} />
         </Link>
         <div className="navbar-menu">
           {user ? (

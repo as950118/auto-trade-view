@@ -20,11 +20,32 @@
   margin: 0 auto;
 }
 
+.hero-logo {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-logo .logo {
+  color: white;
+}
+
+.hero-logo .logo-text {
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero-logo .logo-icon {
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+}
+
 .hero-title {
   font-size: 3.5rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
   line-height: 1.2;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .brand-highlight {
