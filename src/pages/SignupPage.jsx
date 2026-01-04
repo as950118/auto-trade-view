@@ -30,7 +30,7 @@ const SignupPage = () => {
 
     setLoading(true)
 
-    const result = await signup(username, email, password)
+    const result = await signup(username, email, password, confirmPassword)
     setLoading(false)
 
     if (result.success) {

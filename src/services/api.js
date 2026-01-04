@@ -58,23 +58,38 @@ api.interceptors.response.use(
 
 export const authAPI = {
   login: async (username, password) => {
-    const response = await api.post('/api/token/', { username, password })
-    return response.data
+    try {
+      const response = await api.post('/api/token/', { username, password })
+      return response.data
+    } catch (error) {
+      console.error('Login error:', error)
+      throw error
+    }
   },
-  signup: async (username, email, password) => {
-    const response = await api.post('/api/users/', {
-      username,
-      email,
-      password,
-      password2: password, // 비밀번호 확인
-    })
-    return response.data
+  signup: async (username, email, password, password2) => {
+    try {
+      const response = await api.post('/api/users/', {
+        username,
+        email,
+        password,
+        password2: password2 || password, // 비밀번호 확인
+      })
+      return response.data
+    } catch (error) {
+      console.error('Signup error:', error)
+      throw error
+    }
   },
   refreshToken: async (refreshToken) => {
-    const response = await api.post('/api/token/refresh/', {
-      refresh: refreshToken,
-    })
-    return response.data
+    try {
+      const response = await api.post('/api/token/refresh/', {
+        refresh: refreshToken,
+      })
+      return response.data
+    } catch (error) {
+      console.error('Refresh token error:', error)
+      throw error
+    }
   },
 }
 

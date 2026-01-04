@@ -3,6 +3,7 @@ import { AuthProvider } from './contexts/AuthContext.jsx'
 import LandingPage from './pages/LandingPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import SignupPage from './pages/SignupPage.jsx'
+import DashboardPage from './pages/DashboardPage.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import './App.css'
 
@@ -18,7 +19,7 @@ function App() {
             path="/dashboard"
             element={
               <ProtectedRoute>
-                <div>Dashboard (Coming Soon)</div>
+                <DashboardPage />
               </ProtectedRoute>
             }
           />
