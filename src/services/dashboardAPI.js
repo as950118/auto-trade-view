@@ -31,6 +31,12 @@ export const dashboardAPI = {
     return response.data.results || response.data
   },
 
+  // 주문 생성 (매수/매도)
+  createOrder: async (orderData) => {
+    const response = await api.post('/api/orders/', orderData)
+    return response.data
+  },
+
   // 주문 목록 조회
   getOrders: async (params = {}) => {
     const response = await api.get('/api/orders/', { params })
