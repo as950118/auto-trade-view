@@ -1,0 +1,163 @@
+.sell-modal-overlay {
+  z-index: 1001;
+}
+
+.sell-modal-content {
+  max-width: 480px;
+}
+
+.sell-symbol-info {
+  padding: 0 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+}
+
+.sell-symbol-ticker {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.sell-symbol-name {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.sell-available-qty {
+  width: 100%;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.sell-available-qty strong {
+  color: var(--brand-red);
+}
+
+.sell-order-form {
+  padding: 0 1.5rem 1.5rem;
+}
+
+.sell-order-form .form-group {
+  margin-bottom: 1.25rem;
+}
+
+.sell-order-form .form-group label {
+  display: block;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.quantity-type-tabs,
+.order-type-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.quantity-type-tab,
+.order-type-tab {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-gray);
+  border-radius: 8px;
+  background: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.quantity-type-tab:hover,
+.order-type-tab:hover {
+  border-color: var(--brand-red);
+  color: var(--brand-red);
+}
+
+.quantity-type-tab.active,
+.order-type-tab.active {
+  background: var(--brand-red);
+  border-color: var(--brand-red);
+  color: white;
+}
+
+.quantity-value-group {
+  margin-top: 0.5rem;
+}
+
+.percent-quick-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.percent-btn {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--border-gray);
+  border-radius: 6px;
+  background: white;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.percent-btn:hover {
+  border-color: var(--brand-red);
+  color: var(--brand-red);
+}
+
+.percent-btn.active {
+  background: var(--brand-red);
+  border-color: var(--brand-red);
+  color: white;
+}
+
+.sell-order-form .form-input,
+.sell-order-form .form-select {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--border-gray);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.sell-order-form .form-input:focus,
+.sell-order-form .form-select:focus {
+  outline: none;
+  border-color: var(--brand-red);
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.1);
+}
+
+.amount-input-wrap,
+.price-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.amount-input-wrap .form-input,
+.price-input-wrap .form-input {
+  flex: 1;
+}
+
+.amount-unit,
+.price-unit {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-width: 2.5rem;
+}
+
+.btn-sell {
+  background: #dc2626;
+}
+
+.btn-sell:hover:not(:disabled) {
+  background: #b91c1c;
+}

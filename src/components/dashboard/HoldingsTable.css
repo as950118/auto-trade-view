@@ -351,6 +351,35 @@
   width: fit-content;
 }
 
+.td-sell {
+  white-space: nowrap;
+}
+
+.th-action {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.btn-sell-row {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+  background: #dc2626;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn-sell-row:hover {
+  background: #b91c1c;
+}
+
+.btn-sell-row:active {
+  transform: scale(0.98);
+}
+
 .holdings-empty {
   text-align: center;
   padding: 3rem;

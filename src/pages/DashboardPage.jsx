@@ -214,6 +214,7 @@ const DashboardPage = () => {
             accounts={accounts}
             selectedAccount={selectedAccount}
             onClearAccountFilter={() => handleAccountFilter(null)}
+            onSellSuccess={loadDashboardData}
           />
         </section>
       </div>

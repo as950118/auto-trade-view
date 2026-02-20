@@ -1,8 +1,9 @@
 import { useState, useMemo, useEffect } from 'react'
 import { exchangeRateAPI } from '../../services/exchangeRateAPI'
+import SellOrderModal from './SellOrderModal'
 import './HoldingsTable.css'
 
-const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilter }) => {
+const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilter, onSellSuccess }) => {
   const [displayCurrency, setDisplayCurrency] = useState('original') // 'original', 'KRW', 'USD'
   const [exchangeRate, setExchangeRate] = useState(1300) // USD/KRW 환율
   const [loadingRate, setLoadingRate] = useState(false)
@@ -17,6 +18,22 @@ const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilt
     isCrypto: 'all', // 'all', 'crypto', 'stock'
     searchText: '', // 종목명/티커 검색
   })
+
+  // 매도 모달
+  const [sellModalOpen, setSellModalOpen] = useState(false)
+  const [sellModalHolding, setSellModalHolding] = useState(null)
+  const [sellModalCurrency, setSellModalCurrency] = useState('KRW')
+
+  const openSellModal = (holdingGroup, currency) => {
+    setSellModalHolding(holdingGroup)
+    setSellModalCurrency(currency || 'KRW')
+    setSellModalOpen(true)
+  }
+
+  const closeSellModal = () => {
+    setSellModalOpen(false)
+    setSellModalHolding(null)
+  }
 
   useEffect(() => {
     // 환율 로드
@@ -525,6 +542,7 @@ const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilt
                     수익률 {getSortIcon('profitRate')}
                   </th>
                   <th>보유 계좌</th>
+                  <th className="th-action">매도</th>
                 </tr>
               </thead>
               <tbody>
@@ -621,6 +639,16 @@ const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilt
                           ))}
                         </div>
                       </td>
+                      <td className="td-sell">
+                        <button
+                          type="button"
+                          className="btn-sell-row"
+                          onClick={() => openSellModal(holding, currencyGroup.currency)}
+                          title="매도 주문"
+                        >
+                          매도
+                        </button>
+                      </td>
                     </tr>
                   )
                 })}
@@ -637,6 +665,15 @@ const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilt
           <p className="empty-hint">필터를 변경하여 다시 검색해보세요.</p>
         </div>
       )}
+
+      <SellOrderModal
+        isOpen={sellModalOpen}
+        onClose={closeSellModal}
+        onSuccess={onSellSuccess}
+        holdingGroup={sellModalHolding}
+        accounts={accounts}
+        currency={sellModalCurrency}
+      />
     </div>
   )
 }
