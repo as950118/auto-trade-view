@@ -74,7 +74,7 @@ const LandingPage = () => {
             <div className="features-grid">
               <div className="feature-card">
                 <div className="feature-icon-wrapper">
-                  <div className="feature-icon">📈</div>
+                <div className="feature-icon">📈</div>
                 </div>
                 <h3 className="feature-title">주식 자동매매</h3>
                 <p className="feature-description">
@@ -84,7 +84,7 @@ const LandingPage = () => {
               </div>
               <div className="feature-card">
                 <div className="feature-icon-wrapper">
-                  <div className="feature-icon">₿</div>
+                <div className="feature-icon">₿</div>
                 </div>
                 <h3 className="feature-title">암호화폐 자동매매</h3>
                 <p className="feature-description">
@@ -94,7 +94,7 @@ const LandingPage = () => {
               </div>
               <div className="feature-card">
                 <div className="feature-icon-wrapper">
-                  <div className="feature-icon">⚡</div>
+                <div className="feature-icon">⚡</div>
                 </div>
                 <h3 className="feature-title">실시간 모니터링</h3>
                 <p className="feature-description">
@@ -104,7 +104,7 @@ const LandingPage = () => {
               </div>
               <div className="feature-card">
                 <div className="feature-icon-wrapper">
-                  <div className="feature-icon">🔒</div>
+                <div className="feature-icon">🔒</div>
                 </div>
                 <h3 className="feature-title">안전한 거래</h3>
                 <p className="feature-description">
