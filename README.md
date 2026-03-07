@@ -20,11 +20,13 @@ npm install
 
 ### 2. 환경 변수 설정
 
-`.env` 파일을 생성하고 다음 내용을 추가하세요:
+`.env` 파일을 생성하고 API 서버 주소를 설정하세요 (포트 포함):
 
 ```env
-VITE_API_BASE_URL=http://localhost:8000
+REACT_APP_API_URL=http://localhost:8000
 ```
+
+설정하지 않으면 기본값 `http://localhost:8000`이 사용됩니다.
 
 ### 3. 개발 서버 실행
 
@@ -79,7 +81,7 @@ src/
 
 이 프로젝트는 Django DRF 백엔드와 연동됩니다:
 
-- **API Base URL**: `http://localhost:8000` (기본값)
+- **API Base URL**: `REACT_APP_API_URL` 환경 변수 (기본값: `http://localhost:8000`, 포트 포함 가능)
 - **인증 엔드포인트**: 
   - `POST /api/token/` - 로그인
   - `POST /api/token/refresh/` - 토큰 갱신
