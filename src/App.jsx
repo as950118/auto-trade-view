@@ -4,6 +4,7 @@ import LandingPage from './pages/LandingPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import SignupPage from './pages/SignupPage.jsx'
 import DashboardPage from './pages/DashboardPage.jsx'
+import SymbolChartPage from './pages/SymbolChartPage.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import './App.css'
 
@@ -20,6 +21,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/chart"
+            element={
+              <ProtectedRoute>
+                <SymbolChartPage />
               </ProtectedRoute>
             }
           />

@@ -6,6 +6,7 @@ import HoldingsTable from '../components/dashboard/HoldingsTable'
 import DailyProfitChart from '../components/dashboard/DailyProfitChart'
 import SummaryStats from '../components/dashboard/SummaryStats'
 import AccountFormModal from '../components/dashboard/AccountFormModal'
+import BuyOrderModal from '../components/dashboard/BuyOrderModal'
 import { dashboardAPI } from '../services/dashboardAPI'
 import './DashboardPage.css'
 
@@ -20,6 +21,7 @@ const DashboardPage = () => {
   const [error, setError] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingAccount, setEditingAccount] = useState(null)
+  const [buyModalOpen, setBuyModalOpen] = useState(false)
 
   useEffect(() => {
     loadDashboardData()
@@ -203,11 +205,20 @@ const DashboardPage = () => {
         <section className="dashboard-section">
           <div className="section-header-row">
             <h2 className="section-title">보유종목</h2>
-            {selectedAccount && (
-              <span className="filter-badge">
-                계좌 필터 적용됨
-              </span>
-            )}
+            <div className="section-header-actions">
+              <button
+                type="button"
+                className="btn-buy-open"
+                onClick={() => setBuyModalOpen(true)}
+              >
+                매수
+              </button>
+              {selectedAccount && (
+                <span className="filter-badge">
+                  계좌 필터 적용됨
+                </span>
+              )}
+            </div>
           </div>
           <HoldingsTable
             holdings={holdings}
@@ -217,6 +228,14 @@ const DashboardPage = () => {
             onSellSuccess={loadDashboardData}
           />
         </section>
+
+        {/* 매수 주문 모달 */}
+        <BuyOrderModal
+          isOpen={buyModalOpen}
+          onClose={() => setBuyModalOpen(false)}
+          onSuccess={handleModalSuccess}
+          accounts={accounts}
+        />
       </div>
     </div>
   )

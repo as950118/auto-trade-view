@@ -25,6 +25,12 @@ export const dashboardAPI = {
     return response.data
   },
 
+  // 종목 목록 조회 (매수용 검색)
+  getSymbols: async (params = {}) => {
+    const response = await api.get('/api/symbols/', { params })
+    return response.data
+  },
+
   // 브로커 목록 조회
   getBrokers: async () => {
     const response = await api.get('/api/brokers/')

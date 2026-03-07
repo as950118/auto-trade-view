@@ -24,6 +24,9 @@ const Navbar = () => {
               <Link to="/dashboard" className="navbar-link">
                 대시보드
               </Link>
+              <Link to="/chart" className="navbar-link">
+                주가 차트
+              </Link>
               <span className="navbar-user">안녕하세요, {user.username}님</span>
               <button onClick={handleLogout} className="navbar-button">
                 로그아웃

@@ -47,6 +47,32 @@
   margin-bottom: 1.5rem;
 }
 
+.section-header-row .section-title {
+  margin-bottom: 0;
+}
+
+.section-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-buy-open {
+  background-color: var(--brand-green, #16a34a);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-buy-open:hover {
+  background-color: var(--brand-green-dark, #15803d);
+}
+
 .btn-add-account {
   background-color: var(--brand-red);
   color: white;
