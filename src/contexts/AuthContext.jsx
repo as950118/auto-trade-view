@@ -39,8 +39,8 @@ export const AuthProvider = ({ children }) => {
         if (savedUsername) {
           setUser({ username: savedUsername })
         } else {
-          localStorage.removeItem('accessToken')
-          localStorage.removeItem('refreshToken')
+        localStorage.removeItem('accessToken')
+        localStorage.removeItem('refreshToken')
         }
       }
     }
@@ -146,8 +146,60 @@ export const AuthProvider = ({ children }) => {
     setUser(null)
   }
 
+  const googleOAuth2Login = async () => {
+    try {
+      const data = await authAPI.getGoogleOAuth2Url()
+      // Google OAuth2 인증 페이지로 리다이렉트
+      window.location.href = data.auth_url
+      return { success: true }
+    } catch (error) {
+      let errorMessage = 'Google 로그인 URL을 가져오는데 실패했습니다.'
+      
+      if (error.response?.data?.detail) {
+        errorMessage = error.response.data.detail
+      } else if (error.message) {
+        errorMessage = error.message
+      }
+      
+      return {
+        success: false,
+        error: errorMessage,
+      }
+    }
+  }
+
+  const googleOAuth2Callback = async (code) => {
+    try {
+      const data = await authAPI.googleOAuth2Callback(code)
+      localStorage.setItem('accessToken', data.access)
+      localStorage.setItem('refreshToken', data.refresh)
+      localStorage.setItem('username', data.user.username)
+      setUser({ username: data.user.username })
+      return { success: true }
+    } catch (error) {
+      let errorMessage = 'Google 로그인에 실패했습니다.'
+      
+      if (error.response?.data) {
+        const data = error.response.data
+        
+        if (data.detail) {
+          errorMessage = data.detail
+        } else if (typeof data === 'string') {
+          errorMessage = data
+        }
+      } else if (error.message) {
+        errorMessage = error.message
+      }
+      
+      return {
+        success: false,
+        error: errorMessage,
+      }
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, signup, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, signup, logout, googleOAuth2Login, googleOAuth2Callback }}>
       {children}
     </AuthContext.Provider>
   )

@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage.jsx'
 import SignupPage from './pages/SignupPage.jsx'
 import DashboardPage from './pages/DashboardPage.jsx'
 import SymbolChartPage from './pages/SymbolChartPage.jsx'
+import OAuth2CallbackPage from './pages/OAuth2CallbackPage.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import './App.css'
 
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/oauth2/google" element={<OAuth2CallbackPage />} />
           <Route
             path="/dashboard"
             element={

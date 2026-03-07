@@ -59,8 +59,8 @@ api.interceptors.response.use(
 export const authAPI = {
   login: async (username, password) => {
     try {
-      const response = await api.post('/api/token/', { username, password })
-      return response.data
+    const response = await api.post('/api/token/', { username, password })
+    return response.data
     } catch (error) {
       console.error('Login error:', error)
       throw error
@@ -68,13 +68,13 @@ export const authAPI = {
   },
   signup: async (username, email, password, password2) => {
     try {
-      const response = await api.post('/api/users/', {
-        username,
-        email,
-        password,
+    const response = await api.post('/api/users/', {
+      username,
+      email,
+      password,
         password2: password2 || password, // 비밀번호 확인
-      })
-      return response.data
+    })
+    return response.data
     } catch (error) {
       console.error('Signup error:', error)
       throw error
@@ -82,12 +82,30 @@ export const authAPI = {
   },
   refreshToken: async (refreshToken) => {
     try {
-      const response = await api.post('/api/token/refresh/', {
-        refresh: refreshToken,
-      })
-      return response.data
+    const response = await api.post('/api/token/refresh/', {
+      refresh: refreshToken,
+    })
+    return response.data
     } catch (error) {
       console.error('Refresh token error:', error)
+      throw error
+    }
+  },
+  getGoogleOAuth2Url: async () => {
+    try {
+      const response = await api.get('/api/oauth2/google/login/')
+      return response.data
+    } catch (error) {
+      console.error('Get Google OAuth2 URL error:', error)
+      throw error
+    }
+  },
+  googleOAuth2Callback: async (code) => {
+    try {
+      const response = await api.post('/api/oauth2/google/callback/', { code })
+      return response.data
+    } catch (error) {
+      console.error('Google OAuth2 callback error:', error)
       throw error
     }
   },
