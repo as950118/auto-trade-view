@@ -25,7 +25,12 @@ const SymbolChartPage = () => {
         setSymbols(Array.isArray(list) ? list : [])
       } catch (err) {
         console.error('Symbols load error:', err)
-        setError(err.response?.data?.detail || '종목 목록을 불러오는데 실패했습니다.')
+        const isUnauth = err.response?.status === 401
+        setError(
+          isUnauth
+            ? null
+            : err.response?.data?.detail || '종목 목록을 불러오는데 실패했습니다.'
+        )
       } finally {
         setLoading(false)
       }
@@ -102,7 +107,10 @@ const SymbolChartPage = () => {
 
           {!loading && !tvSymbol && (
             <p className="chart-hint">
-              위에서 종목을 선택하거나 티커를 직접 입력하면 TradingView 차트가 표시됩니다.
+              종목을 선택하거나 티커를 직접 입력하면 TradingView 차트가 표시됩니다.
+              {symbols.length === 0 && !error && (
+                <> 로그인하면 등록된 종목 목록을 불러올 수 있습니다.</>
+              )}
             </p>
           )}
           {tvSymbol && (

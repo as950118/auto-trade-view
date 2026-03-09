@@ -26,14 +26,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/chart"
-            element={
-              <ProtectedRoute>
-                <SymbolChartPage />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/chart" element={<SymbolChartPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>
