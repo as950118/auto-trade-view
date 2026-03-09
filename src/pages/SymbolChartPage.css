@@ -65,6 +65,29 @@
   box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.15);
 }
 
+.chart-ticker-input {
+  flex: 1;
+  min-width: 200px;
+  max-width: 560px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid var(--border-gray);
+  border-radius: 8px;
+  background: white;
+  color: var(--text-primary);
+}
+
+.chart-ticker-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+.chart-ticker-input:focus {
+  outline: none;
+  border-color: var(--brand-red);
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.15);
+}
+
 .chart-stats-inline {
   display: flex;
   align-items: center;
@@ -100,7 +123,16 @@
 
 .chart-wrapper {
   width: 100%;
+  min-height: 500px;
   margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chart-wrapper .tradingview-chart-embed {
+  flex: 1;
+  min-height: 500px;
 }
 
 .chart-hint {

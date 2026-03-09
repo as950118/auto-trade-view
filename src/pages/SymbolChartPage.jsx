@@ -9,10 +9,9 @@ import './SymbolChartPage.css'
 const SymbolChartPage = () => {
   const { user } = useAuth()
   const [searchParams, setSearchParams] = useSearchParams()
-  const symbolIdFromUrl = searchParams.get('symbol')
 
   const [symbols, setSymbols] = useState([])
-  const [selectedSymbol, setSelectedSymbol] = useState(null)
+  const [tickerInput, setTickerInput] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
@@ -34,27 +33,29 @@ const SymbolChartPage = () => {
     loadSymbols()
   }, [])
 
+  // URL 반영: ?symbol=id → 해당 종목 티커, ?ticker=XXX → 그대로
   useEffect(() => {
-    if (!symbolIdFromUrl || !symbols.length) return
-    const id = parseInt(symbolIdFromUrl, 10)
-    const found = symbols.find((s) => s.id === id)
-    if (found) setSelectedSymbol(found)
-  }, [symbolIdFromUrl, symbols])
-
-  const handleSymbolChange = (e) => {
-    const id = e.target.value
-    if (!id) {
-      setSelectedSymbol(null)
-      setSearchParams({})
+    const tickerFromUrl = searchParams.get('ticker')
+    const symbolIdFromUrl = searchParams.get('symbol')
+    if (tickerFromUrl) {
+      setTickerInput(tickerFromUrl)
       return
     }
-    const sym = symbols.find((s) => String(s.id) === id)
-    setSelectedSymbol(sym || null)
-    setSearchParams(sym ? { symbol: sym.id } : {})
+    if (symbolIdFromUrl && symbols.length) {
+      const id = parseInt(symbolIdFromUrl, 10)
+      const found = symbols.find((s) => s.id === id)
+      if (found) setTickerInput(found.ticker)
+    }
+  }, [symbols, searchParams])
+
+  const handleTickerChange = (e) => {
+    const value = e.target.value
+    setTickerInput(value)
+    if (value.trim()) setSearchParams({ ticker: value.trim() })
+    else setSearchParams({})
   }
 
-  // TradingView 심볼: "거래소:TICKER" 형식 권장. ticker에 이미 ":" 있으면 그대로 사용
-  const tvSymbol = selectedSymbol ? selectedSymbol.ticker : ''
+  const tvSymbol = tickerInput.trim()
 
   return (
     <div className="symbol-chart-page">
@@ -69,27 +70,26 @@ const SymbolChartPage = () => {
 
         <section className="symbol-chart-section">
           <div className="chart-controls">
-            <label className="chart-control-label">종목 선택</label>
-            <select
-              className="chart-symbol-select"
-              value={selectedSymbol ? selectedSymbol.id : ''}
-              onChange={handleSymbolChange}
+            <label className="chart-control-label" htmlFor="chart-ticker-input">
+              종목
+            </label>
+            <input
+              id="chart-ticker-input"
+              type="text"
+              list="symbol-datalist"
+              className="chart-ticker-input"
+              placeholder="목록에서 선택하거나 티커 입력 (예: NASDAQ:AAPL, BINANCE:BTCUSDT)"
+              value={tickerInput}
+              onChange={handleTickerChange}
               disabled={loading}
-            >
-              <option value="">-- 종목 선택 --</option>
+            />
+            <datalist id="symbol-datalist">
               {symbols.map((s) => (
-                <option key={s.id} value={s.id}>
+                <option key={s.id} value={s.ticker}>
                   {s.ticker} - {s.name}
                 </option>
               ))}
-            </select>
-            {selectedSymbol && (
-              <div className="chart-stats-inline">
-                <span className="chart-symbol-name">
-                  {selectedSymbol.ticker} {selectedSymbol.name}
-                </span>
-              </div>
-            )}
+            </datalist>
           </div>
 
           {error && (
@@ -100,8 +100,15 @@ const SymbolChartPage = () => {
             <TradingViewChart key={tvSymbol || 'empty'} symbol={tvSymbol} height={500} />
           </div>
 
-          {!loading && !selectedSymbol && (
-            <p className="chart-hint">위에서 종목을 선택하면 TradingView 차트가 표시됩니다.</p>
+          {!loading && !tvSymbol && (
+            <p className="chart-hint">
+              위에서 종목을 선택하거나 티커를 직접 입력하면 TradingView 차트가 표시됩니다.
+            </p>
+          )}
+          {tvSymbol && (
+            <p className="chart-hint">
+              차트 티커: <strong>{tvSymbol}</strong>
+            </p>
           )}
         </section>
       </div>
