@@ -132,4 +132,10 @@ export const dashboardAPI = {
     const response = await api.delete(`/api/target-allocation-plans/${id}/`)
     return response.data
   },
+
+  // 거래소 수수료 환급(페이백) 목록 조회
+  getFeeRebates: async (params = {}) => {
+    const response = await api.get('/api/fee-rebates/', { params })
+    return response.data
+  },
 }

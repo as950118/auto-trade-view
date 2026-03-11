@@ -6,6 +6,7 @@ import SignupPage from './pages/SignupPage.jsx'
 import DashboardPage from './pages/DashboardPage.jsx'
 import SymbolChartPage from './pages/SymbolChartPage.jsx'
 import TargetAllocationPage from './pages/TargetAllocationPage.jsx'
+import FeeRebateComparisonPage from './pages/FeeRebateComparisonPage.jsx'
 import OAuth2CallbackPage from './pages/OAuth2CallbackPage.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import './App.css'
@@ -28,6 +29,7 @@ function App() {
             }
           />
           <Route path="/chart" element={<SymbolChartPage />} />
+          <Route path="/fee-rebate" element={<FeeRebateComparisonPage />} />
           <Route
             path="/target-allocation"
             element={

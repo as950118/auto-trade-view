@@ -22,6 +22,9 @@ const Navbar = () => {
           <Link to="/chart" className="navbar-link">
             주가 차트
           </Link>
+          <Link to="/fee-rebate" className="navbar-link">
+            수수료 리베이트
+          </Link>
           {user ? (
             <>
               <Link to="/dashboard" className="navbar-link">
