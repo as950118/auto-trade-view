@@ -111,4 +111,25 @@ export const dashboardAPI = {
     const response = await api.get('/api/daily-profits/summary/')
     return response.data
   },
+
+  // 목표 비율 자동매매 계획
+  getTargetAllocationPlans: async (params = {}) => {
+    const response = await api.get('/api/target-allocation-plans/', { params })
+    return response.data
+  },
+
+  createTargetAllocationPlan: async (data) => {
+    const response = await api.post('/api/target-allocation-plans/', data)
+    return response.data
+  },
+
+  updateTargetAllocationPlan: async (id, data) => {
+    const response = await api.patch(`/api/target-allocation-plans/${id}/`, data)
+    return response.data
+  },
+
+  deleteTargetAllocationPlan: async (id) => {
+    const response = await api.delete(`/api/target-allocation-plans/${id}/`)
+    return response.data
+  },
 }

@@ -1,0 +1,281 @@
+.target-allocation-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  padding: 1rem;
+}
+
+.target-allocation-modal-content {
+  background: white;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.target-allocation-modal-content .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-gray, #e5e7eb);
+}
+
+.target-allocation-modal-content .modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary, #111);
+  margin: 0;
+}
+
+.target-allocation-modal-content .modal-close {
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  color: var(--text-secondary, #6b7280);
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.target-allocation-modal-content .modal-close:hover {
+  background-color: var(--bg-gray, #f3f4f6);
+  color: var(--text-primary, #111);
+}
+
+.target-allocation-desc {
+  padding: 0.75rem 1.5rem;
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary, #6b7280);
+  line-height: 1.4;
+  border-bottom: 1px solid var(--border-gray, #e5e7eb);
+}
+
+.target-allocation-form {
+  padding: 1rem 1.5rem 1.5rem;
+}
+
+.target-allocation-form .modal-error {
+  background-color: #fee2e2;
+  color: #dc2626;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.target-allocation-form .form-group {
+  margin-bottom: 1.25rem;
+}
+
+.target-allocation-form .form-group label {
+  display: block;
+  font-weight: 600;
+  color: var(--text-primary, #111);
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.target-allocation-form .form-select,
+.target-allocation-form .form-input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border-gray, #e5e7eb);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.target-allocation-form .form-hint {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-secondary, #6b7280);
+  margin-top: 0.35rem;
+}
+
+.target-allocation-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.target-allocation-form .form-group-checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.target-allocation-form .form-group-checkbox input[type="checkbox"] {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.target-allocation-form .order-type-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.target-allocation-form .order-type-tab {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-gray, #e5e7eb);
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.target-allocation-form .order-type-tab:hover {
+  border-color: var(--brand-red, #dc2626);
+  color: var(--brand-red, #dc2626);
+}
+
+.target-allocation-form .order-type-tab.active {
+  background-color: var(--brand-red, #dc2626);
+  border-color: var(--brand-red, #dc2626);
+  color: white;
+}
+
+.target-allocation-form .symbol-placeholder {
+  padding: 0.75rem;
+  background: var(--bg-gray, #f9fafb);
+  border-radius: 8px;
+  color: var(--text-secondary, #6b7280);
+  font-size: 0.9rem;
+}
+
+.target-allocation-form .selected-symbol-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.target-allocation-form .selected-symbol-display {
+  flex: 1;
+  padding: 0.6rem 0.75rem;
+  background: var(--bg-gray, #f9fafb);
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.target-allocation-form .btn-clear-symbol-inline {
+  padding: 0.4rem 0.65rem;
+  font-size: 0.85rem;
+  border: 1px solid var(--border-gray, #e5e7eb);
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  color: var(--text-secondary, #6b7280);
+}
+
+.target-allocation-form .symbol-search-loading {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #6b7280);
+  padding: 0.5rem 0;
+}
+
+.target-allocation-form .symbol-results-list {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid var(--border-gray, #e5e7eb);
+  border-radius: 8px;
+}
+
+.target-allocation-form .symbol-results-list li {
+  border-bottom: 1px solid var(--border-gray, #e5e7eb);
+}
+
+.target-allocation-form .symbol-results-list li:last-child {
+  border-bottom: none;
+}
+
+.target-allocation-form .symbol-result-item {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  background: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  transition: background 0.15s;
+}
+
+.target-allocation-form .symbol-result-item:hover {
+  background: var(--bg-gray, #f3f4f6);
+}
+
+.target-allocation-form .symbol-result-ticker {
+  font-weight: 600;
+  color: var(--text-primary, #111);
+}
+
+.target-allocation-form .symbol-result-name,
+.target-allocation-form .symbol-result-currency {
+  color: var(--text-secondary, #6b7280);
+  font-size: 0.85rem;
+}
+
+.target-allocation-form .modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-gray, #e5e7eb);
+}
+
+.target-allocation-form .btn-secondary {
+  padding: 0.6rem 1.25rem;
+  border: 1px solid var(--border-gray, #e5e7eb);
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--text-primary, #111);
+}
+
+.target-allocation-form .btn-primary {
+  padding: 0.6rem 1.25rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--brand-red, #dc2626);
+  color: white;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.target-allocation-form .btn-primary:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+
+.target-allocation-form .btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}

@@ -1,0 +1,267 @@
+.target-allocation-page {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.target-allocation-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.target-allocation-header {
+  margin-bottom: 2rem;
+}
+
+.target-allocation-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary, #111);
+  margin-bottom: 0.5rem;
+}
+
+.target-allocation-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary, #6b7280);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.target-allocation-section {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.target-allocation-section .section-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.target-allocation-section .section-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary, #111);
+  margin: 0;
+}
+
+.section-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.filter-account-select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-gray, #e5e7eb);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  min-width: 180px;
+}
+
+.btn-add-plan {
+  background-color: var(--brand-red, #dc2626);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-add-plan:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+
+.btn-add-plan:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--text-secondary, #6b7280);
+}
+
+.empty-state p {
+  margin-bottom: 1rem;
+}
+
+.btn-add-plan-inline {
+  background-color: var(--brand-red, #dc2626);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-add-plan-inline:hover {
+  filter: brightness(1.05);
+}
+
+.plans-table-wrapper {
+  overflow-x: auto;
+}
+
+.plans-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.plans-table th,
+.plans-table td {
+  padding: 0.75rem 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-gray, #e5e7eb);
+}
+
+.plans-table th {
+  font-weight: 600;
+  color: var(--text-secondary, #6b7280);
+  white-space: nowrap;
+}
+
+.plans-table td {
+  color: var(--text-primary, #111);
+}
+
+.plans-table tbody tr:hover {
+  background-color: var(--bg-gray, #f9fafb);
+}
+
+.symbol-ticker {
+  font-weight: 600;
+  margin-right: 0.35rem;
+}
+
+.symbol-name {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #6b7280);
+}
+
+.trades-done {
+  font-weight: 500;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.status-active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-paused {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.date-cell {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #6b7280);
+  white-space: nowrap;
+}
+
+.actions-cell {
+  white-space: nowrap;
+}
+
+.btn-action {
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: none;
+  margin-right: 0.35rem;
+  transition: all 0.2s;
+}
+
+.btn-edit {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.btn-edit:hover {
+  background: #dbeafe;
+}
+
+.btn-delete {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.btn-delete:hover {
+  background: #fecaca;
+}
+
+.target-allocation-loading,
+.target-allocation-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  gap: 1rem;
+  color: var(--text-secondary, #6b7280);
+}
+
+.target-allocation-error .retry-button {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-gray, #e5e7eb);
+  background: white;
+  cursor: pointer;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-gray, #e5e7eb);
+  border-top-color: var(--brand-red, #dc2626);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .plans-table-wrapper {
+    margin: 0 -1rem;
+  }
+
+  .plans-table th,
+  .plans-table td {
+    padding: 0.6rem 0.4rem;
+    font-size: 0.85rem;
+  }
+
+  .section-header-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-account-select {
+    min-width: 100%;
+  }
+}
