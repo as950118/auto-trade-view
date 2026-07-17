@@ -109,6 +109,18 @@ export const authAPI = {
       throw error
     }
   },
+  getMe: async () => {
+    const response = await api.get('/api/users/me/')
+    return response.data
+  },
+  setPassword: async ({ password, password2, current_password }) => {
+    const body = { password, password2 }
+    if (current_password) {
+      body.current_password = current_password
+    }
+    const response = await api.post('/api/users/me/password/', body)
+    return response.data
+  },
 }
 
 export default api
