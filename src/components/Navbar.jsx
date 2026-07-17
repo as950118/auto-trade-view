@@ -33,7 +33,7 @@ const Navbar = () => {
               <Link to="/target-allocation" className="navbar-link">
                 목표 비율 매매
               </Link>
-              <span className="navbar-user">안녕하세요, {user.username}님</span>
+              <span className="navbar-user">안녕하세요, {user.displayName || user.username}님</span>
               <button onClick={handleLogout} className="navbar-button">
                 로그아웃
               </button>

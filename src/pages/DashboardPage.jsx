@@ -129,7 +129,7 @@ const DashboardPage = () => {
       <div className="dashboard-container">
         <div className="dashboard-header">
           <h1 className="dashboard-title">대시보드</h1>
-          <p className="dashboard-subtitle">안녕하세요, {user?.username}님</p>
+          <p className="dashboard-subtitle">안녕하세요, {user?.displayName || user?.username}님</p>
         </div>
 
         {/* 요약 통계 */}

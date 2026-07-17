@@ -22,22 +22,25 @@ export const AuthProvider = ({ children }) => {
       // 토큰에서 사용자 정보 추출 (간단한 디코딩)
       try {
         const payload = JSON.parse(atob(token.split('.')[1]))
-        // username만 사용 (user_id는 사용하지 않음)
+        // username / displayName
         if (payload.username) {
-          setUser({ username: payload.username })
+          const displayName = localStorage.getItem('displayName') || payload.username
+          setUser({ username: payload.username, displayName })
         } else {
           // 토큰에 username이 없으면 로컬 스토리지에서 가져오기
           const savedUsername = localStorage.getItem('username')
+          const displayName = localStorage.getItem('displayName') || savedUsername
           if (savedUsername) {
-            setUser({ username: savedUsername })
+            setUser({ username: savedUsername, displayName })
           }
         }
       } catch (e) {
         console.error('Token decode error:', e)
         // 로컬 스토리지에서 username 가져오기 시도
         const savedUsername = localStorage.getItem('username')
+        const displayName = localStorage.getItem('displayName') || savedUsername
         if (savedUsername) {
-          setUser({ username: savedUsername })
+          setUser({ username: savedUsername, displayName })
         } else {
         localStorage.removeItem('accessToken')
         localStorage.removeItem('refreshToken')
@@ -53,7 +56,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('accessToken', data.access)
       localStorage.setItem('refreshToken', data.refresh)
       localStorage.setItem('username', username) // username 저장
-      setUser({ username })
+      setUser({ username, displayName: username })
       return { success: true }
     } catch (error) {
       let errorMessage = '로그인에 실패했습니다.'
@@ -143,6 +146,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('accessToken')
     localStorage.removeItem('refreshToken')
     localStorage.removeItem('username')
+    localStorage.removeItem('displayName')
     setUser(null)
   }
 
@@ -174,7 +178,9 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('accessToken', data.access)
       localStorage.setItem('refreshToken', data.refresh)
       localStorage.setItem('username', data.user.username)
-      setUser({ username: data.user.username })
+      const displayName = data.user.display_name || data.user.first_name || data.user.username
+      localStorage.setItem('displayName', displayName)
+      setUser({ username: data.user.username, displayName })
       return { success: true }
     } catch (error) {
       let errorMessage = 'Google 로그인에 실패했습니다.'
