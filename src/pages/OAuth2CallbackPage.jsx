@@ -43,14 +43,14 @@ const OAuth2CallbackPage = () => {
           setLoading(false)
           setTimeout(() => {
             navigate('/login')
-          }, 2000)
+          }, 15000)
         }
       } catch (err) {
         setError('로그인 처리 중 오류가 발생했습니다.')
         setLoading(false)
         setTimeout(() => {
           navigate('/login')
-        }, 2000)
+        }, 15000)
       }
     }
 
@@ -67,7 +67,11 @@ const OAuth2CallbackPage = () => {
             {loading && (
               <div className="loading-spinner" style={{ margin: '2rem auto' }}></div>
             )}
-            {error && <div className="auth-error">{error}</div>}
+            {error && (
+              <div className="auth-error" style={{ whiteSpace: 'pre-wrap', textAlign: 'left' }}>
+                {error}
+              </div>
+            )}
           </div>
         </div>
       </div>

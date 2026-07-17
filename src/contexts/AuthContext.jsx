@@ -178,19 +178,32 @@ export const AuthProvider = ({ children }) => {
       return { success: true }
     } catch (error) {
       let errorMessage = 'Google 로그인에 실패했습니다.'
-      
+
       if (error.response?.data) {
         const data = error.response.data
-        
-        if (data.detail) {
-          errorMessage = data.detail
-        } else if (typeof data === 'string') {
+        if (typeof data === 'string') {
           errorMessage = data
+        } else {
+          const parts = []
+          if (data.detail) parts.push(data.detail)
+          if (data.redirect_uri) parts.push(`redirect_uri: ${data.redirect_uri}`)
+          if (data.frontend_url) parts.push(`FRONTEND_URL: ${data.frontend_url}`)
+          if (data.google_status) parts.push(`google_status: ${data.google_status}`)
+          if (data.google_error) {
+            parts.push(
+              `google_error: ${
+                typeof data.google_error === 'string'
+                  ? data.google_error
+                  : JSON.stringify(data.google_error)
+              }`
+            )
+          }
+          if (parts.length) errorMessage = parts.join('\n')
         }
       } else if (error.message) {
         errorMessage = error.message
       }
-      
+
       return {
         success: false,
         error: errorMessage,
