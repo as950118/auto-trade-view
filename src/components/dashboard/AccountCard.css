@@ -155,11 +155,13 @@
   color: var(--brand-red);
 }
 
-.stat-value.profit-rate.positive {
+.stat-value.profit-rate.positive,
+.stat-value.positive {
   color: #dc2626;
 }
 
-.stat-value.profit-rate.negative {
+.stat-value.profit-rate.negative,
+.stat-value.negative {
   color: #059669;
 }
 
@@ -171,9 +173,9 @@
 }
 
 .account-profit {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
   padding-top: 0.75rem;
   border-top: 1px solid #e5e7eb;
 }

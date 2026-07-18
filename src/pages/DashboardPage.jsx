@@ -109,18 +109,38 @@ const DashboardPage = () => {
     )
   }
 
-  // 총 자산 계산
-  const totalAssets = accounts.reduce((sum, account) => {
-    return sum + parseFloat(account.total_assets || 0)
-  }, 0)
+  // 통화별 총자산 / 평가손익 (환율 환산 없이 분리)
+  const totalAssetsKrw = accounts.reduce(
+    (sum, a) => sum + parseFloat(a.total_assets_krw || 0),
+    0
+  )
+  const totalAssetsUsd = accounts.reduce(
+    (sum, a) => sum + parseFloat(a.total_assets_usd || 0),
+    0
+  )
+  const totalProfitLossKrw = accounts.reduce(
+    (sum, a) => sum + parseFloat(a.profit_loss_krw || 0),
+    0
+  )
+  const totalProfitLossUsd = accounts.reduce(
+    (sum, a) => sum + parseFloat(a.profit_loss_usd || 0),
+    0
+  )
 
-  // 총 수익률 계산 (가중 평균)
-  const totalProfitRate = accounts.length > 0
-    ? accounts.reduce((sum, account) => {
-        const assets = parseFloat(account.total_assets || 0)
-        const rate = parseFloat(account.profit_rate || 0)
-        return sum + (assets * rate)
-      }, 0) / totalAssets
+  // 통화별 가중 평균 수익률 (해당 통화 자산 기준)
+  const totalProfitRateKrw = totalAssetsKrw > 0
+    ? accounts.reduce((sum, a) => {
+        const assets = parseFloat(a.total_assets_krw || 0)
+        const rate = parseFloat(a.profit_rate_krw || 0)
+        return sum + assets * rate
+      }, 0) / totalAssetsKrw
+    : 0
+  const totalProfitRateUsd = totalAssetsUsd > 0
+    ? accounts.reduce((sum, a) => {
+        const assets = parseFloat(a.total_assets_usd || 0)
+        const rate = parseFloat(a.profit_rate_usd || 0)
+        return sum + assets * rate
+      }, 0) / totalAssetsUsd
     : 0
 
   return (
@@ -136,8 +156,12 @@ const DashboardPage = () => {
         {profitSummary && (
           <SummaryStats
             summary={profitSummary}
-            totalAssets={totalAssets}
-            totalProfitRate={totalProfitRate}
+            totalAssetsKrw={totalAssetsKrw}
+            totalAssetsUsd={totalAssetsUsd}
+            totalProfitLossKrw={totalProfitLossKrw}
+            totalProfitLossUsd={totalProfitLossUsd}
+            totalProfitRateKrw={totalProfitRateKrw}
+            totalProfitRateUsd={totalProfitRateUsd}
           />
         )}
 
