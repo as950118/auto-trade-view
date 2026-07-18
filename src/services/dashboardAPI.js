@@ -133,6 +133,42 @@ export const dashboardAPI = {
     return response.data
   },
 
+  // TradingView 알림 전략
+  getAlertStrategies: async (params = {}) => {
+    const response = await api.get('/api/alert-strategies/', { params })
+    return response.data
+  },
+
+  createAlertStrategy: async (data) => {
+    const response = await api.post('/api/alert-strategies/', data)
+    return response.data
+  },
+
+  updateAlertStrategy: async (id, data) => {
+    const response = await api.patch(`/api/alert-strategies/${id}/`, data)
+    return response.data
+  },
+
+  deleteAlertStrategy: async (id) => {
+    const response = await api.delete(`/api/alert-strategies/${id}/`)
+    return response.data
+  },
+
+  regenerateAlertStrategyToken: async (id) => {
+    const response = await api.post(`/api/alert-strategies/${id}/regenerate_token/`)
+    return response.data
+  },
+
+  getAlertEvents: async (params = {}) => {
+    const response = await api.get('/api/alert-events/', { params })
+    return response.data
+  },
+
+  getAlertTradePlans: async (params = {}) => {
+    const response = await api.get('/api/alert-trade-plans/', { params })
+    return response.data
+  },
+
   // 거래소 수수료 환급(페이백) 목록 조회
   getFeeRebates: async (params = {}) => {
     const response = await api.get('/api/fee-rebates/', { params })

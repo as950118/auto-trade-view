@@ -87,6 +87,9 @@ const Navbar = () => {
               <Link to="/target-allocation" className="navbar-link" onClick={closeMenu}>
                 목표 비율 매매
               </Link>
+              <Link to="/alert-strategies" className="navbar-link" onClick={closeMenu}>
+                알림 전략
+              </Link>
               <Link to="/account" className="navbar-link" onClick={closeMenu}>
                 계정
               </Link>
