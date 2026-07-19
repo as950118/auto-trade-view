@@ -204,13 +204,30 @@ const AccountCard = ({ account, onClick, onEdit, onDelete, isSelected, holdings 
                 </span>
               </div>
             </div>
+            <div className="account-stats-row">
+              <div className="account-stat">
+                <span className="stat-label">평가손익</span>
+                <span className={`stat-value ${parseFloat(account.profit_loss_krw || 0) >= 0 ? 'positive' : 'negative'}`}>
+                  {formatCurrency(parseFloat(account.profit_loss_krw || 0), 'KRW')}
+                </span>
+              </div>
+              <div className="account-stat">
+                <span className="stat-label">수익률</span>
+                <span className={`stat-value profit-rate ${parseFloat(account.profit_rate_krw || 0) >= 0 ? 'positive' : 'negative'}`}>
+                  {formatPercent(account.profit_rate_krw)}
+                </span>
+              </div>
+            </div>
           </div>
         )}
 
-        {/* 달러 자산 */}
+        {/* 달러 자산 (USDT 포함) */}
         {hasUSD && shouldShowUSD && (
           <div className="currency-section">
-            <div className="currency-label">달러 (USD)</div>
+            <div className="currency-label">
+              달러 (USD)
+              {account.broker?.is_crypto_exchange ? ' / USDT' : ''}
+            </div>
             <div className="account-stat">
               <span className="stat-label">총 자산</span>
               <span className="stat-value total-assets">
@@ -228,6 +245,20 @@ const AccountCard = ({ account, onClick, onEdit, onDelete, isSelected, holdings 
                 <span className="stat-label">보유종목</span>
                 <span className="stat-value">
                   {formatCurrency(currencyBreakdown.USD.stock, 'USD')}
+                </span>
+              </div>
+            </div>
+            <div className="account-stats-row">
+              <div className="account-stat">
+                <span className="stat-label">평가손익</span>
+                <span className={`stat-value ${parseFloat(account.profit_loss_usd || 0) >= 0 ? 'positive' : 'negative'}`}>
+                  {formatCurrency(parseFloat(account.profit_loss_usd || 0), 'USD')}
+                </span>
+              </div>
+              <div className="account-stat">
+                <span className="stat-label">수익률</span>
+                <span className={`stat-value profit-rate ${parseFloat(account.profit_rate_usd || 0) >= 0 ? 'positive' : 'negative'}`}>
+                  {formatPercent(account.profit_rate_usd)}
                 </span>
               </div>
             </div>
@@ -257,15 +288,22 @@ const AccountCard = ({ account, onClick, onEdit, onDelete, isSelected, holdings 
                 </span>
               </div>
             </div>
+            <div className="account-stats-row">
+              <div className="account-stat">
+                <span className="stat-label">평가손익</span>
+                <span className={`stat-value ${parseFloat(account.profit_loss || 0) >= 0 ? 'positive' : 'negative'}`}>
+                  {formatCurrency(parseFloat(account.profit_loss || 0), 'KRW')}
+                </span>
+              </div>
+              <div className="account-stat">
+                <span className="stat-label">수익률</span>
+                <span className={`stat-value profit-rate ${isPositive ? 'positive' : 'negative'}`}>
+                  {formatPercent(profitRate)}
+                </span>
+              </div>
+            </div>
           </>
         )}
-
-        <div className="account-profit">
-          <span className="stat-label">수익률</span>
-          <span className={`stat-value profit-rate ${isPositive ? 'positive' : 'negative'}`}>
-            {formatPercent(profitRate)}
-          </span>
-        </div>
       </div>
 
       <div className="account-card-footer">
