@@ -84,11 +84,19 @@
   flex-wrap: wrap;
 }
 
-.alert-strategy-form .form-checkbox {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.alert-strategy-form .form-hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.alert-strategy-form textarea {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
   font-size: 0.95rem;
+  font-family: inherit;
+  resize: vertical;
 }
 
 .alert-strategy-form .form-actions {

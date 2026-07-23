@@ -133,29 +133,50 @@ export const dashboardAPI = {
     return response.data
   },
 
-  // TradingView 알림 전략
-  getAlertStrategies: async (params = {}) => {
-    const response = await api.get('/api/alert-strategies/', { params })
+  // 전략 템플릿
+  getStrategies: async (params = {}) => {
+    const response = await api.get('/api/strategies/', { params })
     return response.data
   },
 
-  createAlertStrategy: async (data) => {
-    const response = await api.post('/api/alert-strategies/', data)
+  createStrategy: async (data) => {
+    const response = await api.post('/api/strategies/', data)
     return response.data
   },
 
-  updateAlertStrategy: async (id, data) => {
-    const response = await api.patch(`/api/alert-strategies/${id}/`, data)
+  updateStrategy: async (id, data) => {
+    const response = await api.patch(`/api/strategies/${id}/`, data)
     return response.data
   },
 
-  deleteAlertStrategy: async (id) => {
-    const response = await api.delete(`/api/alert-strategies/${id}/`)
+  deleteStrategy: async (id) => {
+    const response = await api.delete(`/api/strategies/${id}/`)
     return response.data
   },
 
-  regenerateAlertStrategyToken: async (id) => {
-    const response = await api.post(`/api/alert-strategies/${id}/regenerate_token/`)
+  regenerateStrategyToken: async (id) => {
+    const response = await api.post(`/api/strategies/${id}/regenerate_token/`)
+    return response.data
+  },
+
+  // 전략 연동
+  getStrategyLinks: async (params = {}) => {
+    const response = await api.get('/api/strategy-links/', { params })
+    return response.data
+  },
+
+  createStrategyLink: async (data) => {
+    const response = await api.post('/api/strategy-links/', data)
+    return response.data
+  },
+
+  updateStrategyLink: async (id, data) => {
+    const response = await api.patch(`/api/strategy-links/${id}/`, data)
+    return response.data
+  },
+
+  deleteStrategyLink: async (id) => {
+    const response = await api.delete(`/api/strategy-links/${id}/`)
     return response.data
   },
 

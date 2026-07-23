@@ -186,6 +186,12 @@
   color: #4b5563;
 }
 
+.muted-text {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-top: 0.2rem;
+}
+
 .status-pill {
   display: inline-block;
   padding: 0.15rem 0.5rem;

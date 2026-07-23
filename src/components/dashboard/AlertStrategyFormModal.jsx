@@ -7,74 +7,99 @@ const ORDER_TYPES = [
   { value: 'LIMIT', label: '지정가' },
 ]
 
-const CURRENCIES = [
-  { value: 'KRW', label: 'KRW' },
-  { value: 'USD', label: 'USD' },
-  { value: 'USDT', label: 'USDT' },
-]
-
-const AlertStrategyFormModal = ({ isOpen, onClose, onSuccess, strategy = null, accounts = [] }) => {
-  const [selectedAccountId, setSelectedAccountId] = useState(null)
-  const [name, setName] = useState('')
-  const [seedAmount, setSeedAmount] = useState('')
-  const [seedCurrency, setSeedCurrency] = useState('KRW')
-  const [buySeedPercent, setBuySeedPercent] = useState('10')
-  const [sellSeedPercent, setSellSeedPercent] = useState('10')
+/**
+ * mode: 'strategy' | 'link'
+ */
+const AlertStrategyFormModal = ({
+  isOpen,
+  onClose,
+  onSuccess,
+  mode = 'strategy',
+  strategy = null,
+  link = null,
+  accounts = [],
+  strategies = [],
+  isStaff = false,
+}) => {
+  // strategy fields
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [visibility, setVisibility] = useState('PRIVATE')
   const [maxWeight, setMaxWeight] = useState('100')
-  const [minSellHolding, setMinSellHolding] = useState('')
+  const [tradePercent, setTradePercent] = useState('10')
   const [splitCount, setSplitCount] = useState('1')
   const [splitInterval, setSplitInterval] = useState('0')
   const [orderType, setOrderType] = useState('MARKET')
   const [enabled, setEnabled] = useState(true)
   const [passphrase, setPassphrase] = useState('')
-  const [allowedTickers, setAllowedTickers] = useState('')
   const [cooldown, setCooldown] = useState('60')
+
+  // link fields
+  const [selectedStrategyId, setSelectedStrategyId] = useState(null)
+  const [selectedAccountId, setSelectedAccountId] = useState(null)
+  const [seedAmount, setSeedAmount] = useState('')
+  const [seedCurrency, setSeedCurrency] = useState('KRW')
+  const [overrideMax, setOverrideMax] = useState('')
+  const [overrideTrade, setOverrideTrade] = useState('')
+  const [overrideSplit, setOverrideSplit] = useState('')
+  const [overrideInterval, setOverrideInterval] = useState('')
+
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
   useEffect(() => {
     if (!isOpen) return
-    if (strategy) {
-      setSelectedAccountId(strategy.account?.id ?? strategy.account_id)
-      setName(strategy.name || '')
-      setSeedAmount(strategy.seed_amount != null ? String(strategy.seed_amount) : '')
-      setSeedCurrency(strategy.seed_currency || 'KRW')
-      setBuySeedPercent(strategy.buy_seed_percent != null ? String(strategy.buy_seed_percent) : '10')
-      setSellSeedPercent(strategy.sell_seed_percent != null ? String(strategy.sell_seed_percent) : '10')
-      setMaxWeight(strategy.max_position_weight_percent != null ? String(strategy.max_position_weight_percent) : '100')
-      setMinSellHolding(
-        strategy.min_sell_holding_percent != null ? String(strategy.min_sell_holding_percent) : ''
-      )
-      setSplitCount(strategy.split_count != null ? String(strategy.split_count) : '1')
-      setSplitInterval(
-        strategy.split_interval_seconds != null ? String(strategy.split_interval_seconds) : '0'
-      )
-      setOrderType(strategy.order_type || 'MARKET')
-      setEnabled(strategy.enabled !== false)
-      setPassphrase('')
-      setAllowedTickers(
-        Array.isArray(strategy.allowed_tickers) ? strategy.allowed_tickers.join(', ') : ''
-      )
-      setCooldown(strategy.cooldown_seconds != null ? String(strategy.cooldown_seconds) : '60')
-    } else {
-      setSelectedAccountId(accounts.length > 0 ? accounts[0].id : null)
-      setName('')
-      setSeedAmount('')
-      setSeedCurrency('KRW')
-      setBuySeedPercent('10')
-      setSellSeedPercent('10')
-      setMaxWeight('100')
-      setMinSellHolding('')
-      setSplitCount('1')
-      setSplitInterval('0')
-      setOrderType('MARKET')
-      setEnabled(true)
-      setPassphrase('')
-      setAllowedTickers('')
-      setCooldown('60')
-    }
     setError('')
-  }, [isOpen, strategy, accounts])
+    if (mode === 'strategy') {
+      if (strategy) {
+        setTitle(strategy.title || '')
+        setDescription(strategy.description || '')
+        setVisibility(strategy.visibility || 'PRIVATE')
+        setMaxWeight(String(strategy.default_max_position_weight_percent ?? '100'))
+        setTradePercent(String(strategy.default_trade_percent ?? '10'))
+        setSplitCount(String(strategy.default_split_count ?? '1'))
+        setSplitInterval(String(strategy.default_split_interval_seconds ?? '0'))
+        setOrderType(strategy.order_type || 'MARKET')
+        setEnabled(strategy.enabled !== false)
+        setCooldown(String(strategy.cooldown_seconds ?? '60'))
+        setPassphrase('')
+      } else {
+        setTitle('')
+        setDescription('')
+        setVisibility('PRIVATE')
+        setMaxWeight('100')
+        setTradePercent('10')
+        setSplitCount('1')
+        setSplitInterval('0')
+        setOrderType('MARKET')
+        setEnabled(true)
+        setCooldown('60')
+        setPassphrase('')
+      }
+    } else {
+      if (link) {
+        setSelectedStrategyId(link.strategy?.id ?? link.strategy_id)
+        setSelectedAccountId(link.account?.id ?? link.account_id)
+        setSeedAmount(String(link.seed_amount ?? ''))
+        setSeedCurrency(link.seed_currency || 'KRW')
+        setOverrideMax(link.max_position_weight_percent != null ? String(link.max_position_weight_percent) : '')
+        setOverrideTrade(link.trade_percent != null ? String(link.trade_percent) : '')
+        setOverrideSplit(link.split_count != null ? String(link.split_count) : '')
+        setOverrideInterval(link.split_interval_seconds != null ? String(link.split_interval_seconds) : '')
+        setEnabled(link.enabled !== false)
+      } else {
+        setSelectedStrategyId(strategies[0]?.id || null)
+        setSelectedAccountId(accounts[0]?.id || null)
+        setSeedAmount('')
+        setSeedCurrency('KRW')
+        setOverrideMax('')
+        setOverrideTrade('')
+        setOverrideSplit('')
+        setOverrideInterval('')
+        setEnabled(true)
+      }
+    }
+  }, [isOpen, mode, strategy, link, accounts, strategies])
 
   const getAccountName = (acc) =>
     acc.broker?.name ? `${acc.broker.name} (${acc.account_number || '-'})` : `계좌 ${acc.id}`
@@ -84,72 +109,58 @@ const AlertStrategyFormModal = ({ isOpen, onClose, onSuccess, strategy = null, a
     setError('')
     setLoading(true)
     try {
-      if (!selectedAccountId) {
-        setError('계좌를 선택해 주세요.')
-        setLoading(false)
-        return
-      }
-      if (!name.trim()) {
-        setError('전략명을 입력해 주세요.')
-        setLoading(false)
-        return
-      }
-      const seed = parseFloat(seedAmount)
-      if (isNaN(seed) || seed <= 0) {
-        setError('시드 금액은 0보다 커야 합니다.')
-        setLoading(false)
-        return
-      }
-      const buyPct = parseFloat(buySeedPercent)
-      const sellPct = parseFloat(sellSeedPercent)
-      const maxPct = parseFloat(maxWeight)
-      if ([buyPct, sellPct, maxPct].some((v) => isNaN(v) || v <= 0 || v > 100)) {
-        setError('매수/매도/최대 비중(%)은 0 초과 100 이하여야 합니다.')
-        setLoading(false)
-        return
-      }
-      const splits = parseInt(splitCount, 10)
-      const interval = parseInt(splitInterval, 10)
-      if (isNaN(splits) || splits < 1) {
-        setError('분할 횟수는 1 이상이어야 합니다.')
-        setLoading(false)
-        return
-      }
-      if (isNaN(interval) || interval < 0) {
-        setError('분할 간격(초)은 0 이상이어야 합니다.')
-        setLoading(false)
-        return
-      }
-
-      const tickers = allowedTickers
-        .split(/[,\s]+/)
-        .map((t) => t.trim())
-        .filter(Boolean)
-
-      const payload = {
-        account_id: Number(selectedAccountId),
-        name: name.trim(),
-        seed_amount: seed,
-        seed_currency: seedCurrency,
-        buy_seed_percent: buyPct,
-        sell_seed_percent: sellPct,
-        max_position_weight_percent: maxPct,
-        min_sell_holding_percent: minSellHolding === '' ? null : parseFloat(minSellHolding),
-        split_count: splits,
-        split_interval_seconds: interval,
-        order_type: orderType,
-        enabled,
-        allowed_tickers: tickers.length ? tickers : null,
-        cooldown_seconds: parseInt(cooldown, 10) || 0,
-      }
-      if (passphrase) {
-        payload.webhook_passphrase = passphrase
-      }
-
-      if (strategy) {
-        await dashboardAPI.updateAlertStrategy(strategy.id, payload)
+      if (mode === 'strategy') {
+        if (!title.trim()) {
+          setError('제목을 입력해 주세요.')
+          setLoading(false)
+          return
+        }
+        const payload = {
+          title: title.trim(),
+          description: description.trim(),
+          visibility: isStaff ? visibility : 'PRIVATE',
+          default_max_position_weight_percent: parseFloat(maxWeight),
+          default_trade_percent: parseFloat(tradePercent),
+          default_split_count: parseInt(splitCount, 10),
+          default_split_interval_seconds: parseInt(splitInterval, 10),
+          order_type: orderType,
+          enabled,
+          cooldown_seconds: parseInt(cooldown, 10) || 0,
+        }
+        if (passphrase) payload.webhook_passphrase = passphrase
+        if (strategy) {
+          await dashboardAPI.updateStrategy(strategy.id, payload)
+        } else {
+          await dashboardAPI.createStrategy(payload)
+        }
       } else {
-        await dashboardAPI.createAlertStrategy(payload)
+        if (!selectedStrategyId || !selectedAccountId) {
+          setError('전략과 계좌를 선택해 주세요.')
+          setLoading(false)
+          return
+        }
+        const seed = parseFloat(seedAmount)
+        if (isNaN(seed) || seed <= 0) {
+          setError('시드 금액은 0보다 커야 합니다.')
+          setLoading(false)
+          return
+        }
+        const payload = {
+          strategy_id: Number(selectedStrategyId),
+          account_id: Number(selectedAccountId),
+          seed_amount: seed,
+          seed_currency: seedCurrency,
+          max_position_weight_percent: overrideMax === '' ? null : parseFloat(overrideMax),
+          trade_percent: overrideTrade === '' ? null : parseFloat(overrideTrade),
+          split_count: overrideSplit === '' ? null : parseInt(overrideSplit, 10),
+          split_interval_seconds: overrideInterval === '' ? null : parseInt(overrideInterval, 10),
+          enabled,
+        }
+        if (link) {
+          await dashboardAPI.updateStrategyLink(link.id, payload)
+        } else {
+          await dashboardAPI.createStrategyLink(payload)
+        }
       }
       onSuccess()
       onClose()
@@ -158,7 +169,7 @@ const AlertStrategyFormModal = ({ isOpen, onClose, onSuccess, strategy = null, a
       setError(
         typeof data === 'string'
           ? data
-          : data?.detail || data?.non_field_errors?.[0] || JSON.stringify(data) || '저장에 실패했습니다.'
+          : data?.detail || JSON.stringify(data) || '저장에 실패했습니다.'
       )
     } finally {
       setLoading(false)
@@ -171,7 +182,15 @@ const AlertStrategyFormModal = ({ isOpen, onClose, onSuccess, strategy = null, a
     <div className="alert-strategy-modal-overlay" onClick={onClose}>
       <div className="alert-strategy-modal" onClick={(e) => e.stopPropagation()}>
         <div className="alert-strategy-modal-header">
-          <h2>{strategy ? '알림 전략 수정' : '알림 전략 추가'}</h2>
+          <h2>
+            {mode === 'strategy'
+              ? strategy
+                ? '전략 수정'
+                : '전략 추가'
+              : link
+                ? '연동 수정'
+                : '전략 연동'}
+          </h2>
           <button type="button" className="modal-close" onClick={onClose} aria-label="닫기">
             ×
           </button>
@@ -179,181 +198,141 @@ const AlertStrategyFormModal = ({ isOpen, onClose, onSuccess, strategy = null, a
         <form onSubmit={handleSubmit} className="alert-strategy-form">
           {error && <div className="form-error">{error}</div>}
 
-          <label className="form-field">
-            <span>계좌</span>
-            <select
-              value={selectedAccountId || ''}
-              onChange={(e) => setSelectedAccountId(e.target.value ? Number(e.target.value) : null)}
-              required
-              disabled={!!strategy}
-            >
-              {accounts.map((acc) => (
-                <option key={acc.id} value={acc.id}>
-                  {getAccountName(acc)}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label className="form-field">
-            <span>전략명</span>
-            <input value={name} onChange={(e) => setName(e.target.value)} required placeholder="예: BTC 추세 전략" />
-          </label>
-
-          <div className="form-row">
-            <label className="form-field">
-              <span>고정 시드 금액</span>
-              <input
-                type="number"
-                step="any"
-                min="0.01"
-                value={seedAmount}
-                onChange={(e) => setSeedAmount(e.target.value)}
-                required
-              />
-            </label>
-            <label className="form-field">
-              <span>통화</span>
-              <select value={seedCurrency} onChange={(e) => setSeedCurrency(e.target.value)}>
-                {CURRENCIES.map((c) => (
-                  <option key={c.value} value={c.value}>
-                    {c.label}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
-
-          <div className="form-row">
-            <label className="form-field">
-              <span>매수 시드 %</span>
-              <input
-                type="number"
-                step="any"
-                min="0.0001"
-                max="100"
-                value={buySeedPercent}
-                onChange={(e) => setBuySeedPercent(e.target.value)}
-                required
-              />
-            </label>
-            <label className="form-field">
-              <span>매도 시드 %</span>
-              <input
-                type="number"
-                step="any"
-                min="0.0001"
-                max="100"
-                value={sellSeedPercent}
-                onChange={(e) => setSellSeedPercent(e.target.value)}
-                required
-              />
-            </label>
-          </div>
-
-          <div className="form-row">
-            <label className="form-field">
-              <span>최대 포지션 비중 %</span>
-              <input
-                type="number"
-                step="any"
-                min="0.0001"
-                max="100"
-                value={maxWeight}
-                onChange={(e) => setMaxWeight(e.target.value)}
-                required
-              />
-            </label>
-            <label className="form-field">
-              <span>최소 매도 보유 비중 % (선택)</span>
-              <input
-                type="number"
-                step="any"
-                min="0"
-                max="100"
-                value={minSellHolding}
-                onChange={(e) => setMinSellHolding(e.target.value)}
-                placeholder="비우면 미적용"
-              />
-            </label>
-          </div>
-
-          <div className="form-row">
-            <label className="form-field">
-              <span>분할 횟수</span>
-              <input
-                type="number"
-                min="1"
-                value={splitCount}
-                onChange={(e) => setSplitCount(e.target.value)}
-                required
-              />
-            </label>
-            <label className="form-field">
-              <span>분할 간격 (초)</span>
-              <input
-                type="number"
-                min="0"
-                value={splitInterval}
-                onChange={(e) => setSplitInterval(e.target.value)}
-                required
-              />
-            </label>
-          </div>
-
-          <div className="form-row">
-            <label className="form-field">
-              <span>주문 타입</span>
-              <select value={orderType} onChange={(e) => setOrderType(e.target.value)}>
-                {ORDER_TYPES.map((o) => (
-                  <option key={o.value} value={o.value}>
-                    {o.label}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="form-field">
-              <span>쿨다운 (초)</span>
-              <input
-                type="number"
-                min="0"
-                value={cooldown}
-                onChange={(e) => setCooldown(e.target.value)}
-              />
-            </label>
-          </div>
-
-          <label className="form-field">
-            <span>웹훅 패스프레이즈 (선택)</span>
-            <input
-              type="password"
-              value={passphrase}
-              onChange={(e) => setPassphrase(e.target.value)}
-              placeholder={strategy ? '변경 시에만 입력' : 'payload secret과 일치'}
-              autoComplete="new-password"
-            />
-          </label>
-
-          <label className="form-field">
-            <span>허용 티커 (쉼표 구분, 비우면 전체)</span>
-            <input
-              value={allowedTickers}
-              onChange={(e) => setAllowedTickers(e.target.value)}
-              placeholder="예: BTC-KRW, ETH-KRW"
-            />
-          </label>
+          {mode === 'strategy' ? (
+            <>
+              <label className="form-field">
+                <span>제목</span>
+                <input value={title} onChange={(e) => setTitle(e.target.value)} required />
+              </label>
+              <label className="form-field">
+                <span>설명</span>
+                <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={3} />
+              </label>
+              {isStaff && (
+                <label className="form-field">
+                  <span>공개 범위</span>
+                  <select value={visibility} onChange={(e) => setVisibility(e.target.value)}>
+                    <option value="PRIVATE">비공개</option>
+                    <option value="PUBLIC">공개</option>
+                  </select>
+                </label>
+              )}
+              <div className="form-row">
+                <label className="form-field">
+                  <span>default 최대비중 %</span>
+                  <input type="number" step="any" min="0.0001" max="100" value={maxWeight} onChange={(e) => setMaxWeight(e.target.value)} required />
+                </label>
+                <label className="form-field">
+                  <span>default 매매당비중 %</span>
+                  <input type="number" step="any" min="0.0001" max="100" value={tradePercent} onChange={(e) => setTradePercent(e.target.value)} required />
+                </label>
+              </div>
+              <div className="form-row">
+                <label className="form-field">
+                  <span>default 분할</span>
+                  <input type="number" min="1" value={splitCount} onChange={(e) => setSplitCount(e.target.value)} required />
+                </label>
+                <label className="form-field">
+                  <span>default 분할기간 (초)</span>
+                  <input type="number" min="0" value={splitInterval} onChange={(e) => setSplitInterval(e.target.value)} required />
+                </label>
+              </div>
+              <div className="form-row">
+                <label className="form-field">
+                  <span>주문 타입</span>
+                  <select value={orderType} onChange={(e) => setOrderType(e.target.value)}>
+                    {ORDER_TYPES.map((o) => (
+                      <option key={o.value} value={o.value}>{o.label}</option>
+                    ))}
+                  </select>
+                </label>
+                <label className="form-field">
+                  <span>쿨다운 (초)</span>
+                  <input type="number" min="0" value={cooldown} onChange={(e) => setCooldown(e.target.value)} />
+                </label>
+              </div>
+              <label className="form-field">
+                <span>웹훅 패스프레이즈 (선택)</span>
+                <input type="password" value={passphrase} onChange={(e) => setPassphrase(e.target.value)} placeholder={strategy ? '변경 시에만 입력' : ''} autoComplete="new-password" />
+              </label>
+            </>
+          ) : (
+            <>
+              <label className="form-field">
+                <span>전략</span>
+                <select
+                  value={selectedStrategyId || ''}
+                  onChange={(e) => setSelectedStrategyId(e.target.value ? Number(e.target.value) : null)}
+                  required
+                  disabled={!!link}
+                >
+                  {strategies.map((s) => (
+                    <option key={s.id} value={s.id}>
+                      {s.title} ({s.visibility === 'PUBLIC' ? '공개' : '비공개'})
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="form-field">
+                <span>계좌</span>
+                <select
+                  value={selectedAccountId || ''}
+                  onChange={(e) => setSelectedAccountId(e.target.value ? Number(e.target.value) : null)}
+                  required
+                  disabled={!!link}
+                >
+                  {accounts.map((acc) => (
+                    <option key={acc.id} value={acc.id}>{getAccountName(acc)}</option>
+                  ))}
+                </select>
+              </label>
+              <div className="form-row">
+                <label className="form-field">
+                  <span>시드 금액</span>
+                  <input type="number" step="any" min="0.01" value={seedAmount} onChange={(e) => setSeedAmount(e.target.value)} required />
+                </label>
+                <label className="form-field">
+                  <span>통화</span>
+                  <select value={seedCurrency} onChange={(e) => setSeedCurrency(e.target.value)}>
+                    <option value="KRW">KRW</option>
+                    <option value="USD">USD</option>
+                    <option value="USDT">USDT</option>
+                  </select>
+                </label>
+              </div>
+              <p className="form-hint">아래 override는 비우면 전략 default를 사용합니다.</p>
+              <div className="form-row">
+                <label className="form-field">
+                  <span>최대비중 override %</span>
+                  <input type="number" step="any" value={overrideMax} onChange={(e) => setOverrideMax(e.target.value)} placeholder="default 사용" />
+                </label>
+                <label className="form-field">
+                  <span>매매당비중 override %</span>
+                  <input type="number" step="any" value={overrideTrade} onChange={(e) => setOverrideTrade(e.target.value)} placeholder="default 사용" />
+                </label>
+              </div>
+              <div className="form-row">
+                <label className="form-field">
+                  <span>분할 override</span>
+                  <input type="number" min="1" value={overrideSplit} onChange={(e) => setOverrideSplit(e.target.value)} placeholder="default 사용" />
+                </label>
+                <label className="form-field">
+                  <span>분할기간 override (초)</span>
+                  <input type="number" min="0" value={overrideInterval} onChange={(e) => setOverrideInterval(e.target.value)} placeholder="default 사용" />
+                </label>
+              </div>
+            </>
+          )}
 
           <label className="form-checkbox">
             <input type="checkbox" checked={enabled} onChange={(e) => setEnabled(e.target.checked)} />
-            <span>전략 활성</span>
+            <span>활성</span>
           </label>
 
           <div className="form-actions">
-            <button type="button" className="btn-cancel" onClick={onClose} disabled={loading}>
-              취소
-            </button>
+            <button type="button" className="btn-cancel" onClick={onClose} disabled={loading}>취소</button>
             <button type="submit" className="btn-submit" disabled={loading}>
-              {loading ? '저장 중...' : strategy ? '수정' : '추가'}
+              {loading ? '저장 중...' : '저장'}
             </button>
           </div>
         </form>
