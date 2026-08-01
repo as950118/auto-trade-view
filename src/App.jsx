@@ -7,6 +7,7 @@ import DashboardPage from './pages/DashboardPage.jsx'
 import SymbolChartPage from './pages/SymbolChartPage.jsx'
 import TargetAllocationPage from './pages/TargetAllocationPage.jsx'
 import AlertStrategyPage from './pages/AlertStrategyPage.jsx'
+import PortfolioPage from './pages/PortfolioPage.jsx'
 import FeeRebateComparisonPage from './pages/FeeRebateComparisonPage.jsx'
 import OAuth2CallbackPage from './pages/OAuth2CallbackPage.jsx'
 import AccountSettingsPage from './pages/AccountSettingsPage.jsx'
@@ -45,6 +46,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <AlertStrategyPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/portfolios"
+            element={
+              <ProtectedRoute>
+                <PortfolioPage />
               </ProtectedRoute>
             }
           />
