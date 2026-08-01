@@ -1,0 +1,12 @@
+.portfolio-weight-chart-container {
+  width: 100%;
+}
+
+.portfolio-weight-chart-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  color: #6b7280;
+  font-size: 0.9rem;
+}

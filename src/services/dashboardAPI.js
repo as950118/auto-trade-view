@@ -195,4 +195,57 @@ export const dashboardAPI = {
     const response = await api.get('/api/fee-rebates/', { params })
     return response.data
   },
+
+  // 포트폴리오
+  getPortfolios: async (params = {}) => {
+    const response = await api.get('/api/portfolios/', { params })
+    return response.data
+  },
+
+  getPortfolio: async (id) => {
+    const response = await api.get(`/api/portfolios/${id}/`)
+    return response.data
+  },
+
+  createPortfolio: async (data) => {
+    const response = await api.post('/api/portfolios/', data)
+    return response.data
+  },
+
+  updatePortfolio: async (id, data) => {
+    const response = await api.patch(`/api/portfolios/${id}/`, data)
+    return response.data
+  },
+
+  deletePortfolio: async (id) => {
+    const response = await api.delete(`/api/portfolios/${id}/`)
+    return response.data
+  },
+
+  // holdings: [{ symbol_id, target_weight_percent }, ...] 전체 교체 (저장 즉시 구독 계좌 리밸런싱)
+  updatePortfolioHoldings: async (id, holdings) => {
+    const response = await api.put(`/api/portfolios/${id}/holdings/`, holdings)
+    return response.data
+  },
+
+  // 포트폴리오 연동(구독)
+  getPortfolioLinks: async (params = {}) => {
+    const response = await api.get('/api/portfolio-links/', { params })
+    return response.data
+  },
+
+  createPortfolioLink: async (data) => {
+    const response = await api.post('/api/portfolio-links/', data)
+    return response.data
+  },
+
+  updatePortfolioLink: async (id, data) => {
+    const response = await api.patch(`/api/portfolio-links/${id}/`, data)
+    return response.data
+  },
+
+  deletePortfolioLink: async (id) => {
+    const response = await api.delete(`/api/portfolio-links/${id}/`)
+    return response.data
+  },
 }

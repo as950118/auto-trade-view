@@ -90,6 +90,9 @@ const Navbar = () => {
               <Link to="/alert-strategies" className="navbar-link" onClick={closeMenu}>
                 알림 전략
               </Link>
+              <Link to="/portfolios" className="navbar-link" onClick={closeMenu}>
+                포트폴리오
+              </Link>
               <Link to="/account" className="navbar-link" onClick={closeMenu}>
                 계정
               </Link>
