@@ -1,0 +1,79 @@
+.ui-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.ui-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.ui-btn:focus-visible {
+  outline: 2px solid var(--color-rise);
+  outline-offset: 2px;
+}
+
+.ui-btn-md {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-sm);
+}
+
+.ui-btn-lg {
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--font-size-base);
+}
+
+.ui-btn-primary {
+  background-color: var(--color-rise);
+  color: white;
+}
+
+.ui-btn-primary:hover:not(:disabled) {
+  background-color: var(--color-rise-hover);
+}
+
+.ui-btn-buy {
+  background-color: var(--color-rise);
+  color: white;
+}
+
+.ui-btn-buy:hover:not(:disabled) {
+  background-color: var(--color-rise-hover);
+}
+
+.ui-btn-sell {
+  background-color: var(--color-fall);
+  color: white;
+}
+
+.ui-btn-sell:hover:not(:disabled) {
+  background-color: var(--color-fall-hover);
+}
+
+.ui-btn-secondary {
+  background-color: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+}
+
+.ui-btn-secondary:hover:not(:disabled) {
+  background-color: var(--color-bg-page);
+}
+
+.ui-btn-ghost {
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  padding-left: var(--space-2);
+  padding-right: var(--space-2);
+}
+
+.ui-btn-ghost:hover:not(:disabled) {
+  color: var(--color-text-primary);
+}

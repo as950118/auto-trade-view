@@ -44,8 +44,8 @@
 }
 
 .btn-clear-symbol:hover {
-  border-color: var(--brand-green);
-  color: var(--brand-green);
+  border-color: var(--color-rise);
+  color: var(--color-rise);
 }
 
 .buy-order-form {
@@ -86,14 +86,14 @@
 
 .buy-order-form .quantity-type-tab:hover,
 .buy-order-form .order-type-tab:hover {
-  border-color: var(--brand-green);
-  color: var(--brand-green);
+  border-color: var(--color-rise);
+  color: var(--color-rise);
 }
 
 .buy-order-form .quantity-type-tab.active,
 .buy-order-form .order-type-tab.active {
-  background: var(--brand-green);
-  border-color: var(--brand-green);
+  background: var(--color-rise);
+  border-color: var(--color-rise);
   color: white;
 }
 
@@ -119,13 +119,13 @@
 }
 
 .buy-order-form .percent-btn:hover {
-  border-color: var(--brand-green);
-  color: var(--brand-green);
+  border-color: var(--color-rise);
+  color: var(--color-rise);
 }
 
 .buy-order-form .percent-btn.active {
-  background: var(--brand-green);
-  border-color: var(--brand-green);
+  background: var(--color-rise);
+  border-color: var(--color-rise);
   color: white;
 }
 
@@ -142,8 +142,8 @@
 .buy-order-form .form-input:focus,
 .buy-order-form .form-select:focus {
   outline: none;
-  border-color: var(--brand-green);
-  box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.15);
+  border-color: var(--color-rise);
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.15);
 }
 
 .buy-order-form .amount-input-wrap,
@@ -204,8 +204,8 @@
 }
 
 .btn-clear-symbol-inline:hover {
-  border-color: var(--brand-green);
-  color: var(--brand-green);
+  border-color: var(--color-rise);
+  color: var(--color-rise);
 }
 
 .selected-symbol-display {
@@ -253,7 +253,7 @@
 }
 
 .symbol-result-item:hover {
-  background: rgba(22, 163, 74, 0.08);
+  background: rgba(220, 38, 38, 0.08);
 }
 
 .symbol-result-ticker {
@@ -276,9 +276,10 @@
 }
 
 .btn-buy {
-  background: var(--brand-green, #16a34a);
+  background: var(--color-rise);
+  color: white;
 }
 
 .btn-buy:hover:not(:disabled) {
-  background: #15803d;
+  background: var(--color-rise-hover);
 }

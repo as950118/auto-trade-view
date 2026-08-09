@@ -365,7 +365,7 @@
   font-size: 0.85rem;
   font-weight: 600;
   color: white;
-  background: #dc2626;
+  background: var(--color-fall);
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -373,7 +373,7 @@
 }
 
 .btn-sell-row:hover {
-  background: #b91c1c;
+  background: var(--color-fall-hover);
 }
 
 .btn-sell-row:active {

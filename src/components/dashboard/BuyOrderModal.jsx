@@ -434,7 +434,7 @@ const BuyOrderModal = ({ isOpen, onClose, onSuccess, accounts }) => {
             <button type="button" className="btn btn-secondary" onClick={onClose}>
               취소
             </button>
-            <button type="submit" className="btn btn-primary btn-buy" disabled={loading || !selectedSymbol}>
+            <button type="submit" className="btn btn-buy" disabled={loading || !selectedSymbol}>
               {loading ? '접수 중...' : '매수 주문'}
             </button>
           </div>

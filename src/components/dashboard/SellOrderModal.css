@@ -33,7 +33,7 @@
 }
 
 .sell-available-qty strong {
-  color: var(--brand-red);
+  color: var(--color-fall);
 }
 
 .sell-order-form {
@@ -74,14 +74,14 @@
 
 .quantity-type-tab:hover,
 .order-type-tab:hover {
-  border-color: var(--brand-red);
-  color: var(--brand-red);
+  border-color: var(--color-fall);
+  color: var(--color-fall);
 }
 
 .quantity-type-tab.active,
 .order-type-tab.active {
-  background: var(--brand-red);
-  border-color: var(--brand-red);
+  background: var(--color-fall);
+  border-color: var(--color-fall);
   color: white;
 }
 
@@ -107,13 +107,13 @@
 }
 
 .percent-btn:hover {
-  border-color: var(--brand-red);
-  color: var(--brand-red);
+  border-color: var(--color-fall);
+  color: var(--color-fall);
 }
 
 .percent-btn.active {
-  background: var(--brand-red);
-  border-color: var(--brand-red);
+  background: var(--color-fall);
+  border-color: var(--color-fall);
   color: white;
 }
 
@@ -130,8 +130,8 @@
 .sell-order-form .form-input:focus,
 .sell-order-form .form-select:focus {
   outline: none;
-  border-color: var(--brand-red);
-  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.1);
+  border-color: var(--color-fall);
+  box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.1);
 }
 
 .amount-input-wrap,
@@ -155,9 +155,10 @@
 }
 
 .btn-sell {
-  background: #dc2626;
+  background: var(--color-fall);
+  color: white;
 }
 
 .btn-sell:hover:not(:disabled) {
-  background: #b91c1c;
+  background: var(--color-fall-hover);
 }

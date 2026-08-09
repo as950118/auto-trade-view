@@ -310,7 +310,7 @@ const SellOrderModal = ({ isOpen, onClose, onSuccess, holdingGroup, accounts, cu
             <button type="button" className="btn btn-secondary" onClick={onClose}>
               취소
             </button>
-            <button type="submit" className="btn btn-primary btn-sell" disabled={loading}>
+            <button type="submit" className="btn btn-sell" disabled={loading}>
               {loading ? '접수 중...' : '매도 주문'}
             </button>
           </div>

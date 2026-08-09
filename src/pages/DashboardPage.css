@@ -58,7 +58,7 @@
 }
 
 .btn-buy-open {
-  background-color: var(--brand-green, #16a34a);
+  background-color: var(--color-rise);
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -70,7 +70,7 @@
 }
 
 .btn-buy-open:hover {
-  background-color: var(--brand-green-dark, #15803d);
+  background-color: var(--color-rise-hover);
 }
 
 .btn-add-account {
