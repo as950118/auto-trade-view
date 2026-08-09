@@ -4,7 +4,15 @@ import './PortfolioFormModal.css'
 
 const CURRENCIES = ['KRW', 'USD', 'USDT']
 
-const PortfolioLinkFormModal = ({ isOpen, onClose, onSuccess, link = null, accounts = [], portfolios = [] }) => {
+const PortfolioLinkFormModal = ({
+  isOpen,
+  onClose,
+  onSuccess,
+  link = null,
+  accounts = [],
+  portfolios = [],
+  initialPortfolioId = null,
+}) => {
   const [selectedPortfolioId, setSelectedPortfolioId] = useState(null)
   const [selectedAccountId, setSelectedAccountId] = useState(null)
   const [seedAmount, setSeedAmount] = useState('')
@@ -24,7 +32,10 @@ const PortfolioLinkFormModal = ({ isOpen, onClose, onSuccess, link = null, accou
       setSeedCurrency(link.seed_currency || 'KRW')
       setEnabled(link.enabled !== false)
     } else {
-      const first = portfolios[0]
+      const preselected = initialPortfolioId
+        ? portfolios.find((p) => p.id === initialPortfolioId)
+        : null
+      const first = preselected || portfolios[0]
       setSelectedPortfolioId(first?.id || null)
       const firstCurrency = first?.holdings?.[0]?.symbol?.currency
       setSelectedAccountId(accounts[0]?.id || null)
@@ -32,7 +43,7 @@ const PortfolioLinkFormModal = ({ isOpen, onClose, onSuccess, link = null, accou
       setSeedCurrency(firstCurrency || 'KRW')
       setEnabled(true)
     }
-  }, [isOpen, link, accounts, portfolios])
+  }, [isOpen, link, accounts, portfolios, initialPortfolioId])
 
   const selectedPortfolio = useMemo(
     () => portfolios.find((p) => p.id === selectedPortfolioId),

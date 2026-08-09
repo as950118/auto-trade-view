@@ -1,14 +1,16 @@
 :root {
-  --brand-red: #dc2626;
-  --brand-red-dark: #b91c1c;
+  /* 레거시 변수명 — DS-0001 토큰(styles/tokens.css)의 별칭. 신규 코드는 --color-, --space- 등
+     새 토큰을 직접 사용하고, 이 별칭은 기존 CSS 호환을 위해서만 남겨둔다. */
+  --brand-red: var(--color-rise);
+  --brand-red-dark: var(--color-rise-hover);
   --brand-red-light: #ef4444;
-  --brand-green: #16a34a;
-  --brand-green-dark: #15803d;
-  --text-primary: #1f2937;
-  --text-secondary: #6b7280;
-  --bg-white: #ffffff;
-  --bg-gray: #f9fafb;
-  --border-gray: #e5e7eb;
+  --brand-green: var(--color-fall);
+  --brand-green-dark: var(--color-fall-hover);
+  --text-primary: var(--color-text-primary);
+  --text-secondary: var(--color-text-secondary);
+  --bg-white: var(--color-bg-elevated);
+  --bg-gray: var(--color-bg-page);
+  --border-gray: var(--color-border);
 }
 
 .app {
