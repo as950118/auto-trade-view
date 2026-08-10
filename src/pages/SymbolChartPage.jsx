@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import Navbar from '../components/Navbar'
 import TradingViewChart from '../components/chart/TradingViewChart'
+import DisclosureEarningsPanel from '../components/DisclosureEarningsPanel'
 import { dashboardAPI } from '../services/dashboardAPI'
 import './SymbolChartPage.css'
 
@@ -62,6 +63,32 @@ const SymbolChartPage = () => {
 
   const tvSymbol = tickerInput.trim()
 
+  // `symbols`는 매수 검색용 목록으로 기본 페이지(20건)만 로드하므로 여기서 KR 여부를
+  // 판단하기엔 불완전하다(PRD-0004 라이브 테스트에서 확인). 티커가 바뀔 때마다 country=KR로
+  // 좁혀 직접 조회한다.
+  const [krSymbolMatch, setKrSymbolMatch] = useState(null)
+  useEffect(() => {
+    if (!tvSymbol) {
+      setKrSymbolMatch(null)
+      return
+    }
+    let cancelled = false
+    dashboardAPI
+      .getSymbols({ search: tvSymbol, country: 'KR' })
+      .then((res) => {
+        if (cancelled) return
+        const list = res.results || res
+        const found = (Array.isArray(list) ? list : []).find((s) => s.ticker === tvSymbol)
+        setKrSymbolMatch(found || null)
+      })
+      .catch(() => {
+        if (!cancelled) setKrSymbolMatch(null)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [tvSymbol])
+
   return (
     <div className="symbol-chart-page">
       <Navbar />
@@ -118,6 +145,8 @@ const SymbolChartPage = () => {
               차트 티커: <strong>{tvSymbol}</strong>
             </p>
           )}
+
+          {krSymbolMatch && <DisclosureEarningsPanel symbol={krSymbolMatch} />}
         </section>
       </div>
     </div>

@@ -37,6 +37,22 @@ export const dashboardAPI = {
     return response.data.results || response.data
   },
 
+  // 국내(KR) 종목 공시 목록 조회 (PRD-0004)
+  getKrDisclosures: async (symbolId) => {
+    const response = await api.get('/api/kr-disclosures/', {
+      params: { symbol: symbolId, ordering: '-rcept_dt' }
+    })
+    return response.data.results || response.data
+  },
+
+  // 국내(KR) 종목 분기 실적 조회 (PRD-0004)
+  getKrFinancialFacts: async (symbolId) => {
+    const response = await api.get('/api/kr-financial-facts/', {
+      params: { symbol: symbolId, ordering: '-bsns_year,-reprt_code' }
+    })
+    return response.data.results || response.data
+  },
+
   // 주문 생성 (매수/매도)
   createOrder: async (orderData) => {
     const response = await api.post('/api/orders/', orderData)
