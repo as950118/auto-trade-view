@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import { dashboardAPI } from '../../services/dashboardAPI'
+import { getAssetType, isAccountCompatibleWithAssetType } from '../../utils/portfolio'
 import './PortfolioFormModal.css'
 
 const CURRENCIES = ['KRW', 'USD', 'USDT']
@@ -50,6 +51,21 @@ const PortfolioLinkFormModal = ({
     [portfolios, selectedPortfolioId]
   )
   const portfolioCurrency = selectedPortfolio?.holdings?.[0]?.symbol?.currency || null
+  const selectedAssetType = selectedPortfolio ? getAssetType(selectedPortfolio) : null
+
+  // PRD-0003 AC-1: 포트폴리오 자산군과 호환되는 계좌만 노출한다. 수정 모드는 계좌 필드가
+  // 비활성화되어 있으므로(이미 확정된 연동) 필터링하지 않고 현재 값을 그대로 보여준다.
+  const compatibleAccounts = useMemo(() => {
+    if (link || !selectedAssetType) return accounts
+    return accounts.filter((acc) => isAccountCompatibleWithAssetType(acc, selectedAssetType))
+  }, [accounts, selectedAssetType, link])
+
+  useEffect(() => {
+    if (!isOpen || link) return
+    if (!compatibleAccounts.some((acc) => acc.id === selectedAccountId)) {
+      setSelectedAccountId(compatibleAccounts[0]?.id || null)
+    }
+  }, [isOpen, link, compatibleAccounts, selectedAccountId])
 
   const getAccountName = (acc) =>
     acc.broker?.name ? `${acc.broker.name} (${acc.account_number || '-'})` : `계좌 ${acc.id}`
@@ -59,6 +75,10 @@ const PortfolioLinkFormModal = ({
     setError('')
     if (!selectedPortfolioId || !selectedAccountId) {
       setError('포트폴리오와 계좌를 선택해 주세요.')
+      return
+    }
+    if (!link && compatibleAccounts.length === 0) {
+      setError('이 포트폴리오와 호환되는 계좌가 없습니다.')
       return
     }
     const seed = parseFloat(seedAmount)
@@ -133,13 +153,16 @@ const PortfolioLinkFormModal = ({
               value={selectedAccountId || ''}
               onChange={(e) => setSelectedAccountId(e.target.value ? Number(e.target.value) : null)}
               required
-              disabled={!!link}
+              disabled={!!link || compatibleAccounts.length === 0}
             >
-              {accounts.map((acc) => (
+              {compatibleAccounts.map((acc) => (
                 <option key={acc.id} value={acc.id}>{getAccountName(acc)}</option>
               ))}
             </select>
           </label>
+          {!link && compatibleAccounts.length === 0 && (
+            <p className="form-error">이 포트폴리오({selectedAssetType === 'MIXED' ? '혼합' : selectedAssetType} 자산군)와 호환되는 계좌가 없습니다.</p>
+          )}
           <div className="form-row">
             <label className="form-field">
               <span>시드 금액</span>
@@ -166,7 +189,11 @@ const PortfolioLinkFormModal = ({
 
           <div className="form-actions">
             <button type="button" className="btn-cancel" onClick={onClose} disabled={loading}>취소</button>
-            <button type="submit" className="btn-submit" disabled={loading}>
+            <button
+              type="submit"
+              className="btn-submit"
+              disabled={loading || (!link && compatibleAccounts.length === 0)}
+            >
               {loading ? '저장 중...' : '저장'}
             </button>
           </div>
