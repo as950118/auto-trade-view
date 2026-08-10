@@ -1,0 +1,118 @@
+.kr-disclosure-earnings-panel {
+  margin-top: var(--space-5);
+  padding: var(--space-4);
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.kr-panel-title {
+  margin: 0 0 var(--space-3);
+  font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
+}
+
+.kr-panel-subtitle {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.kr-panel-hint {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.kr-panel-error {
+  color: var(--color-status-danger-fg);
+}
+
+.kr-panel-empty {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.kr-panel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+}
+
+@media (max-width: 768px) {
+  .kr-panel-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.kr-disclosure-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.kr-disclosure-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--font-size-sm);
+}
+
+.kr-disclosure-item a {
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.kr-disclosure-item a:hover {
+  text-decoration: underline;
+}
+
+.kr-disclosure-date {
+  flex-shrink: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+}
+
+.kr-earnings-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+}
+
+.kr-earnings-table th,
+.kr-earnings-table td {
+  padding: var(--space-2);
+  text-align: right;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.kr-earnings-table th:first-child,
+.kr-earnings-table td:first-child {
+  text-align: left;
+  color: var(--color-text-secondary);
+}
+
+.kr-yoy-empty {
+  margin-left: var(--space-2);
+  color: var(--color-text-secondary);
+}
+
+/* DS-0001: 수익률류 지표는 국내 증시 관례(상승=--color-rise/적, 하락=--color-fall/녹)를 따른다.
+   Badge의 success/danger(일반 상태색)를 그대로 쓰지 않고, 결합 셀렉터(specificity 0-2-0)로
+   오버라이드해 import 순서에 따른 우선순위 충돌을 피한다(DS-0001 Open Question #7 사례 참고). */
+.ui-badge.kr-yoy-rise {
+  margin-left: var(--space-2);
+  background-color: color-mix(in srgb, var(--color-rise) 15%, transparent);
+  color: var(--color-rise);
+}
+
+.ui-badge.kr-yoy-fall {
+  margin-left: var(--space-2);
+  background-color: color-mix(in srgb, var(--color-fall) 15%, transparent);
+  color: var(--color-fall);
+}
