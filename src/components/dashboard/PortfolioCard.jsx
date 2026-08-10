@@ -1,4 +1,7 @@
 import './PortfolioCard.css'
+import { getAssetType } from '../../utils/portfolio'
+
+export { getAssetType }
 
 const COLORS = ['#dc2626', '#2563eb', '#16a34a', '#d97706', '#7c3aed', '#0891b2', '#db2777', '#65a30d']
 
@@ -7,15 +10,6 @@ const ASSET_META = {
   CRYPTO: { label: '코인', className: 'chip-crypto' },
   MIXED: { label: '혼합', className: 'chip-mixed' },
   EMPTY: { label: '미구성', className: 'chip-empty' },
-}
-
-export const getAssetType = (portfolio) => {
-  const holdings = portfolio.holdings || []
-  if (holdings.length === 0) return 'EMPTY'
-  const hasCrypto = holdings.some((h) => h.symbol?.is_crypto)
-  const hasStock = holdings.some((h) => !h.symbol?.is_crypto)
-  if (hasCrypto && hasStock) return 'MIXED'
-  return hasCrypto ? 'CRYPTO' : 'STOCK'
 }
 
 const MiniWeightBar = ({ holdings = [] }) => {

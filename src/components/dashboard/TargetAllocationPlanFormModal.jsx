@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { dashboardAPI } from '../../services/dashboardAPI'
+import { isAccountCompatibleWithSymbol } from '../../utils/portfolio'
 import './TargetAllocationPlanFormModal.css'
 
 const ORDER_TYPES = [
@@ -24,7 +25,8 @@ const TargetAllocationPlanFormModal = ({ isOpen, onClose, onSuccess, plan = null
   const selectedAccount = accounts.find((a) => Number(a.id) === Number(selectedAccountId))
   const selectedBrokerId = selectedAccount?.broker?.id ?? selectedAccount?.broker_id
 
-  const searchSymbols = useCallback(async (query, brokerId) => {
+  const searchSymbols = useCallback(async (query, account) => {
+    const brokerId = account?.broker?.id ?? account?.broker_id
     if (!brokerId) {
       setSymbolResults([])
       return
@@ -37,12 +39,16 @@ const TargetAllocationPlanFormModal = ({ isOpen, onClose, onSuccess, plan = null
     try {
       const data = await dashboardAPI.getSymbols({
         search: query.trim(),
-        broker_id: brokerId,
+        broker: brokerId,
         is_delisted: false,
         limit: 20,
       })
       const list = data.results || data
-      setSymbolResults(Array.isArray(list) ? list : [])
+      // PRD-0003 AC-3: 서버 필터(broker)에 더해 선택 계좌 자산군과 다른 종목은 한 번 더 제외한다.
+      const filtered = (Array.isArray(list) ? list : []).filter((sym) =>
+        isAccountCompatibleWithSymbol(account, sym)
+      )
+      setSymbolResults(filtered)
     } catch (err) {
       setSymbolResults([])
     } finally {
@@ -52,9 +58,9 @@ const TargetAllocationPlanFormModal = ({ isOpen, onClose, onSuccess, plan = null
 
   useEffect(() => {
     if (!selectedBrokerId) return
-    const t = setTimeout(() => searchSymbols(symbolSearch, selectedBrokerId), 300)
+    const t = setTimeout(() => searchSymbols(symbolSearch, selectedAccount), 300)
     return () => clearTimeout(t)
-  }, [symbolSearch, selectedBrokerId, searchSymbols])
+  }, [symbolSearch, selectedBrokerId, selectedAccount, searchSymbols])
 
   useEffect(() => {
     if (!isOpen) return
