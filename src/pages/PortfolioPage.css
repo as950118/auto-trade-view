@@ -1,6 +1,6 @@
 .portfolio-page {
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background-color: var(--color-bg-page);
 }
 
 .portfolio-container {
@@ -16,23 +16,23 @@
 .portfolio-title {
   font-size: 2rem;
   font-weight: 700;
-  color: #111;
+  color: var(--color-text-primary);
   margin-bottom: 0.5rem;
 }
 
 .portfolio-subtitle {
   font-size: 1rem;
-  color: #6b7280;
+  color: var(--color-text-secondary);
   line-height: 1.5;
   margin: 0;
 }
 
 .portfolio-section {
-  background: white;
-  border-radius: 16px;
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-xl);
   padding: 1.5rem 2rem;
   margin-bottom: 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-1);
 }
 
 .portfolio-section .section-header-row {
@@ -50,26 +50,10 @@
   margin: 0;
 }
 
-.btn-add-plan {
-  background-color: var(--brand-red, #dc2626);
-  color: white;
-  border: none;
-  padding: 0.6rem 1.25rem;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-}
-
-.btn-add-plan:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 .empty-state {
   text-align: center;
   padding: 2rem;
-  color: #6b7280;
+  color: var(--color-text-secondary);
 }
 
 /* --- Toolbar: search + filter chips --- */
@@ -85,19 +69,19 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  background: #f9fafb;
-  border: 1.5px solid #e5e7eb;
-  border-radius: 10px;
+  background: var(--color-bg-page);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
   padding: 0.6rem 0.9rem;
   max-width: 420px;
   transition: border-color 0.15s ease, background 0.15s ease;
-  color: #9ca3af;
+  color: var(--color-text-secondary);
 }
 
 .portfolio-search:focus-within {
-  border-color: var(--brand-red, #dc2626);
-  background: white;
-  color: var(--brand-red, #dc2626);
+  border-color: var(--color-rise);
+  background: var(--color-bg-elevated);
+  color: var(--color-rise);
 }
 
 .portfolio-search input {
@@ -106,7 +90,7 @@
   background: transparent;
   flex: 1;
   font-size: 0.9rem;
-  color: #111;
+  color: var(--color-text-primary);
 }
 
 .search-clear {
@@ -115,12 +99,12 @@
   cursor: pointer;
   font-size: 1.1rem;
   line-height: 1;
-  color: #9ca3af;
+  color: var(--color-text-secondary);
   padding: 0 0.1rem;
 }
 
 .search-clear:hover {
-  color: #6b7280;
+  color: var(--color-text-secondary);
 }
 
 .filter-row {
@@ -133,9 +117,9 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  border: 1.5px solid #e5e7eb;
-  background: white;
-  color: #4b5563;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-secondary);
   font-size: 0.82rem;
   font-weight: 600;
   padding: 0.4rem 0.85rem;
@@ -146,12 +130,12 @@
 
 .filter-chip:hover {
   border-color: var(--brand-red-light, #ef4444);
-  color: var(--brand-red, #dc2626);
+  color: var(--color-rise);
 }
 
 .filter-chip.active {
-  background: var(--brand-red, #dc2626);
-  border-color: var(--brand-red, #dc2626);
+  background: var(--color-rise);
+  border-color: var(--color-rise);
   color: white;
 }
 
@@ -169,7 +153,7 @@
 .filter-chip-secondary {
   font-size: 0.78rem;
   padding: 0.35rem 0.75rem;
-  color: #6b7280;
+  color: var(--color-text-secondary);
 }
 
 /* --- Portfolio card grid --- */
@@ -181,7 +165,7 @@
 }
 
 .portfolio-detail-section {
-  border: 1.5px solid #fecaca;
+  border: 1.5px solid color-mix(in srgb, var(--color-rise) 35%, white);
 }
 
 /* --- Subscriptions --- */
@@ -197,9 +181,9 @@
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
-  background: #f9fafb;
-  border: 1px solid #f0f0f0;
-  border-radius: 10px;
+  background: var(--color-bg-page);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
   padding: 0.8rem 1rem;
 }
 
@@ -214,18 +198,18 @@
 .subscription-title {
   font-weight: 700;
   font-size: 0.92rem;
-  color: #111;
+  color: var(--color-text-primary);
 }
 
 .subscription-meta {
   font-size: 0.78rem;
-  color: #9ca3af;
+  color: var(--color-text-secondary);
 }
 
 .subscription-seed {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #4b5563;
+  color: var(--color-text-secondary);
   white-space: nowrap;
 }
 
@@ -234,24 +218,6 @@
 }
 
 /* --- Shared table/badge bits still used elsewhere on this page --- */
-
-.badge {
-  display: inline-block;
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
-.badge-on {
-  background: #dcfce7;
-  color: #166534;
-}
-
-.badge-off {
-  background: #f3f4f6;
-  color: #6b7280;
-}
 
 .btn-link {
   background: none;
@@ -264,12 +230,12 @@
 }
 
 .btn-link.danger {
-  color: #dc2626;
+  color: var(--color-rise);
 }
 
 .muted-text {
   font-size: 0.8rem;
-  color: #9ca3af;
+  color: var(--color-text-secondary);
   margin-top: 0.2rem;
 }
 
@@ -286,8 +252,8 @@
 .loading-spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid #e5e7eb;
-  border-top-color: #dc2626;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-rise);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -296,16 +262,6 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-.retry-button {
-  background: #dc2626;
-  color: white;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
 }
 
 @media (max-width: 768px) {

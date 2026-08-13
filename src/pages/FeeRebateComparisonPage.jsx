@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import Navbar from '../components/Navbar'
+import Button from '../components/ui/Button'
 import { dashboardAPI } from '../services/dashboardAPI'
 import './FeeRebateComparisonPage.css'
 
@@ -97,9 +98,9 @@ const FeeRebateComparisonPage = () => {
         <Navbar />
         <div className="fee-rebate-error">
           <p>{error}</p>
-          <button type="button" className="retry-button" onClick={loadData}>
+          <Button type="button" variant="primary" onClick={loadData}>
             다시 시도
-          </button>
+          </Button>
         </div>
       </div>
     )

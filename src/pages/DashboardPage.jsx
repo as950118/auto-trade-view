@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import Navbar from '../components/Navbar'
+import Button from '../components/ui/Button'
 import AccountCard from '../components/dashboard/AccountCard'
 import HoldingsTable from '../components/dashboard/HoldingsTable'
 import DailyProfitChart from '../components/dashboard/DailyProfitChart'
@@ -101,9 +102,9 @@ const DashboardPage = () => {
         <Navbar />
         <div className="dashboard-error">
           <p>{error}</p>
-          <button onClick={loadDashboardData} className="retry-button">
+          <Button variant="primary" size="lg" onClick={loadDashboardData}>
             다시 시도
-          </button>
+          </Button>
         </div>
       </div>
     )
@@ -169,9 +170,9 @@ const DashboardPage = () => {
         <section className="dashboard-section">
           <div className="section-header-row">
             <h2 className="section-title">계좌 목록</h2>
-            <button className="btn-add-account" onClick={handleAddAccount}>
+            <Button variant="primary" onClick={handleAddAccount}>
               + 계좌 등록
-            </button>
+            </Button>
           </div>
             <div className="accounts-grid">
               {accounts.length > 0 ? (
@@ -189,19 +190,20 @@ const DashboardPage = () => {
               ) : (
               <div className="empty-state">
                 <p>등록된 계좌가 없습니다.</p>
-                <button className="btn-add-account" onClick={handleAddAccount}>
+                <Button variant="primary" onClick={handleAddAccount}>
                   계좌 등록하기
-                </button>
+                </Button>
               </div>
             )}
           </div>
           {selectedAccount && (
-            <button
+            <Button
+              variant="secondary"
               className="filter-clear-button"
               onClick={() => handleAccountFilter('all')}
             >
               전체 보기
-            </button>
+            </Button>
           )}
         </section>
 
@@ -230,13 +232,14 @@ const DashboardPage = () => {
           <div className="section-header-row">
             <h2 className="section-title">보유종목</h2>
             <div className="section-header-actions">
-              <button
+              <Button
                 type="button"
-                className="btn-buy-open"
+                variant="buy"
+                size="md"
                 onClick={() => setBuyModalOpen(true)}
               >
                 매수
-              </button>
+              </Button>
               {selectedAccount && (
                 <span className="filter-badge">
                   계좌 필터 적용됨

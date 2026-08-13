@@ -86,9 +86,9 @@ const AccountSettingsPage = () => {
             <div
               className="auth-error"
               style={{
-                backgroundColor: '#dcfce7',
-                color: '#166534',
-                borderColor: '#bbf7d0',
+                backgroundColor: 'var(--color-status-success-bg)',
+                color: 'var(--color-status-success-fg)',
+                borderColor: 'var(--color-status-success-fg)',
               }}
             >
               {success}

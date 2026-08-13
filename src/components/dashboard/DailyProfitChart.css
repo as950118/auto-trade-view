@@ -1,5 +1,5 @@
 .daily-profit-chart-container {
-  background: white;
+  background: var(--color-bg-elevated);
 }
 
 .chart-stats {
@@ -7,7 +7,7 @@
   gap: 2rem;
   margin-bottom: 1.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border-gray);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .stat-item {
@@ -18,7 +18,7 @@
 
 .stat-label {
   font-size: 0.9rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   font-weight: 500;
 }
 
@@ -28,11 +28,11 @@
 }
 
 .stat-value.positive {
-  color: #dc2626;
+  color: var(--color-rise);
 }
 
 .stat-value.negative {
-  color: #059669;
+  color: var(--color-fall);
 }
 
 .chart-wrapper {
@@ -43,7 +43,7 @@
 .chart-empty {
   text-align: center;
   padding: 3rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 @media (max-width: 768px) {

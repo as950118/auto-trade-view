@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { dashboardAPI } from '../../services/dashboardAPI'
+import Button from '../ui/Button'
 import './AccountFormModal.css'
 
 const AccountFormModal = ({ isOpen, onClose, onSuccess, account = null }) => {
@@ -313,21 +314,23 @@ const AccountFormModal = ({ isOpen, onClose, onSuccess, account = null }) => {
           )}
 
           <div className="form-actions">
-            <button
+            <Button
               type="button"
-              className="btn btn-secondary"
+              variant="secondary"
+              size="lg"
               onClick={onClose}
               disabled={loading}
             >
               취소
-            </button>
-            <button
+            </Button>
+            <Button
               type="submit"
-              className="btn btn-primary"
+              variant="primary"
+              size="lg"
               disabled={loading}
             >
               {loading ? '저장 중...' : account ? '수정' : '등록'}
-            </button>
+            </Button>
           </div>
         </form>
       </div>

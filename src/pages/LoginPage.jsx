@@ -111,7 +111,7 @@ const LoginPage = () => {
                 회원가입
               </Link>
             </p>
-            <p style={{ marginTop: '0.75rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+            <p style={{ marginTop: '0.75rem', fontSize: '0.85rem', color: 'var(--color-text-secondary)' }}>
               Google로만 가입한 경우, 로그인 후{' '}
               <strong>계정</strong> 메뉴에서 비밀번호를 설정하면 ID/비밀번호로도 로그인할 수 있습니다.
             </p>

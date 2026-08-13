@@ -10,7 +10,7 @@
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(135deg, var(--brand-red) 0%, var(--brand-red-dark) 100%);
+  background: linear-gradient(135deg, var(--color-rise) 0%, var(--color-rise-hover) 100%);
   color: white;
   padding: 6rem 2rem;
   text-align: center;
@@ -84,7 +84,7 @@
 
 .btn {
   padding: 1rem 2.5rem;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   font-size: 1.1rem;
   font-weight: 600;
   text-decoration: none;
@@ -100,13 +100,13 @@
 
 .btn-primary {
   background-color: white;
-  color: var(--brand-red);
+  color: var(--color-rise);
 }
 
 .btn-primary:hover {
-  background-color: var(--bg-gray);
+  background-color: var(--color-bg-page);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-1);
 }
 
 .btn-secondary {
@@ -123,7 +123,7 @@
 /* Chart Section */
 .chart-section {
   padding: 5rem 2rem;
-  background: linear-gradient(to bottom, #f9fafb 0%, #ffffff 100%);
+  background: linear-gradient(to bottom, var(--color-bg-page) 0%, var(--color-bg-elevated) 100%);
 }
 
 .chart-section-container {
@@ -147,13 +147,13 @@
 .section-title {
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
   margin-bottom: 1rem;
 }
 
 .section-description {
   font-size: 1.1rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   max-width: 600px;
   margin: 0 auto;
 }
@@ -161,7 +161,7 @@
 /* Features Section */
 .features {
   padding: 5rem 2rem;
-  background-color: var(--bg-white);
+  background-color: var(--color-bg-elevated);
 }
 
 .features-container {
@@ -177,9 +177,9 @@
 }
 
 .feature-card {
-  background-color: var(--bg-gray);
+  background-color: var(--color-bg-page);
   padding: 2.5rem;
-  border-radius: 16px;
+  border-radius: var(--radius-xl);
   text-align: center;
   transition: all 0.3s ease;
   border: 1px solid transparent;
@@ -187,8 +187,8 @@
 
 .feature-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-  border-color: var(--brand-red);
+  box-shadow: var(--shadow-2);
+  border-color: var(--color-rise);
 }
 
 .feature-icon-wrapper {
@@ -206,11 +206,11 @@
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 }
 
 .feature-description {
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   line-height: 1.7;
   font-size: 0.95rem;
 }
@@ -218,7 +218,7 @@
 /* Technology Section */
 .technology {
   padding: 5rem 2rem;
-  background: linear-gradient(to bottom, #ffffff 0%, #f9fafb 100%);
+  background: linear-gradient(to bottom, var(--color-bg-elevated) 0%, var(--color-bg-page) 100%);
 }
 
 .technology-container {
@@ -234,10 +234,10 @@
 }
 
 .tech-card {
-  background: white;
+  background: var(--color-bg-elevated);
   padding: 2.5rem;
-  border-radius: 16px;
-  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -250,7 +250,7 @@
   left: 0;
   width: 4px;
   height: 100%;
-  background: var(--brand-red);
+  background: var(--color-rise);
   transform: scaleY(0);
   transition: transform 0.3s ease;
 }
@@ -260,14 +260,14 @@
 }
 
 .tech-card:hover {
-  box-shadow: 0 8px 24px rgba(220, 38, 38, 0.1);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--color-rise) 10%, transparent);
   transform: translateX(4px);
 }
 
 .tech-number {
   font-size: 3rem;
   font-weight: 700;
-  color: var(--brand-red);
+  color: var(--color-rise);
   opacity: 0.2;
   margin-bottom: 1rem;
   line-height: 1;
@@ -277,11 +277,11 @@
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 }
 
 .tech-description {
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   line-height: 1.7;
   font-size: 0.95rem;
 }
@@ -289,7 +289,7 @@
 /* CTA Section */
 .cta-section {
   padding: 5rem 2rem;
-  background: linear-gradient(135deg, var(--brand-red) 0%, var(--brand-red-dark) 100%);
+  background: linear-gradient(135deg, var(--color-rise) 0%, var(--color-rise-hover) 100%);
   color: white;
   text-align: center;
 }
@@ -321,7 +321,7 @@
 
 /* Footer */
 .landing-footer {
-  background-color: var(--text-primary);
+  background-color: var(--color-text-primary);
   color: white;
   padding: 2rem;
   text-align: center;

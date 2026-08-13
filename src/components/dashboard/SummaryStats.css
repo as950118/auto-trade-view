@@ -9,9 +9,9 @@
 }
 
 .stat-card {
-  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
-  border: 1px solid var(--border-gray);
-  border-radius: 12px;
+  background: linear-gradient(135deg, var(--color-bg-elevated) 0%, var(--color-bg-page) 100%);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
   padding: 1.5rem;
   display: flex;
   align-items: center;
@@ -21,8 +21,8 @@
 
 .stat-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-color: var(--brand-red);
+  box-shadow: var(--shadow-1);
+  border-color: var(--color-rise);
 }
 
 .stat-icon {
@@ -39,7 +39,7 @@
 
 .stat-label {
   font-size: 0.9rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   font-weight: 500;
 }
 
@@ -49,15 +49,15 @@
 }
 
 .stat-value.primary {
-  color: var(--brand-red);
+  color: var(--color-rise);
 }
 
 .stat-value.positive {
-  color: #dc2626;
+  color: var(--color-rise);
 }
 
 .stat-value.negative {
-  color: #059669;
+  color: var(--color-fall);
 }
 
 @media (max-width: 768px) {

@@ -1,6 +1,6 @@
 .fee-rebate-page {
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background-color: var(--color-bg-page);
 }
 
 .fee-rebate-container {
@@ -16,23 +16,23 @@
 .fee-rebate-title {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--text-primary, #111);
+  color: var(--color-text-primary);
   margin-bottom: 0.5rem;
 }
 
 .fee-rebate-subtitle {
   font-size: 1rem;
-  color: var(--text-secondary, #6b7280);
+  color: var(--color-text-secondary);
   line-height: 1.5;
   margin: 0;
 }
 
 .fee-rebate-section {
-  background: white;
-  border-radius: 16px;
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-xl);
   padding: 1.5rem 2rem;
   margin-bottom: 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-1);
 }
 
 .fee-rebate-section .section-header-row {
@@ -47,7 +47,7 @@
 .fee-rebate-section .section-title {
   font-size: 1.35rem;
   font-weight: 700;
-  color: var(--text-primary, #111);
+  color: var(--color-text-primary);
   margin: 0;
 }
 
@@ -65,31 +65,31 @@
 .fee-rebate-table td {
   padding: 0.75rem 0.5rem;
   text-align: left;
-  border-bottom: 1px solid var(--border-gray, #e5e7eb);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .fee-rebate-table th {
   font-weight: 600;
-  color: var(--text-secondary, #6b7280);
+  color: var(--color-text-secondary);
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
 }
 
 .fee-rebate-table th:hover {
-  color: var(--text-primary, #111);
+  color: var(--color-text-primary);
 }
 
 .fee-rebate-table th.sorted {
-  color: var(--brand-red, #dc2626);
+  color: var(--color-rise);
 }
 
 .fee-rebate-table td {
-  color: var(--text-primary, #111);
+  color: var(--color-text-primary);
 }
 
 .fee-rebate-table tbody tr:hover {
-  background-color: var(--bg-gray, #f9fafb);
+  background-color: var(--color-bg-page);
 }
 
 .fee-rebate-table .exchange-name {
@@ -105,7 +105,7 @@
 .tag-badge {
   display: inline-block;
   padding: 0.2rem 0.5rem;
-  border-radius: 6px;
+  border-radius: var(--radius-md);
   font-size: 0.8rem;
   background: #eff6ff;
   color: #1d4ed8;
@@ -114,7 +114,7 @@
 .empty-state {
   text-align: center;
   padding: 3rem 2rem;
-  color: var(--text-secondary, #6b7280);
+  color: var(--color-text-secondary);
 }
 
 .empty-state p {
@@ -123,7 +123,7 @@
 
 .empty-state-hint {
   font-size: 0.9rem;
-  color: var(--text-secondary, #9ca3af);
+  color: var(--color-text-secondary);
 }
 
 .fee-rebate-loading,
@@ -134,22 +134,14 @@
   justify-content: center;
   min-height: 50vh;
   gap: 1rem;
-  color: var(--text-secondary, #6b7280);
-}
-
-.fee-rebate-error .retry-button {
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  border: 1px solid var(--border-gray, #e5e7eb);
-  background: white;
-  cursor: pointer;
+  color: var(--color-text-secondary);
 }
 
 .fee-rebate-loading .loading-spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid var(--border-gray, #e5e7eb);
-  border-top-color: var(--brand-red, #dc2626);
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-rise);
   border-radius: 50%;
   animation: fee-rebate-spin 0.8s linear infinite;
 }
