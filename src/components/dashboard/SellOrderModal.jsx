@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { dashboardAPI } from '../../services/dashboardAPI'
+import Button from '../ui/Button'
 import './SellOrderModal.css'
 
 const QUANTITY_TYPES = [
@@ -307,12 +308,12 @@ const SellOrderModal = ({ isOpen, onClose, onSuccess, holdingGroup, accounts, cu
           </div>
 
           <div className="form-actions">
-            <button type="button" className="btn btn-secondary" onClick={onClose}>
+            <Button type="button" variant="secondary" size="lg" onClick={onClose}>
               취소
-            </button>
-            <button type="submit" className="btn btn-sell" disabled={loading}>
+            </Button>
+            <Button type="submit" variant="sell" size="lg" disabled={loading}>
               {loading ? '접수 중...' : '매도 주문'}
-            </button>
+            </Button>
           </div>
         </form>
       </div>

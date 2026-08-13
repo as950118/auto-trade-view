@@ -1,6 +1,8 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import Navbar from '../components/Navbar'
+import Button from '../components/ui/Button'
+import Badge from '../components/ui/Badge'
 import PortfolioFormModal from '../components/dashboard/PortfolioFormModal'
 import PortfolioHoldingsEditor from '../components/dashboard/PortfolioHoldingsEditor'
 import PortfolioLinkFormModal from '../components/dashboard/PortfolioLinkFormModal'
@@ -162,7 +164,7 @@ const PortfolioPage = () => {
         <Navbar />
         <div className="portfolio-error">
           <p>{error}</p>
-          <button type="button" onClick={loadData} className="retry-button">다시 시도</button>
+          <Button type="button" variant="primary" size="lg" onClick={loadData}>다시 시도</Button>
         </div>
       </div>
     )
@@ -182,16 +184,16 @@ const PortfolioPage = () => {
         <section className="portfolio-section">
           <div className="section-header-row">
             <h2 className="section-title">포트폴리오</h2>
-            <button
+            <Button
               type="button"
-              className="btn-add-plan"
+              variant="primary"
               onClick={() => {
                 setEditingPortfolio(null)
                 setPortfolioModalOpen(true)
               }}
             >
               + 포트폴리오 추가
-            </button>
+            </Button>
           </div>
 
           <div className="portfolio-toolbar">
@@ -288,9 +290,9 @@ const PortfolioPage = () => {
         <section className="portfolio-section">
           <div className="section-header-row">
             <h2 className="section-title">내 구독</h2>
-            <button
+            <Button
               type="button"
-              className="btn-add-plan"
+              variant="primary"
               onClick={() => {
                 setEditingLink(null)
                 setSubscribeTargetId(null)
@@ -299,7 +301,7 @@ const PortfolioPage = () => {
               disabled={accounts.length === 0 || portfolios.length === 0}
             >
               + 구독 추가
-            </button>
+            </Button>
           </div>
           {links.length === 0 ? (
             <div className="empty-state"><p>구독한 포트폴리오가 없습니다.</p></div>
@@ -314,9 +316,9 @@ const PortfolioPage = () => {
                   <div className="subscription-seed">
                     {Number(l.seed_amount).toLocaleString()} {l.seed_currency}
                   </div>
-                  <span className={`badge ${l.enabled ? 'badge-on' : 'badge-off'}`}>
+                  <Badge variant={l.enabled ? 'success' : 'danger'}>
                     {l.enabled ? 'ON' : 'OFF'}
-                  </span>
+                  </Badge>
                   <div className="subscription-actions">
                     <button
                       type="button"

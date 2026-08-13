@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { dashboardAPI } from '../../services/dashboardAPI'
 import { isAccountCompatibleWithSymbol } from '../../utils/portfolio'
+import Button from '../ui/Button'
 import './TargetAllocationPlanFormModal.css'
 
 const ORDER_TYPES = [
@@ -326,12 +327,12 @@ const TargetAllocationPlanFormModal = ({ isOpen, onClose, onSuccess, plan = null
           </div>
 
           <div className="modal-actions">
-            <button type="button" className="btn-secondary" onClick={onClose}>
+            <Button type="button" variant="secondary" onClick={onClose}>
               취소
-            </button>
-            <button type="submit" className="btn-primary" disabled={loading}>
+            </Button>
+            <Button type="submit" variant="primary" disabled={loading}>
               {loading ? '저장 중...' : plan ? '수정' : '추가'}
-            </button>
+            </Button>
           </div>
         </form>
       </div>

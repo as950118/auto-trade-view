@@ -1,7 +1,7 @@
 .account-card {
-  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
-  border: 2px solid #e5e7eb;
-  border-radius: 12px;
+  background: linear-gradient(135deg, var(--color-bg-elevated) 0%, var(--color-bg-page) 100%);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
   padding: 1.25rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -16,15 +16,15 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: var(--brand-red);
+  background: var(--color-rise);
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
 
 .account-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  border-color: var(--brand-red);
+  box-shadow: var(--shadow-2);
+  border-color: var(--color-rise);
 }
 
 .account-card:hover::before {
@@ -32,8 +32,8 @@
 }
 
 .account-card.selected {
-  border-color: var(--brand-red);
-  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+  border-color: var(--color-rise);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--color-rise) 20%, transparent);
 }
 
 .account-card.selected::before {
@@ -43,7 +43,7 @@
 .account-card-header {
   margin-bottom: 1rem;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .account-broker {
@@ -56,21 +56,12 @@
 .broker-name {
   font-weight: 700;
   font-size: 0.95rem;
-  color: var(--text-primary);
-}
-
-.crypto-badge {
-  background-color: #fef3c7;
-  color: #92400e;
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
+  color: var(--color-text-primary);
 }
 
 .account-number {
   font-size: 0.75rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   font-family: monospace;
 }
 
@@ -83,16 +74,16 @@
   gap: 0.5rem;
   margin-bottom: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .currency-toggle-btn {
   flex: 1;
   padding: 0.4rem 0.6rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
-  background: white;
-  color: var(--text-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-secondary);
   font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
@@ -100,21 +91,21 @@
 }
 
 .currency-toggle-btn:hover {
-  border-color: var(--brand-red);
-  background: var(--bg-gray);
-  color: var(--text-primary);
+  border-color: var(--color-rise);
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
 }
 
 .currency-toggle-btn.active {
-  background: var(--brand-red);
+  background: var(--color-rise);
   color: white;
-  border-color: var(--brand-red);
+  border-color: var(--color-rise);
 }
 
 .currency-section {
   margin-bottom: 1rem;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .currency-section:last-of-type {
@@ -125,7 +116,7 @@
 .currency-label {
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -140,29 +131,29 @@
 
 .stat-label {
   font-size: 0.8rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   font-weight: 500;
 }
 
 .stat-value {
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 }
 
 .stat-value.total-assets {
   font-size: 1.2rem;
-  color: var(--brand-red);
+  color: var(--color-rise);
 }
 
 .stat-value.profit-rate.positive,
 .stat-value.positive {
-  color: #dc2626;
+  color: var(--color-rise);
 }
 
 .stat-value.profit-rate.negative,
 .stat-value.negative {
-  color: #059669;
+  color: var(--color-fall);
 }
 
 .account-stats-row {
@@ -177,12 +168,12 @@
   grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
   padding-top: 0.75rem;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--color-border);
 }
 
 .account-card-footer {
   padding-top: 0.75rem;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--color-border);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -206,34 +197,17 @@
   font-size: 1.2rem;
   cursor: pointer;
   padding: 0.25rem 0.5rem;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   transition: background-color 0.2s;
   line-height: 1;
 }
 
 .action-button:hover {
-  background-color: var(--bg-gray);
+  background-color: var(--color-bg-page);
 }
 
 .delete-button:hover {
-  background-color: #fee2e2;
-}
-
-.status-badge {
-  padding: 0.3rem 0.6rem;
-  border-radius: 6px;
-  font-size: 0.7rem;
-  font-weight: 600;
-}
-
-.status-badge.enabled {
-  background-color: #d1fae5;
-  color: #065f46;
-}
-
-.status-badge.disabled {
-  background-color: #fee2e2;
-  color: #991b1b;
+  background-color: var(--color-status-danger-bg);
 }
 
 @media (max-width: 768px) {
@@ -241,4 +215,3 @@
     padding: 1.25rem;
   }
 }
-

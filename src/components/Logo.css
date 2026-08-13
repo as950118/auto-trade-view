@@ -27,7 +27,7 @@
 
 .logo-text {
   font-weight: bold;
-  color: var(--brand-red);
+  color: var(--color-rise);
   font-size: 1.25rem;
   letter-spacing: -0.5px;
   white-space: nowrap;

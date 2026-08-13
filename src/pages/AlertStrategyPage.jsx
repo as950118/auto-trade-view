@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import Navbar from '../components/Navbar'
+import Button from '../components/ui/Button'
+import Badge from '../components/ui/Badge'
 import AlertStrategyFormModal from '../components/dashboard/AlertStrategyFormModal'
 import { dashboardAPI } from '../services/dashboardAPI'
 import './AlertStrategyPage.css'
@@ -122,7 +124,7 @@ const AlertStrategyPage = () => {
         <Navbar />
         <div className="alert-strategy-error">
           <p>{error}</p>
-          <button type="button" onClick={loadData} className="retry-button">다시 시도</button>
+          <Button type="button" variant="primary" size="lg" onClick={loadData}>다시 시도</Button>
         </div>
       </div>
     )
@@ -147,16 +149,16 @@ const AlertStrategyPage = () => {
         <section className="alert-strategy-section">
           <div className="section-header-row">
             <h2 className="section-title">전략</h2>
-            <button
+            <Button
               type="button"
-              className="btn-add-plan"
+              variant="primary"
               onClick={() => {
                 setEditingStrategy(null)
                 setStrategyModalOpen(true)
               }}
             >
               + 전략 추가
-            </button>
+            </Button>
           </div>
           {strategies.length === 0 ? (
             <div className="empty-state"><p>등록된 전략이 없습니다.</p></div>
@@ -189,9 +191,9 @@ const AlertStrategyPage = () => {
                         {s.default_split_count}회 / {s.default_split_interval_seconds}초
                       </td>
                       <td>
-                        <span className={`badge ${s.enabled ? 'badge-on' : 'badge-off'}`}>
+                        <Badge variant={s.enabled ? 'success' : 'danger'}>
                           {s.enabled ? 'ON' : 'OFF'}
-                        </span>
+                        </Badge>
                       </td>
                       <td className="webhook-cell">
                         <button type="button" className="btn-link" onClick={() => handleCopyWebhook(s)}>
@@ -229,9 +231,9 @@ const AlertStrategyPage = () => {
         <section className="alert-strategy-section">
           <div className="section-header-row">
             <h2 className="section-title">내 연동</h2>
-            <button
+            <Button
               type="button"
-              className="btn-add-plan"
+              variant="primary"
               onClick={() => {
                 setEditingLink(null)
                 setLinkModalOpen(true)
@@ -239,7 +241,7 @@ const AlertStrategyPage = () => {
               disabled={accounts.length === 0 || strategies.length === 0}
             >
               + 연동 추가
-            </button>
+            </Button>
           </div>
           {links.length === 0 ? (
             <div className="empty-state"><p>연동된 전략이 없습니다.</p></div>
@@ -272,9 +274,9 @@ const AlertStrategyPage = () => {
                         {l.effective_split_count}회 / {l.effective_split_interval_seconds}초
                       </td>
                       <td>
-                        <span className={`badge ${l.enabled ? 'badge-on' : 'badge-off'}`}>
+                        <Badge variant={l.enabled ? 'success' : 'danger'}>
                           {l.enabled ? 'ON' : 'OFF'}
-                        </span>
+                        </Badge>
                       </td>
                       <td className="actions-cell">
                         <button
@@ -302,7 +304,7 @@ const AlertStrategyPage = () => {
         <section className="alert-strategy-section">
           <div className="section-header-row">
             <h2 className="section-title">최근 알림 이력</h2>
-            <button type="button" className="btn-refresh" onClick={loadData}>새로고침</button>
+            <Button type="button" variant="secondary" onClick={loadData}>새로고침</Button>
           </div>
           {events.length === 0 ? (
             <div className="empty-state"><p>수신된 알림이 없습니다.</p></div>

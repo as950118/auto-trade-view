@@ -1,7 +1,7 @@
 .tradingview-chart-embed {
   width: 100%;
   min-width: 0;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -15,7 +15,7 @@
 }
 
 .tradingview-chart-embed .tradingview-widget-container iframe {
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
 .tradingview-chart-empty {
@@ -23,8 +23,8 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  background: var(--bg-gray, #f9fafb);
-  color: var(--text-secondary, #6b7280);
-  border-radius: 8px;
-  border: 1px dashed var(--border-gray, #e5e7eb);
+  background: var(--color-bg-page);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--color-border);
 }

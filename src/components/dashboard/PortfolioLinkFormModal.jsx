@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { dashboardAPI } from '../../services/dashboardAPI'
 import { getAssetType, isAccountCompatibleWithAssetType } from '../../utils/portfolio'
+import Button from '../ui/Button'
 import './PortfolioFormModal.css'
 
 const CURRENCIES = ['KRW', 'USD', 'USDT']
@@ -188,14 +189,14 @@ const PortfolioLinkFormModal = ({
           </label>
 
           <div className="form-actions">
-            <button type="button" className="btn-cancel" onClick={onClose} disabled={loading}>취소</button>
-            <button
+            <Button type="button" variant="secondary" onClick={onClose} disabled={loading}>취소</Button>
+            <Button
               type="submit"
-              className="btn-submit"
+              variant="primary"
               disabled={loading || (!link && compatibleAccounts.length === 0)}
             >
               {loading ? '저장 중...' : '저장'}
-            </button>
+            </Button>
           </div>
         </form>
       </div>

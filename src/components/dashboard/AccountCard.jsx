@@ -1,4 +1,5 @@
 import { useMemo, useState, useEffect } from 'react'
+import Badge from '../ui/Badge'
 import './AccountCard.css'
 
 const AccountCard = ({ account, onClick, onEdit, onDelete, isSelected, holdings = [] }) => {
@@ -149,7 +150,7 @@ const AccountCard = ({ account, onClick, onEdit, onDelete, isSelected, holdings 
         <div className="account-broker">
           <span className="broker-name">{account.broker?.name || '알 수 없음'}</span>
           {account.broker?.is_crypto_exchange && (
-            <span className="crypto-badge">암호화폐</span>
+            <Badge variant="warning">암호화폐</Badge>
           )}
         </div>
         <div className="account-number">{account.account_number || '-'}</div>
@@ -308,12 +309,12 @@ const AccountCard = ({ account, onClick, onEdit, onDelete, isSelected, holdings 
 
       <div className="account-card-footer">
         <div className="account-status">
-          <span className={`status-badge ${account.buy_enabled ? 'enabled' : 'disabled'}`}>
+          <Badge variant={account.buy_enabled ? 'success' : 'danger'} pill={false}>
             매수 {account.buy_enabled ? '활성' : '비활성'}
-          </span>
-          <span className={`status-badge ${account.sell_enabled ? 'enabled' : 'disabled'}`}>
+          </Badge>
+          <Badge variant={account.sell_enabled ? 'success' : 'danger'} pill={false}>
             매도 {account.sell_enabled ? '활성' : '비활성'}
-          </span>
+          </Badge>
         </div>
         <div className="account-actions">
           {onEdit && (

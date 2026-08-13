@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import Navbar from '../components/Navbar'
+import Button from '../components/ui/Button'
+import Badge from '../components/ui/Badge'
 import TargetAllocationPlanFormModal from '../components/dashboard/TargetAllocationPlanFormModal'
 import { dashboardAPI } from '../services/dashboardAPI'
 import './TargetAllocationPage.css'
@@ -92,9 +94,9 @@ const TargetAllocationPage = () => {
         <Navbar />
         <div className="target-allocation-error">
           <p>{error}</p>
-          <button onClick={loadData} className="retry-button">
+          <Button variant="primary" onClick={loadData}>
             다시 시도
-          </button>
+          </Button>
         </div>
       </div>
     )
@@ -129,9 +131,9 @@ const TargetAllocationPage = () => {
                   ))}
                 </select>
               )}
-              <button type="button" className="btn-add-plan" onClick={handleAdd} disabled={accounts.length === 0}>
+              <Button type="button" variant="primary" onClick={handleAdd} disabled={accounts.length === 0}>
                 + 계획 추가
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -142,9 +144,9 @@ const TargetAllocationPage = () => {
           ) : filteredPlans.length === 0 ? (
             <div className="empty-state">
               <p>등록된 목표 비율 계획이 없습니다.</p>
-              <button type="button" className="btn-add-plan-inline" onClick={handleAdd}>
+              <Button type="button" variant="primary" onClick={handleAdd}>
                 첫 계획 추가하기
-              </button>
+              </Button>
             </div>
           ) : (
             <div className="plans-table-wrapper">
@@ -179,9 +181,9 @@ const TargetAllocationPage = () => {
                       </td>
                       <td>{plan.order_type_display || (plan.order_type === 'MARKET' ? '시장가' : '지정가')}</td>
                       <td>
-                        <span className={`status-badge ${plan.enabled ? 'status-active' : 'status-paused'}`}>
+                        <Badge variant={plan.enabled ? 'success' : 'warning'} pill={false}>
                           {plan.enabled ? '활성' : '일시중지'}
-                        </span>
+                        </Badge>
                       </td>
                       <td className="date-cell">
                         {plan.start_date && plan.end_date

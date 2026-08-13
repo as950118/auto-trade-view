@@ -1,5 +1,7 @@
 import { useState, useMemo, useEffect } from 'react'
 import { exchangeRateAPI } from '../../services/exchangeRateAPI'
+import Button from '../ui/Button'
+import Badge from '../ui/Badge'
 import SellOrderModal from './SellOrderModal'
 import './HoldingsTable.css'
 
@@ -582,7 +584,7 @@ const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilt
                             {holding.symbol?.name || '알 수 없음'}
                           </span>
                           {holding.symbol?.is_crypto && (
-                            <span className="crypto-tag">암호화폐</span>
+                            <Badge variant="warning" className="crypto-tag">암호화폐</Badge>
                           )}
                         </div>
                       </td>
@@ -640,14 +642,15 @@ const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilt
                         </div>
                       </td>
                       <td className="td-sell">
-                        <button
+                        <Button
                           type="button"
-                          className="btn-sell-row"
+                          variant="sell"
+                          size="md"
                           onClick={() => openSellModal(holding, currencyGroup.currency)}
                           title="매도 주문"
                         >
                           매도
-                        </button>
+                        </Button>
                       </td>
                     </tr>
                   )

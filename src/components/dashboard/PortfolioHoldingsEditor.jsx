@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import { dashboardAPI } from '../../services/dashboardAPI'
+import Button from '../ui/Button'
 import './PortfolioHoldingsEditor.css'
 
 const PortfolioHoldingsEditor = ({ isOpen, onClose, onSuccess, portfolio }) => {
@@ -206,10 +207,10 @@ const PortfolioHoldingsEditor = ({ isOpen, onClose, onSuccess, portfolio }) => {
         </div>
 
         <div className="form-actions holdings-editor-actions">
-          <button type="button" className="btn-cancel" onClick={onClose} disabled={loading}>취소</button>
-          <button type="button" className="btn-submit" onClick={handleSave} disabled={loading}>
+          <Button type="button" variant="secondary" onClick={onClose} disabled={loading}>취소</Button>
+          <Button type="button" variant="primary" onClick={handleSave} disabled={loading}>
             {loading ? '저장 중...' : '저장 및 즉시 리밸런싱'}
-          </button>
+          </Button>
         </div>
       </div>
     </div>

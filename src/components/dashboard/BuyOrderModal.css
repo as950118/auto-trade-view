@@ -1,5 +1,5 @@
 .buy-modal-overlay {
-  z-index: 1001;
+  z-index: var(--z-dropdown);
 }
 
 .buy-modal-content {
@@ -18,28 +18,28 @@
 .buy-symbol-ticker {
   font-weight: 700;
   font-size: 1.1rem;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 }
 
 .buy-symbol-name {
   font-size: 0.9rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .buy-symbol-currency {
   font-size: 0.85rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .btn-clear-symbol {
   margin-left: auto;
   padding: 0.35rem 0.65rem;
   font-size: 0.85rem;
-  border: 1px solid var(--border-gray);
-  border-radius: 6px;
-  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
   cursor: pointer;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   transition: all 0.2s;
 }
 
@@ -59,7 +59,7 @@
 .buy-order-form .form-group label {
   display: block;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
 }
@@ -75,9 +75,9 @@
 .buy-order-form .quantity-type-tab,
 .buy-order-form .order-type-tab {
   padding: 0.5rem 0.75rem;
-  border: 1px solid var(--border-gray);
-  border-radius: 8px;
-  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
@@ -110,9 +110,9 @@
 
 .buy-order-form .percent-btn {
   padding: 0.4rem 0.75rem;
-  border: 1px solid var(--border-gray);
-  border-radius: 6px;
-  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
   font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.2s;
@@ -133,8 +133,8 @@
 .buy-order-form .form-select {
   width: 100%;
   padding: 0.65rem 0.75rem;
-  border: 1px solid var(--border-gray);
-  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
   font-size: 1rem;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -143,7 +143,7 @@
 .buy-order-form .form-select:focus {
   outline: none;
   border-color: var(--color-rise);
-  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.15);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-rise) 15%, transparent);
 }
 
 .buy-order-form .amount-input-wrap,
@@ -162,23 +162,23 @@
 .buy-order-form .price-unit {
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   min-width: 2.5rem;
 }
 
 .symbol-placeholder {
   padding: 0.75rem 1rem;
-  background: var(--bg-secondary, #f3f4f6);
-  border-radius: 8px;
+  background: var(--color-bg-page);
+  border-radius: var(--radius-md);
   font-size: 0.9rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   text-align: center;
 }
 
 .form-hint {
   margin: 0.5rem 0 0;
   font-size: 0.8rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .selected-symbol-row {
@@ -194,11 +194,11 @@
 .btn-clear-symbol-inline {
   padding: 0.4rem 0.65rem;
   font-size: 0.85rem;
-  border: 1px solid var(--border-gray);
-  border-radius: 6px;
-  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
   cursor: pointer;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   transition: all 0.2s;
   flex-shrink: 0;
 }
@@ -210,15 +210,15 @@
 
 .selected-symbol-display {
   padding: 0.65rem 0.75rem;
-  background: var(--bg-secondary, #f3f4f6);
-  border-radius: 8px;
+  background: var(--color-bg-page);
+  border-radius: var(--radius-md);
   font-size: 0.95rem;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 }
 
 .symbol-search-loading {
   font-size: 0.85rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   margin-top: 0.35rem;
 }
 
@@ -228,9 +228,9 @@
   padding: 0;
   max-height: 220px;
   overflow-y: auto;
-  border: 1px solid var(--border-gray);
-  border-radius: 8px;
-  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
 }
 
 .symbol-result-item {
@@ -244,7 +244,7 @@
   background: none;
   cursor: pointer;
   font-size: 0.9rem;
-  border-bottom: 1px solid var(--border-gray);
+  border-bottom: 1px solid var(--color-border);
   transition: background 0.15s;
 }
 
@@ -253,18 +253,18 @@
 }
 
 .symbol-result-item:hover {
-  background: rgba(220, 38, 38, 0.08);
+  background: color-mix(in srgb, var(--color-rise) 8%, transparent);
 }
 
 .symbol-result-ticker {
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
   min-width: 4rem;
 }
 
 .symbol-result-name {
   flex: 1;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -272,14 +272,5 @@
 
 .symbol-result-currency {
   font-size: 0.8rem;
-  color: var(--text-secondary);
-}
-
-.btn-buy {
-  background: var(--color-rise);
-  color: white;
-}
-
-.btn-buy:hover:not(:disabled) {
-  background: var(--color-rise-hover);
+  color: var(--color-text-secondary);
 }

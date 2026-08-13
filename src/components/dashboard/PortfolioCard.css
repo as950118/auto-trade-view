@@ -1,7 +1,7 @@
 .portfolio-card {
-  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
-  border: 2px solid var(--border-gray);
-  border-radius: 14px;
+  background: linear-gradient(135deg, var(--color-bg-elevated) 0%, var(--color-bg-page) 100%);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
@@ -18,7 +18,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: var(--brand-red);
+  background: var(--color-rise);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.25s ease;
@@ -26,7 +26,7 @@
 
 .portfolio-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-1);
   border-color: var(--brand-red-light);
 }
 
@@ -36,8 +36,8 @@
 }
 
 .portfolio-card.is-selected {
-  border-color: var(--brand-red);
-  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.15);
+  border-color: var(--color-rise);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--color-rise) 15%, transparent);
 }
 
 .portfolio-card-badges {
@@ -47,6 +47,8 @@
   flex-wrap: wrap;
 }
 
+/* 아래 chip-* 계열은 DS-0001 토큰에 없는 카테고리 팔레트(자산군/공개여부 구분용)이므로
+   상태 배지(Badge 컴포넌트: success/warning/danger)와 별도로 유지한다. */
 .chip {
   font-size: 0.7rem;
   font-weight: 700;
@@ -61,8 +63,8 @@
 }
 
 .chip-crypto {
-  background: #fef3c7;
-  color: #92400e;
+  background: var(--color-status-warning-bg);
+  color: var(--color-status-warning-fg);
 }
 
 .chip-mixed {
@@ -72,17 +74,17 @@
 
 .chip-empty {
   background: #f3f4f6;
-  color: #6b7280;
+  color: var(--color-text-secondary);
 }
 
 .chip-mine {
-  background: #fee2e2;
-  color: #b91c1c;
+  background: var(--color-status-danger-bg);
+  color: var(--color-status-danger-fg);
 }
 
 .chip-subscribed {
-  background: #dcfce7;
-  color: #166534;
+  background: var(--color-status-success-bg);
+  color: var(--color-status-success-fg);
 }
 
 .chip-visibility.is-public {
@@ -92,7 +94,7 @@
 
 .chip-visibility.is-private {
   background: #f3f4f6;
-  color: #6b7280;
+  color: var(--color-text-secondary);
 }
 
 .status-dot {
@@ -104,12 +106,12 @@
 }
 
 .status-dot.on {
-  background: #16a34a;
-  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
+  background: var(--color-fall);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-fall) 15%, transparent);
 }
 
 .status-dot.off {
-  background: #d1d5db;
+  background: var(--color-border);
 }
 
 .portfolio-card-title {
@@ -119,17 +121,17 @@
   text-align: left;
   font-size: 1.1rem;
   font-weight: 800;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
   cursor: pointer;
 }
 
 .portfolio-card-title:hover {
-  color: var(--brand-red);
+  color: var(--color-rise);
 }
 
 .portfolio-card-desc {
   font-size: 0.85rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -158,13 +160,13 @@
 }
 
 .mini-weight-segment.cash {
-  background: #e5e7eb !important;
+  background: var(--color-border) !important;
 }
 
 .mini-weight-bar.empty {
   height: auto;
   font-size: 0.75rem;
-  color: #9ca3af;
+  color: var(--color-text-secondary);
   background: none;
 }
 
@@ -179,7 +181,7 @@
   align-items: center;
   gap: 0.3rem;
   font-size: 0.72rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   font-weight: 600;
 }
 
@@ -191,16 +193,16 @@
 }
 
 .mini-weight-tag.more {
-  color: #9ca3af;
+  color: var(--color-text-secondary);
 }
 
 .portfolio-card-meta {
   display: flex;
   justify-content: space-between;
   font-size: 0.75rem;
-  color: #9ca3af;
+  color: var(--color-text-secondary);
   padding-top: 0.5rem;
-  border-top: 1px solid var(--border-gray);
+  border-top: 1px solid var(--color-border);
 }
 
 .portfolio-card-actions {
@@ -213,35 +215,35 @@
 .card-btn {
   flex: 1;
   min-width: 70px;
-  background: white;
-  border: 1px solid var(--border-gray);
-  color: var(--text-primary);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
   font-size: 0.8rem;
   font-weight: 600;
   padding: 0.45rem 0.6rem;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
 .card-btn:hover {
-  border-color: var(--brand-red);
-  color: var(--brand-red);
+  border-color: var(--color-rise);
+  color: var(--color-rise);
 }
 
 .card-btn.danger:hover {
-  border-color: #dc2626;
-  color: #dc2626;
-  background: #fef2f2;
+  border-color: var(--color-rise);
+  color: var(--color-rise);
+  background: var(--color-status-danger-bg);
 }
 
 .card-btn.primary {
-  background: var(--brand-red);
-  border-color: var(--brand-red);
+  background: var(--color-rise);
+  border-color: var(--color-rise);
   color: white;
 }
 
 .card-btn.primary:hover {
-  background: var(--brand-red-dark);
+  background: var(--color-rise-hover);
   color: white;
 }

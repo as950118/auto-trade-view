@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { dashboardAPI } from '../../services/dashboardAPI'
+import Button from '../ui/Button'
 import './AlertStrategyFormModal.css'
 
 const ORDER_TYPES = [
@@ -330,10 +331,10 @@ const AlertStrategyFormModal = ({
           </label>
 
           <div className="form-actions">
-            <button type="button" className="btn-cancel" onClick={onClose} disabled={loading}>취소</button>
-            <button type="submit" className="btn-submit" disabled={loading}>
+            <Button type="button" variant="secondary" onClick={onClose} disabled={loading}>취소</Button>
+            <Button type="submit" variant="primary" disabled={loading}>
               {loading ? '저장 중...' : '저장'}
-            </button>
+            </Button>
           </div>
         </form>
       </div>

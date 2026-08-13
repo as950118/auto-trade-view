@@ -1,6 +1,6 @@
 .symbol-chart-page {
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background-color: var(--color-bg-page);
 }
 
 .symbol-chart-container {
@@ -16,22 +16,22 @@
 .symbol-chart-title {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
   margin: 0 0 0.5rem 0;
 }
 
 .symbol-chart-subtitle {
   font-size: 1rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   margin: 0;
 }
 
 .symbol-chart-section {
-  background: white;
-  border-radius: 16px;
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-xl);
   padding: 1.5rem 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  border: 1px solid var(--border-gray);
+  box-shadow: var(--shadow-1);
+  border: 1px solid var(--color-border);
 }
 
 .chart-controls {
@@ -45,24 +45,24 @@
 .chart-control-label {
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 }
 
 .chart-symbol-select {
   min-width: 280px;
   padding: 0.5rem 0.75rem;
   font-size: 1rem;
-  border: 1px solid var(--border-gray);
-  border-radius: 8px;
-  background: white;
-  color: var(--text-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
   cursor: pointer;
 }
 
 .chart-symbol-select:focus {
   outline: none;
-  border-color: var(--brand-red);
-  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.15);
+  border-color: var(--color-rise);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-rise) 15%, transparent);
 }
 
 .chart-ticker-input {
@@ -71,21 +71,21 @@
   max-width: 560px;
   padding: 0.5rem 0.75rem;
   font-size: 1rem;
-  border: 1px solid var(--border-gray);
-  border-radius: 8px;
-  background: white;
-  color: var(--text-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
 }
 
 .chart-ticker-input::placeholder {
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   opacity: 0.8;
 }
 
 .chart-ticker-input:focus {
   outline: none;
-  border-color: var(--brand-red);
-  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.15);
+  border-color: var(--color-rise);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-rise) 15%, transparent);
 }
 
 .chart-stats-inline {
@@ -97,7 +97,7 @@
 
 .chart-symbol-name {
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 }
 
 .chart-change {
@@ -106,18 +106,18 @@
 }
 
 .chart-change.positive {
-  color: var(--brand-red);
+  color: var(--color-rise);
 }
 
 .chart-change.negative {
-  color: var(--brand-green);
+  color: var(--color-fall);
 }
 
 .chart-message.error {
   padding: 1rem;
-  background: #fef2f2;
-  color: #b91c1c;
-  border-radius: 8px;
+  background: var(--color-status-danger-bg);
+  color: var(--color-status-danger-fg);
+  border-radius: var(--radius-md);
   margin-bottom: 1rem;
 }
 
@@ -138,7 +138,7 @@
 .chart-hint {
   margin-top: 0.75rem;
   font-size: 0.9rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 @media (max-width: 768px) {
