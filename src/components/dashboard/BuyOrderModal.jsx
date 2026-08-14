@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { dashboardAPI } from '../../services/dashboardAPI'
 import { isAccountCompatibleWithSymbol } from '../../utils/portfolio'
 import Button from '../ui/Button'
+import Modal from '../ui/Modal'
 import './BuyOrderModal.css'
 
 const QUANTITY_TYPES = [
@@ -232,18 +233,8 @@ const BuyOrderModal = ({ isOpen, onClose, onSuccess, accounts }) => {
     setSelectedSymbol(null)
   }
 
-  if (!isOpen) return null
-
   return (
-    <div className="modal-overlay buy-modal-overlay" onClick={onClose}>
-      <div className="modal-content buy-modal-content" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <h2 className="modal-title">매수 주문</h2>
-          <button type="button" className="modal-close" onClick={onClose} aria-label="닫기">
-            ×
-          </button>
-        </div>
-
+    <Modal isOpen={isOpen} onClose={onClose} title="매수 주문" size="sm">
         {selectedSymbol && (
           <div className="buy-symbol-info">
             <span className="buy-symbol-ticker">{selectedSymbol.ticker}</span>
@@ -256,7 +247,7 @@ const BuyOrderModal = ({ isOpen, onClose, onSuccess, accounts }) => {
         )}
 
         <form onSubmit={handleSubmit} className="buy-order-form">
-          {error && <div className="modal-error">{error}</div>}
+          {error && <div className="ui-modal-error">{error}</div>}
 
           <div className="form-group">
             <label>매수 계좌</label>
@@ -446,8 +437,7 @@ const BuyOrderModal = ({ isOpen, onClose, onSuccess, accounts }) => {
             </Button>
           </div>
         </form>
-      </div>
-    </div>
+    </Modal>
   )
 }
 

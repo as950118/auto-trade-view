@@ -1,64 +1,3 @@
-.target-allocation-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: var(--z-dropdown);
-  padding: 1rem;
-}
-
-.target-allocation-modal-content {
-  background: var(--color-bg-elevated);
-  border-radius: var(--radius-xl);
-  width: 100%;
-  max-width: 520px;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: var(--shadow-3);
-}
-
-.target-allocation-modal-content .modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.target-allocation-modal-content .modal-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--color-text-primary);
-  margin: 0;
-}
-
-.target-allocation-modal-content .modal-close {
-  background: none;
-  border: none;
-  font-size: 1.75rem;
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  line-height: 1;
-  padding: 0;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-sm);
-  transition: all 0.2s;
-}
-
-.target-allocation-modal-content .modal-close:hover {
-  background-color: var(--color-bg-page);
-  color: var(--color-text-primary);
-}
-
 .target-allocation-desc {
   padding: 0.75rem 1.5rem;
   margin: 0;
@@ -70,15 +9,6 @@
 
 .target-allocation-form {
   padding: 1rem 1.5rem 1.5rem;
-}
-
-.target-allocation-form .modal-error {
-  background-color: var(--color-status-danger-bg);
-  color: var(--color-status-danger-fg);
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
-  border-radius: var(--radius-md);
-  font-size: 0.9rem;
 }
 
 .target-allocation-form .form-group {

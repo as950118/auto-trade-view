@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { dashboardAPI } from '../../services/dashboardAPI'
 import { isAccountCompatibleWithSymbol } from '../../utils/portfolio'
 import Button from '../ui/Button'
+import Modal from '../ui/Modal'
 import './TargetAllocationPlanFormModal.css'
 
 const ORDER_TYPES = [
@@ -175,24 +176,19 @@ const TargetAllocationPlanFormModal = ({ isOpen, onClose, onSuccess, plan = null
     setSelectedSymbol(null)
   }
 
-  if (!isOpen) return null
-
   return (
-    <div className="modal-overlay target-allocation-modal-overlay" onClick={onClose}>
-      <div className="modal-content target-allocation-modal-content" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <h2 className="modal-title">{plan ? '목표 비율 계획 수정' : '목표 비율 자동매매 추가'}</h2>
-          <button type="button" className="modal-close" onClick={onClose} aria-label="닫기">
-            ×
-          </button>
-        </div>
-
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      title={plan ? '목표 비율 계획 수정' : '목표 비율 자동매매 추가'}
+      size="md"
+    >
         <p className="target-allocation-desc">
           총 자산(현물+예수금) 대비 이 종목이 차지할 비율을 목표로, 지정한 일수 동안 지정한 횟수만큼 나눠서 매수/매도합니다.
         </p>
 
         <form onSubmit={handleSubmit} className="target-allocation-form">
-          {error && <div className="modal-error">{error}</div>}
+          {error && <div className="ui-modal-error">{error}</div>}
 
           <div className="form-group">
             <label>계좌</label>
@@ -335,8 +331,7 @@ const TargetAllocationPlanFormModal = ({ isOpen, onClose, onSuccess, plan = null
             </Button>
           </div>
         </form>
-      </div>
-    </div>
+    </Modal>
   )
 }
 

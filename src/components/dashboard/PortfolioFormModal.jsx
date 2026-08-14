@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { dashboardAPI } from '../../services/dashboardAPI'
 import Button from '../ui/Button'
+import Modal from '../ui/Modal'
 import './PortfolioFormModal.css'
 
 const ORDER_TYPES = [
@@ -71,17 +72,8 @@ const PortfolioFormModal = ({ isOpen, onClose, onSuccess, portfolio = null, isSt
     }
   }
 
-  if (!isOpen) return null
-
   return (
-    <div className="portfolio-modal-overlay" onClick={onClose}>
-      <div className="portfolio-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="portfolio-modal-header">
-          <h2>{portfolio ? '포트폴리오 수정' : '포트폴리오 추가'}</h2>
-          <button type="button" className="modal-close" onClick={onClose} aria-label="닫기">
-            ×
-          </button>
-        </div>
+    <Modal isOpen={isOpen} onClose={onClose} title={portfolio ? '포트폴리오 수정' : '포트폴리오 추가'} size="md">
         <form onSubmit={handleSubmit} className="portfolio-form">
           {error && <div className="form-error">{error}</div>}
 
@@ -122,8 +114,7 @@ const PortfolioFormModal = ({ isOpen, onClose, onSuccess, portfolio = null, isSt
             </Button>
           </div>
         </form>
-      </div>
-    </div>
+    </Modal>
   )
 }
 

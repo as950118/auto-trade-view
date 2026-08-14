@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { dashboardAPI } from '../../services/dashboardAPI'
 import Button from '../ui/Button'
+import Modal from '../ui/Modal'
 import './SellOrderModal.css'
 
 const QUANTITY_TYPES = [
@@ -164,18 +165,8 @@ const SellOrderModal = ({ isOpen, onClose, onSuccess, holdingGroup, accounts, cu
     }
   }
 
-  if (!isOpen) return null
-
   return (
-    <div className="modal-overlay sell-modal-overlay" onClick={onClose}>
-      <div className="modal-content sell-modal-content" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <h2 className="modal-title">매도 주문</h2>
-          <button type="button" className="modal-close" onClick={onClose} aria-label="닫기">
-            ×
-          </button>
-        </div>
-
+    <Modal isOpen={isOpen} onClose={onClose} title="매도 주문" size="sm">
         {symbol && (
           <div className="sell-symbol-info">
             <span className="sell-symbol-ticker">{symbol.ticker}</span>
@@ -190,7 +181,7 @@ const SellOrderModal = ({ isOpen, onClose, onSuccess, holdingGroup, accounts, cu
         )}
 
         <form onSubmit={handleSubmit} className="sell-order-form">
-          {error && <div className="modal-error">{error}</div>}
+          {error && <div className="ui-modal-error">{error}</div>}
 
           <div className="form-group">
             <label>매도 계좌</label>
@@ -316,8 +307,7 @@ const SellOrderModal = ({ isOpen, onClose, onSuccess, holdingGroup, accounts, cu
             </Button>
           </div>
         </form>
-      </div>
-    </div>
+    </Modal>
   )
 }
 

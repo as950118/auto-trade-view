@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { dashboardAPI } from '../../services/dashboardAPI'
 import { getAssetType, isAccountCompatibleWithAssetType } from '../../utils/portfolio'
 import Button from '../ui/Button'
+import Modal from '../ui/Modal'
 import './PortfolioFormModal.css'
 
 const CURRENCIES = ['KRW', 'USD', 'USDT']
@@ -119,17 +120,8 @@ const PortfolioLinkFormModal = ({
     }
   }
 
-  if (!isOpen) return null
-
   return (
-    <div className="portfolio-modal-overlay" onClick={onClose}>
-      <div className="portfolio-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="portfolio-modal-header">
-          <h2>{link ? '구독 수정' : '포트폴리오 구독'}</h2>
-          <button type="button" className="modal-close" onClick={onClose} aria-label="닫기">
-            ×
-          </button>
-        </div>
+    <Modal isOpen={isOpen} onClose={onClose} title={link ? '구독 수정' : '포트폴리오 구독'} size="md">
         <form onSubmit={handleSubmit} className="portfolio-form">
           {error && <div className="form-error">{error}</div>}
 
@@ -199,8 +191,7 @@ const PortfolioLinkFormModal = ({
             </Button>
           </div>
         </form>
-      </div>
-    </div>
+    </Modal>
   )
 }
 

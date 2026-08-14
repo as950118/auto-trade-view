@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { dashboardAPI } from '../../services/dashboardAPI'
 import Button from '../ui/Button'
+import Modal from '../ui/Modal'
 import './AlertStrategyFormModal.css'
 
 const ORDER_TYPES = [
@@ -177,25 +178,17 @@ const AlertStrategyFormModal = ({
     }
   }
 
-  if (!isOpen) return null
+  const modalTitle =
+    mode === 'strategy'
+      ? strategy
+        ? '전략 수정'
+        : '전략 추가'
+      : link
+        ? '연동 수정'
+        : '전략 연동'
 
   return (
-    <div className="alert-strategy-modal-overlay" onClick={onClose}>
-      <div className="alert-strategy-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="alert-strategy-modal-header">
-          <h2>
-            {mode === 'strategy'
-              ? strategy
-                ? '전략 수정'
-                : '전략 추가'
-              : link
-                ? '연동 수정'
-                : '전략 연동'}
-          </h2>
-          <button type="button" className="modal-close" onClick={onClose} aria-label="닫기">
-            ×
-          </button>
-        </div>
+    <Modal isOpen={isOpen} onClose={onClose} title={modalTitle} size="md">
         <form onSubmit={handleSubmit} className="alert-strategy-form">
           {error && <div className="form-error">{error}</div>}
 
@@ -337,8 +330,7 @@ const AlertStrategyFormModal = ({
             </Button>
           </div>
         </form>
-      </div>
-    </div>
+    </Modal>
   )
 }
 
