@@ -50,12 +50,40 @@
 }
 
 /*
- * 다크 토큰은 당분간 [data-theme="dark"] 수동 옵트인으로만 활성화한다.
- * 카드/모달 등 다수 컴포넌트가 아직 배경을 흰색으로 하드코딩하고 있어(--color-bg-elevated
- * 미사용), prefers-color-scheme으로 자동 전환하면 강조색만 어두운 배경용으로 바뀌고
- * 배경은 그대로 흰색인 반쪽짜리 다크모드가 된다. 컴포넌트들이 토큰을 온전히 쓰도록
- * 마이그레이션된 뒤 자동 감지를 다시 켠다 (DS-0001 Open Questions #6).
+ * ThemeContext(src/contexts/ThemeContext.jsx)가 초기 렌더 시 시스템 설정(matchMedia)을 읽어
+ * <html data-theme="..."> 속성을 항상 명시적으로 세팅하므로, 아래 [data-theme='dark']가
+ * 사실상의 SSOT다. prefers-color-scheme 미디어쿼리는 JS 비활성 등 예외 상황의 안전망이며,
+ * 명시적으로 data-theme="light"가 세팅된 경우(시스템은 다크인데 사용자가 라이트를 선택)에는
+ * 미디어쿼리보다 우선한다 (DS-0001 Open Questions #6, 전체 컴포넌트 토큰화 완료로 자동감지
+ * 재활성화 조건 충족).
  */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-rise: #f87171;
+    --color-rise-hover: #ef4444;
+    --color-fall: #4ade80;
+    --color-fall-hover: #22c55e;
+
+    --color-text-primary: #f9fafb;
+    --color-text-secondary: #9ca3af;
+
+    --color-bg-page: #111827;
+    --color-bg-elevated: #1f2937;
+    --color-border: #374151;
+
+    --color-status-success-bg: #064e3b;
+    --color-status-success-fg: #6ee7b7;
+    --color-status-warning-bg: #78350f;
+    --color-status-warning-fg: #fcd34d;
+    --color-status-danger-bg: #7f1d1d;
+    --color-status-danger-fg: #fca5a5;
+
+    --shadow-1: 0 2px 4px rgba(0, 0, 0, 0.4);
+    --shadow-2: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --shadow-3: 0 20px 60px rgba(0, 0, 0, 0.6);
+  }
+}
+
 :root[data-theme='dark'] {
   --color-rise: #f87171;
   --color-rise-hover: #ef4444;

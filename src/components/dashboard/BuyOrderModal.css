@@ -1,11 +1,3 @@
-.buy-modal-overlay {
-  z-index: var(--z-dropdown);
-}
-
-.buy-modal-content {
-  max-width: 480px;
-}
-
 .buy-symbol-info {
   padding: 0 1.5rem;
   margin-bottom: 1rem;

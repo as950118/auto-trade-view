@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext.jsx'
+import { useTheme } from '../contexts/ThemeContext.jsx'
 import Logo from './Logo.jsx'
 import './Navbar.css'
 
 const Navbar = () => {
   const { user, logout } = useAuth()
+  const { theme, toggleTheme } = useTheme()
   const navigate = useNavigate()
   const location = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
@@ -79,6 +81,14 @@ const Navbar = () => {
           <Link to="/fee-rebate" className="navbar-link" onClick={closeMenu}>
             수수료 리베이트
           </Link>
+          <button
+            type="button"
+            className="navbar-link navbar-theme-toggle"
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? '라이트 모드로 전환' : '다크 모드로 전환'}
+          >
+            {theme === 'dark' ? '☀️ 라이트모드' : '🌙 다크모드'}
+          </button>
           {user ? (
             <>
               <Link to="/dashboard" className="navbar-link" onClick={closeMenu}>

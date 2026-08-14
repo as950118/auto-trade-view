@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { dashboardAPI } from '../../services/dashboardAPI'
 import Button from '../ui/Button'
+import Modal from '../ui/Modal'
 import './PortfolioHoldingsEditor.css'
 
 const PortfolioHoldingsEditor = ({ isOpen, onClose, onSuccess, portfolio }) => {
@@ -118,18 +119,8 @@ const PortfolioHoldingsEditor = ({ isOpen, onClose, onSuccess, portfolio }) => {
     }
   }
 
-  if (!isOpen) return null
-
   return (
-    <div className="portfolio-modal-overlay" onClick={onClose}>
-      <div className="portfolio-modal holdings-editor-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="portfolio-modal-header">
-          <h2>{portfolio?.title} · 비중 편집</h2>
-          <button type="button" className="modal-close" onClick={onClose} aria-label="닫기">
-            ×
-          </button>
-        </div>
-
+    <Modal isOpen={isOpen} onClose={onClose} title={`${portfolio?.title} · 비중 편집`} size="md">
         <div className="holdings-editor-body">
           {error && <div className="form-error">{error}</div>}
           <p className="form-hint">
@@ -212,8 +203,7 @@ const PortfolioHoldingsEditor = ({ isOpen, onClose, onSuccess, portfolio }) => {
             {loading ? '저장 중...' : '저장 및 즉시 리밸런싱'}
           </Button>
         </div>
-      </div>
-    </div>
+    </Modal>
   )
 }
 

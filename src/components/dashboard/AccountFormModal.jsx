@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { dashboardAPI } from '../../services/dashboardAPI'
 import Button from '../ui/Button'
+import Modal from '../ui/Modal'
 import './AccountFormModal.css'
 
 const AccountFormModal = ({ isOpen, onClose, onSuccess, account = null }) => {
@@ -130,22 +131,12 @@ const AccountFormModal = ({ isOpen, onClose, onSuccess, account = null }) => {
     }
   }
 
-  if (!isOpen) return null
-
   const selectedBroker = brokers.find(b => b.id === parseInt(formData.broker_id))
   const isCryptoExchange = selectedBroker?.is_crypto_exchange || false
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <h2 className="modal-title">
-            {account ? '계좌 수정' : '계좌 등록'}
-          </h2>
-          <button className="modal-close" onClick={onClose}>×</button>
-        </div>
-
-        {error && <div className="modal-error">{error}</div>}
+    <Modal isOpen={isOpen} onClose={onClose} title={account ? '계좌 수정' : '계좌 등록'} size="md">
+        {error && <div className="ui-modal-error">{error}</div>}
 
         <form onSubmit={handleSubmit} className="account-form">
           <div className="form-group">
@@ -333,8 +324,7 @@ const AccountFormModal = ({ isOpen, onClose, onSuccess, account = null }) => {
             </Button>
           </div>
         </form>
-      </div>
-    </div>
+    </Modal>
   )
 }
 
