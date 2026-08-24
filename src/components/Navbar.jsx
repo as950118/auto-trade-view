@@ -49,18 +49,29 @@ const Navbar = () => {
           <Logo size="medium" showText={true} />
         </Link>
 
-        <button
-          type="button"
-          className={`navbar-toggle${menuOpen ? ' is-open' : ''}`}
-          aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'}
-          aria-expanded={menuOpen}
-          aria-controls="navbar-menu"
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <span className="navbar-toggle-bar" />
-          <span className="navbar-toggle-bar" />
-          <span className="navbar-toggle-bar" />
-        </button>
+        <div className="navbar-actions">
+          <button
+            type="button"
+            className="navbar-theme-icon"
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? '라이트 모드로 전환' : '다크 모드로 전환'}
+          >
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
+
+          <button
+            type="button"
+            className={`navbar-toggle${menuOpen ? ' is-open' : ''}`}
+            aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'}
+            aria-expanded={menuOpen}
+            aria-controls="navbar-menu"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span className="navbar-toggle-bar" />
+            <span className="navbar-toggle-bar" />
+            <span className="navbar-toggle-bar" />
+          </button>
+        </div>
 
         {menuOpen && (
           <button
@@ -81,14 +92,6 @@ const Navbar = () => {
           <Link to="/fee-rebate" className="navbar-link" onClick={closeMenu}>
             수수료 리베이트
           </Link>
-          <button
-            type="button"
-            className="navbar-link navbar-theme-toggle"
-            onClick={toggleTheme}
-            aria-label={theme === 'dark' ? '라이트 모드로 전환' : '다크 모드로 전환'}
-          >
-            {theme === 'dark' ? '☀️ 라이트모드' : '🌙 다크모드'}
-          </button>
           {user ? (
             <>
               <Link to="/dashboard" className="navbar-link" onClick={closeMenu}>

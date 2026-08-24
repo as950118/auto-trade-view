@@ -29,6 +29,31 @@
   letter-spacing: -0.5px;
 }
 
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: var(--z-modal);
+}
+
+.navbar-theme-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.navbar-theme-icon:hover {
+  background-color: var(--color-bg-page);
+}
+
 .navbar-toggle {
   display: none;
   flex-direction: column;
@@ -41,7 +66,6 @@
   border-radius: var(--radius-sm);
   background: transparent;
   cursor: pointer;
-  z-index: var(--z-modal);
 }
 
 .navbar-toggle:hover {
@@ -88,15 +112,6 @@
 
 .navbar-link:hover {
   color: var(--color-rise);
-}
-
-.navbar-theme-toggle {
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: inherit;
-  font-family: inherit;
-  cursor: pointer;
 }
 
 .navbar-user {
