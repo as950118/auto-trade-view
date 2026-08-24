@@ -3,7 +3,24 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext.jsx'
 import { useTheme } from '../contexts/ThemeContext.jsx'
 import Logo from './Logo.jsx'
+import NavDropdown from './NavDropdown.jsx'
 import './Navbar.css'
+
+const MY_PAGE_ITEMS = [
+  { to: '/dashboard', label: '대시보드' },
+  { to: '/account', label: '계정' },
+]
+
+const TRADING_ITEMS = [
+  { to: '/target-allocation', label: '목표 비율 매매' },
+  { to: '/alert-strategies', label: '알림 전략' },
+  { to: '/portfolios', label: '포트폴리오' },
+]
+
+const MARKET_ITEMS = [
+  { to: '/chart', label: '주가 차트' },
+  { to: '/fee-rebate', label: '수수료 리베이트' },
+]
 
 const Navbar = () => {
   const { user, logout } = useAuth()
@@ -86,29 +103,11 @@ const Navbar = () => {
           id="navbar-menu"
           className={`navbar-menu${menuOpen ? ' is-open' : ''}`}
         >
-          <Link to="/chart" className="navbar-link" onClick={closeMenu}>
-            주가 차트
-          </Link>
-          <Link to="/fee-rebate" className="navbar-link" onClick={closeMenu}>
-            수수료 리베이트
-          </Link>
+          <NavDropdown label="시장 정보" items={MARKET_ITEMS} onNavigate={closeMenu} />
           {user ? (
             <>
-              <Link to="/dashboard" className="navbar-link" onClick={closeMenu}>
-                대시보드
-              </Link>
-              <Link to="/target-allocation" className="navbar-link" onClick={closeMenu}>
-                목표 비율 매매
-              </Link>
-              <Link to="/alert-strategies" className="navbar-link" onClick={closeMenu}>
-                알림 전략
-              </Link>
-              <Link to="/portfolios" className="navbar-link" onClick={closeMenu}>
-                포트폴리오
-              </Link>
-              <Link to="/account" className="navbar-link" onClick={closeMenu}>
-                계정
-              </Link>
+              <NavDropdown label="마이페이지" items={MY_PAGE_ITEMS} onNavigate={closeMenu} />
+              <NavDropdown label="트레이딩" items={TRADING_ITEMS} onNavigate={closeMenu} />
               <span className="navbar-user">
                 안녕하세요, {user.displayName || user.username}님
               </span>
