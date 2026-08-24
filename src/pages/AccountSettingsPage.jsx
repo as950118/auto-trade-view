@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
+import { useTheme } from '../contexts/ThemeContext.jsx'
 import { authAPI } from '../services/api'
 import './AuthPage.css'
 
 const AccountSettingsPage = () => {
+  const { theme, toggleTheme } = useTheme()
   const [profile, setProfile] = useState(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -74,6 +76,26 @@ const AccountSettingsPage = () => {
             <p className="auth-subtitle">
               Google로 가입한 경우 비밀번호를 설정하면 ID/비밀번호로도 로그인할 수 있습니다.
             </p>
+          </div>
+
+          <div
+            className="form-group"
+            style={{
+              marginBottom: '1.5rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            <label style={{ marginBottom: 0 }}>화면 테마</label>
+            <button
+              type="button"
+              className="auth-button"
+              style={{ width: 'auto', padding: '0.5rem 1.25rem' }}
+              onClick={toggleTheme}
+            >
+              {theme === 'dark' ? '☀️ 라이트모드로 전환' : '🌙 다크모드로 전환'}
+            </button>
           </div>
 
           {loading && <p className="auth-subtitle">불러오는 중...</p>}
