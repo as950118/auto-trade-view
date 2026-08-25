@@ -35,27 +35,33 @@ const PortfolioComparisonPanel = ({ portfolio, links }) => {
     [links, portfolio.id]
   )
 
-  // getPortfolioLinks()는 서버에서 -created_at 정렬로 오므로 portfolioLinks[0]이 최근 연결 계좌다
-  // (PRD-0006 §6/§8 Open Question #1 확정안).
-  const [selectedLinkId, setSelectedLinkId] = useState(portfolioLinks[0]?.id ?? null)
+  // 사용자가 드롭다운으로 명시적으로 고른 계좌(없으면 null → 아래에서 최근 연결 계좌로 폴백).
+  const [manualLinkId, setManualLinkId] = useState(null)
   const [accountHoldings, setAccountHoldings] = useState([])
   const [loadingHoldings, setLoadingHoldings] = useState(false)
+  const [holdingsError, setHoldingsError] = useState(false)
 
   useEffect(() => {
-    setSelectedLinkId(portfolioLinks[0]?.id ?? null)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setManualLinkId(null)
   }, [portfolio.id])
 
-  const selectedLink = portfolioLinks.find((l) => l.id === selectedLinkId) || null
+  // getPortfolioLinks()는 서버에서 -created_at 정렬로 오므로 portfolioLinks[0]이 최근 연결 계좌다
+  // (PRD-0006 §6/§8 Open Question #1 확정안). manualLinkId가 현재 portfolioLinks에 더 이상 없으면
+  // (구독 삭제, 또는 패널을 연 채로 방금 첫 구독을 추가해 0→1로 바뀐 경우 등) 매 렌더 다시 폴백한다 —
+  // 리뷰에서 지적된 "stale selectedLinkId로 구독 직후에도 '연결된 계좌 없음'이 계속 표시되는" 버그 수정.
+  const selectedLink =
+    portfolioLinks.find((l) => l.id === manualLinkId) || portfolioLinks[0] || null
   const selectedAccountId = selectedLink?.account?.id ?? null
 
   useEffect(() => {
     if (!selectedAccountId) {
       setAccountHoldings([])
+      setHoldingsError(false)
       return
     }
     let cancelled = false
     setLoadingHoldings(true)
+    setHoldingsError(false)
     dashboardAPI
       .getHoldings(selectedAccountId)
       .then((data) => {
@@ -63,7 +69,10 @@ const PortfolioComparisonPanel = ({ portfolio, links }) => {
       })
       .catch((err) => {
         console.error('Comparison panel holdings load error:', err)
-        if (!cancelled) setAccountHoldings([])
+        if (!cancelled) {
+          setAccountHoldings([])
+          setHoldingsError(true)
+        }
       })
       .finally(() => {
         if (!cancelled) setLoadingHoldings(false)
@@ -90,8 +99,8 @@ const PortfolioComparisonPanel = ({ portfolio, links }) => {
           <select
             id="comparison-account-select"
             className="comparison-account-select"
-            value={selectedLinkId ?? ''}
-            onChange={(e) => setSelectedLinkId(Number(e.target.value))}
+            value={selectedLink?.id ?? ''}
+            onChange={(e) => setManualLinkId(Number(e.target.value))}
           >
             {portfolioLinks.map((l) => (
               <option key={l.id} value={l.id}>
@@ -104,9 +113,9 @@ const PortfolioComparisonPanel = ({ portfolio, links }) => {
 
       <div className="comparison-tables">
         <div className="dense-table-wrap">
-          <div className="dense-table-caption">목표 구성</div>
+          <div className="dense-table-caption" id="target-composition-caption">목표 구성</div>
           <div className="dense-table-scroll">
-            <table className="dense-table">
+            <table className="dense-table" aria-labelledby="target-composition-caption">
               <thead>
                 <tr>
                   <th scope="col">티커</th>
@@ -142,7 +151,7 @@ const PortfolioComparisonPanel = ({ portfolio, links }) => {
         </div>
 
         <div className="dense-table-wrap">
-          <div className="dense-table-caption">
+          <div className="dense-table-caption" id="actual-holdings-caption">
             실제 보유
             {selectedLink && (
               <span className="dense-table-caption-meta">{getAccountLabel(selectedLink.account)}</span>
@@ -155,7 +164,7 @@ const PortfolioComparisonPanel = ({ portfolio, links }) => {
                 <p className="muted-text">구독하면 실제 보유가 표시됩니다.</p>
               </div>
             ) : (
-              <table className="dense-table">
+              <table className="dense-table" aria-labelledby="actual-holdings-caption">
                 <thead>
                   <tr>
                     <th scope="col">티커</th>
@@ -170,6 +179,10 @@ const PortfolioComparisonPanel = ({ portfolio, links }) => {
                   {loadingHoldings ? (
                     <tr>
                       <td colSpan={6} className="dense-table-empty">불러오는 중...</td>
+                    </tr>
+                  ) : holdingsError ? (
+                    <tr>
+                      <td colSpan={6} className="dense-table-empty">보유 종목을 불러오지 못했습니다.</td>
                     </tr>
                   ) : actualRows.length === 0 ? (
                     <tr>
