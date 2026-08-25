@@ -69,15 +69,6 @@ const Navbar = () => {
         <div className="navbar-actions">
           <button
             type="button"
-            className="navbar-theme-icon"
-            onClick={toggleTheme}
-            aria-label={theme === 'dark' ? '라이트 모드로 전환' : '다크 모드로 전환'}
-          >
-            {theme === 'dark' ? '☀️' : '🌙'}
-          </button>
-
-          <button
-            type="button"
             className={`navbar-toggle${menuOpen ? ' is-open' : ''}`}
             aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'}
             aria-expanded={menuOpen}
@@ -125,6 +116,17 @@ const Navbar = () => {
               </Link>
             </>
           )}
+          <button
+            type="button"
+            className="navbar-theme-icon"
+            onClick={() => {
+              toggleTheme()
+              closeMenu()
+            }}
+            aria-label={theme === 'dark' ? '라이트 모드로 전환' : '다크 모드로 전환'}
+          >
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
         </div>
       </div>
     </nav>

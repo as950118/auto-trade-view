@@ -200,4 +200,22 @@
   .navbar-button {
     margin-top: 0.25rem;
   }
+
+  .navbar-theme-icon {
+    width: 100%;
+    height: auto;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    padding: 0.85rem 1rem;
+    border-top: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-top: 0.25rem;
+  }
+
+  .navbar-theme-icon::after {
+    content: attr(aria-label);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
 }
