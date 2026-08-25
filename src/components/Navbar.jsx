@@ -8,6 +8,7 @@ import './Navbar.css'
 
 const MY_PAGE_ITEMS = [
   { to: '/dashboard', label: '대시보드' },
+  { to: '/daily-profit', label: '일일 수익률' },
   { to: '/account', label: '계정' },
 ]
 

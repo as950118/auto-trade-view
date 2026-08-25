@@ -35,20 +35,10 @@
   box-shadow: var(--shadow-1);
 }
 
-/* PC 기준 화면 한 번에 들어오도록 계좌 목록/일일 수익률 차트를 2열로 배치 */
-.dashboard-row-2col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-2);
-  margin-bottom: var(--space-2);
-  align-items: stretch;
-}
-
-.dashboard-row-2col .dashboard-section {
-  margin-bottom: 0;
+.dashboard-toolbar {
   display: flex;
-  flex-direction: column;
-  min-width: 0;
+  align-items: center;
+  margin-bottom: var(--space-2);
 }
 
 .section-title {
@@ -75,31 +65,20 @@
   gap: 0.75rem;
 }
 
-.filter-badge {
-  background-color: var(--color-rise);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  font-weight: 500;
+.accounts-modal-body {
+  padding: var(--space-4);
 }
 
-/* DS-0002 Dense Table 권장 높이(320~400px)에 맞춤 — HoldingsTable의 holdings-groups-scroll과 동일 성격의 컴포넌트 전용 치수 */
-.accounts-scroll {
-  flex: 1;
-  min-height: 0;
-  max-height: 320px;
-  overflow-y: auto;
+.accounts-modal-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: var(--space-3);
 }
 
 .accounts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: var(--space-2);
-}
-
-.filter-clear-button {
-  margin-top: var(--space-2);
 }
 
 .empty-state {
@@ -145,14 +124,6 @@
 
   .dashboard-section {
     padding: var(--space-3);
-  }
-
-  .dashboard-row-2col {
-    grid-template-columns: 1fr;
-  }
-
-  .accounts-scroll {
-    max-height: none;
   }
 
   .accounts-grid {
