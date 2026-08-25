@@ -82,7 +82,9 @@ const PortfolioComparisonPanel = ({ portfolio, links }) => {
     }
   }, [selectedAccountId])
 
-  const accountWeights = selectedLink ? computeAccountWeights(accountHoldings) : null
+  // holdingsError일 때도 accountWeights를 null로 유지해, 목표 구성 표의 현재비중/괴리가
+  // "실제 0% 보유"(danger 배지)가 아니라 "-"(미확인)로 표시되게 한다.
+  const accountWeights = selectedLink && !holdingsError ? computeAccountWeights(accountHoldings) : null
   const targetRows = buildTargetComparisonRows(portfolio.holdings, accountWeights)
   const actualRows = useMemo(
     () => [...accountHoldings].sort((a, b) => parseFloat(b.total_value || 0) - parseFloat(a.total_value || 0)),
