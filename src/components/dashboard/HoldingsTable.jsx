@@ -437,6 +437,7 @@ const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilt
         </div>
       </div>
 
+      <div className="holdings-groups-scroll">
       {groupedByCurrency.map((currencyGroup) => {
         const holdingsList = Object.values(currencyGroup.holdings)
         
@@ -660,7 +661,7 @@ const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilt
           </div>
         )
       })}
-      
+
       {/* 필터 결과가 없을 때 메시지 표시 */}
       {groupedByCurrency.length === 0 && (
         <div className="holdings-empty">
@@ -668,6 +669,7 @@ const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilt
           <p className="empty-hint">필터를 변경하여 다시 검색해보세요.</p>
         </div>
       )}
+      </div>
 
       <SellOrderModal
         isOpen={sellModalOpen}

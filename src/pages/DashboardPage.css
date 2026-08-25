@@ -6,45 +6,63 @@
 .dashboard-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: var(--space-3) var(--space-5);
 }
 
 .dashboard-header {
-  margin-bottom: 2rem;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
 }
 
 .dashboard-title {
-  font-size: 2.5rem;
+  font-size: var(--font-size-xl);
   font-weight: 700;
   color: var(--color-text-primary);
-  margin-bottom: 0.5rem;
 }
 
 .dashboard-subtitle {
-  font-size: 1.1rem;
+  font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
 }
 
 .dashboard-section {
   background: var(--color-bg-elevated);
   border-radius: var(--radius-xl);
-  padding: 2rem;
-  margin-bottom: 2rem;
+  padding: var(--space-2) var(--space-3);
+  margin-bottom: var(--space-2);
   box-shadow: var(--shadow-1);
 }
 
+/* PC 기준 화면 한 번에 들어오도록 계좌 목록/일일 수익률 차트를 2열로 배치 */
+.dashboard-row-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  align-items: stretch;
+}
+
+.dashboard-row-2col .dashboard-section {
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
 .section-title {
-  font-size: 1.5rem;
+  font-size: var(--font-size-base);
   font-weight: 700;
   color: var(--color-text-primary);
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-2);
 }
 
 .section-header-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-2);
 }
 
 .section-header-row .section-title {
@@ -66,19 +84,27 @@
   font-weight: 500;
 }
 
+/* DS-0002 Dense Table 권장 높이(320~400px)에 맞춤 — HoldingsTable의 holdings-groups-scroll과 동일 성격의 컴포넌트 전용 치수 */
+.accounts-scroll {
+  flex: 1;
+  min-height: 0;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
 .accounts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-2);
 }
 
 .filter-clear-button {
-  margin-top: 1rem;
+  margin-top: var(--space-2);
 }
 
 .empty-state {
   text-align: center;
-  padding: 3rem;
+  padding: var(--space-4);
   color: var(--color-text-secondary);
 }
 
@@ -112,12 +138,21 @@
     padding: 1rem;
   }
 
-  .dashboard-title {
-    font-size: 2rem;
+  .dashboard-header {
+    flex-direction: column;
+    gap: var(--space-1);
   }
 
   .dashboard-section {
-    padding: 1.5rem;
+    padding: var(--space-3);
+  }
+
+  .dashboard-row-2col {
+    grid-template-columns: 1fr;
+  }
+
+  .accounts-scroll {
+    max-height: none;
   }
 
   .accounts-grid {

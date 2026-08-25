@@ -5,8 +5,14 @@
 .holdings-controls {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  gap: var(--space-1);
+  margin-bottom: var(--space-1);
+}
+
+/* Dense Table 패턴(DS-0002): 보유 종목 수와 무관하게 고정 높이 안에서 스크롤 */
+.holdings-groups-scroll {
+  max-height: 320px;
+  overflow-y: auto;
 }
 
 .account-filter-badge {
@@ -56,8 +62,8 @@
 .filters-section {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0.75rem 1rem;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-2);
   background: var(--color-bg-page);
   border-radius: var(--radius-md);
   flex-wrap: wrap;
@@ -104,8 +110,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 0.75rem 1rem;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-2);
   background: var(--color-bg-page);
   border-radius: var(--radius-md);
   flex-wrap: wrap;
@@ -113,20 +119,20 @@
 
 .toggle-group {
   display: flex;
-  gap: 0.5rem;
+  gap: var(--space-1);
   background: var(--color-bg-elevated);
-  padding: 0.25rem;
+  padding: var(--space-1);
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
 }
 
 .toggle-btn {
-  padding: 0.5rem 1rem;
+  padding: var(--space-1) var(--space-3);
   border: none;
   border-radius: var(--radius-sm);
   background: transparent;
   color: var(--color-text-secondary);
-  font-size: 0.9rem;
+  font-size: var(--font-size-xs);
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
@@ -180,7 +186,7 @@
 }
 
 .currency-section {
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-3);
 }
 
 .currency-section:last-child {
@@ -191,16 +197,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
-  padding: 1rem;
+  margin-bottom: 0;
+  padding: var(--space-1) var(--space-2);
   background-color: var(--color-bg-page);
   border-radius: var(--radius-md);
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: var(--space-2);
 }
 
 .currency-title {
-  font-size: 1.25rem;
+  font-size: var(--font-size-sm);
   font-weight: 700;
   color: var(--color-text-primary);
   margin: 0;
@@ -209,18 +215,18 @@
 .currency-summary {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: var(--space-3);
   flex-wrap: wrap;
 }
 
 .summary-label {
-  font-size: 0.9rem;
+  font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
   font-weight: 500;
 }
 
 .summary-value {
-  font-size: 1rem;
+  font-size: var(--font-size-sm);
   font-weight: 700;
   color: var(--color-text-primary);
 }
@@ -235,7 +241,10 @@
 
 .holdings-table {
   width: 100%;
-  border-collapse: collapse;
+  /* border-collapse:collapse에서는 <th>에 position:sticky가 적용되지 않는 브라우저 제약이 있어
+     separate로 전환(스크롤 중 sticky 컬럼 헤더 유지를 위함, DS-0002 Dense Table 요구사항) */
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
 .holdings-table thead {
@@ -243,20 +252,24 @@
 }
 
 .holdings-table th {
-  padding: 1rem;
+  padding: var(--space-1) var(--space-2);
   text-align: left;
   font-weight: 700;
   color: var(--color-text-primary);
-  font-size: 0.9rem;
+  font-size: var(--font-size-xs);
   text-transform: uppercase;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  background-color: var(--color-bg-page);
   letter-spacing: 0.5px;
   border-bottom: 2px solid var(--color-border);
+  white-space: nowrap;
 }
 
 .holdings-table th.sortable {
   cursor: pointer;
   user-select: none;
-  position: relative;
   transition: background-color 0.2s;
 }
 
@@ -278,9 +291,10 @@
 }
 
 .holdings-table td {
-  padding: 1rem;
+  padding: var(--space-1) var(--space-2);
   border-bottom: 1px solid var(--color-border);
   color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
 }
 
 .holdings-table tbody tr:hover {
@@ -294,22 +308,21 @@
 .symbol-info {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
 }
 
 .symbol-ticker {
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: var(--font-size-sm);
   color: var(--color-text-primary);
 }
 
 .symbol-name {
-  font-size: 0.85rem;
+  font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
 }
 
 .crypto-tag {
-  margin-top: 0.25rem;
+  margin-top: var(--space-1);
   width: fit-content;
 }
 
@@ -331,17 +344,18 @@
 .accounts-list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--space-1);
 }
 
 .account-tag {
   display: inline-block;
   background-color: var(--color-bg-page);
   color: var(--color-text-primary);
-  padding: 0.375rem 0.75rem;
+  padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-md);
-  font-size: 0.85rem;
+  font-size: var(--font-size-xs);
   width: fit-content;
+  white-space: nowrap;
 }
 
 .td-sell {
