@@ -50,7 +50,7 @@ const DailyProfitChart = ({ data, selectedAccount }) => {
       
       {chartData.length > 0 ? (
         <div className="chart-wrapper">
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={190}>
             <AreaChart data={chartData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorProfit" x1="0" y1="0" x2="0" y2="1">

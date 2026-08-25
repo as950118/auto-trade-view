@@ -166,46 +166,60 @@ const DashboardPage = () => {
           />
         )}
 
-        {/* 계좌 목록 */}
-        <section className="dashboard-section">
-          <div className="section-header-row">
-            <h2 className="section-title">계좌 목록</h2>
-            <Button variant="primary" onClick={handleAddAccount}>
-              + 계좌 등록
-            </Button>
-          </div>
-            <div className="accounts-grid">
-              {accounts.length > 0 ? (
-                accounts.map((account) => (
-                  <AccountCard
-                    key={account.id}
-                    account={account}
-                    holdings={holdings}
-                    onClick={() => handleAccountFilter(account.id)}
-                    onEdit={() => handleEditAccount(account)}
-                    onDelete={() => handleDeleteAccount(account.id)}
-                    isSelected={selectedAccount === account.id}
-                  />
-                ))
-              ) : (
-              <div className="empty-state">
-                <p>등록된 계좌가 없습니다.</p>
-                <Button variant="primary" onClick={handleAddAccount}>
-                  계좌 등록하기
-                </Button>
+        <div className="dashboard-row-2col">
+          {/* 계좌 목록 */}
+          <section className="dashboard-section">
+            <div className="section-header-row">
+              <h2 className="section-title">계좌 목록</h2>
+              <Button variant="primary" size="sm" onClick={handleAddAccount}>
+                + 계좌 등록
+              </Button>
+            </div>
+            <div className="accounts-scroll">
+              <div className="accounts-grid">
+                {accounts.length > 0 ? (
+                  accounts.map((account) => (
+                    <AccountCard
+                      key={account.id}
+                      account={account}
+                      holdings={holdings}
+                      onClick={() => handleAccountFilter(account.id)}
+                      onEdit={() => handleEditAccount(account)}
+                      onDelete={() => handleDeleteAccount(account.id)}
+                      isSelected={selectedAccount === account.id}
+                    />
+                  ))
+                ) : (
+                <div className="empty-state">
+                  <p>등록된 계좌가 없습니다.</p>
+                  <Button variant="primary" onClick={handleAddAccount}>
+                    계좌 등록하기
+                  </Button>
+                </div>
+              )}
               </div>
+            </div>
+            {selectedAccount && (
+              <Button
+                variant="secondary"
+                size="sm"
+                className="filter-clear-button"
+                onClick={() => handleAccountFilter('all')}
+              >
+                전체 보기
+              </Button>
             )}
-          </div>
-          {selectedAccount && (
-            <Button
-              variant="secondary"
-              className="filter-clear-button"
-              onClick={() => handleAccountFilter('all')}
-            >
-              전체 보기
-            </Button>
-          )}
-        </section>
+          </section>
+
+          {/* 일일 수익률 차트 */}
+          <section className="dashboard-section">
+            <h2 className="section-title">일일 수익률 추이</h2>
+            <DailyProfitChart
+              data={dailyProfits}
+              selectedAccount={selectedAccount}
+            />
+          </section>
+        </div>
 
         {/* 계좌 등록/수정 모달 */}
         <AccountFormModal
@@ -218,15 +232,6 @@ const DashboardPage = () => {
           account={editingAccount}
         />
 
-        {/* 일일 수익률 차트 */}
-        <section className="dashboard-section">
-          <h2 className="section-title">일일 수익률 추이</h2>
-          <DailyProfitChart
-            data={dailyProfits}
-            selectedAccount={selectedAccount}
-          />
-        </section>
-
         {/* 보유종목 */}
         <section className="dashboard-section">
           <div className="section-header-row">
@@ -235,7 +240,7 @@ const DashboardPage = () => {
               <Button
                 type="button"
                 variant="buy"
-                size="md"
+                size="sm"
                 onClick={() => setBuyModalOpen(true)}
               >
                 매수
