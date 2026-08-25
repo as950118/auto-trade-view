@@ -6,7 +6,7 @@ import Badge from '../components/ui/Badge'
 import PortfolioFormModal from '../components/dashboard/PortfolioFormModal'
 import PortfolioHoldingsEditor from '../components/dashboard/PortfolioHoldingsEditor'
 import PortfolioLinkFormModal from '../components/dashboard/PortfolioLinkFormModal'
-import PortfolioWeightChart from '../components/dashboard/PortfolioWeightChart'
+import PortfolioComparisonPanel from '../components/dashboard/PortfolioComparisonPanel'
 import PortfolioCard, { getAssetType } from '../components/dashboard/PortfolioCard'
 import { dashboardAPI } from '../services/dashboardAPI'
 import './PortfolioPage.css'
@@ -278,12 +278,12 @@ const PortfolioPage = () => {
         {selectedPortfolio && (
           <section className="portfolio-section portfolio-detail-section">
             <div className="section-header-row">
-              <h2 className="section-title">{selectedPortfolio.title} · 목표 비중</h2>
+              <h2 className="section-title">{selectedPortfolio.title} · 목표비중 vs 실제보유</h2>
               <button type="button" className="btn-link" onClick={() => setSelectedPortfolioId(null)}>
                 닫기
               </button>
             </div>
-            <PortfolioWeightChart holdings={selectedPortfolio.holdings} />
+            <PortfolioComparisonPanel portfolio={selectedPortfolio} links={links} />
           </section>
         )}
 
