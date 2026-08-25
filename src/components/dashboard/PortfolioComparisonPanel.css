@@ -1,0 +1,146 @@
+/* Dense Comparison Table / Deviation Indicator — DS-0002. 신규 토큰 없음, DS-0001 토큰만 사용. */
+
+.comparison-panel-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.comparison-account-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.comparison-account-select {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  padding: var(--space-1) var(--space-2);
+}
+
+.comparison-tables {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.dense-table-wrap {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-elevated);
+  overflow: hidden;
+}
+
+.dense-table-caption {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dense-table-caption-meta {
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}
+
+.dense-table-scroll {
+  height: 360px;
+  overflow: auto;
+}
+
+.dense-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+}
+
+.dense-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  background: var(--color-bg-elevated);
+  text-align: left;
+  padding: var(--space-3);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.dense-table td {
+  padding: var(--space-1) var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.dense-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.dense-table tbody tr:hover td {
+  background: var(--color-bg-page);
+}
+
+.dense-table .text-right {
+  text-align: right;
+}
+
+.dense-table-empty {
+  text-align: center;
+  padding: var(--space-4);
+  color: var(--color-text-secondary);
+  white-space: normal;
+}
+
+.dense-table-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.deviation-indicator {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.deviation-indicator.muted {
+  color: var(--color-text-secondary);
+  font-weight: 400;
+}
+
+/* --breakpoint-md(768px)와 동일 — CSS 커스텀 프로퍼티는 미디어쿼리 조건에 쓸 수 없어 리터럴 유지
+   (기존 PortfolioPage.css/HoldingsTable.css 등 다른 반응형 규칙과 동일한 관례). */
+@media (max-width: 768px) {
+  .comparison-tables {
+    grid-template-columns: 1fr;
+  }
+
+  .dense-table-scroll {
+    height: 280px;
+  }
+
+  .dense-table {
+    font-size: var(--font-size-xs);
+  }
+
+  .dense-table thead th {
+    padding: var(--space-2);
+  }
+}
