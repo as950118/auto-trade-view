@@ -121,13 +121,13 @@
   display: flex;
   gap: var(--space-1);
   background: var(--color-bg-elevated);
-  padding: 0.2rem;
+  padding: var(--space-1);
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
 }
 
 .toggle-btn {
-  padding: 0.3rem 0.7rem;
+  padding: var(--space-1) var(--space-3);
   border: none;
   border-radius: var(--radius-sm);
   background: transparent;
@@ -203,9 +203,6 @@
   border-radius: var(--radius-md);
   flex-wrap: wrap;
   gap: var(--space-2);
-  position: sticky;
-  top: 0;
-  z-index: var(--z-sticky);
 }
 
 .currency-title {
@@ -244,7 +241,10 @@
 
 .holdings-table {
   width: 100%;
-  border-collapse: collapse;
+  /* border-collapse:collapse에서는 <th>에 position:sticky가 적용되지 않는 브라우저 제약이 있어
+     separate로 전환(스크롤 중 sticky 컬럼 헤더 유지를 위함, DS-0002 Dense Table 요구사항) */
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
 .holdings-table thead {
@@ -258,6 +258,10 @@
   color: var(--color-text-primary);
   font-size: var(--font-size-xs);
   text-transform: uppercase;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  background-color: var(--color-bg-page);
   letter-spacing: 0.5px;
   border-bottom: 2px solid var(--color-border);
   white-space: nowrap;
@@ -266,7 +270,6 @@
 .holdings-table th.sortable {
   cursor: pointer;
   user-select: none;
-  position: relative;
   transition: background-color 0.2s;
 }
 
@@ -305,7 +308,6 @@
 .symbol-info {
   display: flex;
   flex-direction: column;
-  gap: 0.1rem;
 }
 
 .symbol-ticker {
@@ -320,7 +322,7 @@
 }
 
 .crypto-tag {
-  margin-top: 0.15rem;
+  margin-top: var(--space-1);
   width: fit-content;
 }
 
@@ -342,14 +344,14 @@
 .accounts-list {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: var(--space-1);
 }
 
 .account-tag {
   display: inline-block;
   background-color: var(--color-bg-page);
   color: var(--color-text-primary);
-  padding: 0.2rem 0.5rem;
+  padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-md);
   font-size: var(--font-size-xs);
   width: fit-content;

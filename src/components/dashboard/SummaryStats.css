@@ -26,14 +26,13 @@
 }
 
 .stat-icon {
-  font-size: 1.4rem;
+  font-size: var(--font-size-xl);
   line-height: 1;
 }
 
 .stat-content {
   display: flex;
   flex-direction: column;
-  gap: 0.1rem;
   flex: 1;
   min-width: 0;
 }
@@ -46,7 +45,7 @@
 }
 
 .stat-value {
-  font-size: 1.05rem;
+  font-size: var(--font-size-base);
   font-weight: 700;
   white-space: nowrap;
 }
@@ -73,7 +72,7 @@
   }
 
   .stat-value {
-    font-size: 1.1rem;
+    font-size: var(--font-size-base);
   }
 }
 

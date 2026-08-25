@@ -49,13 +49,13 @@
 .account-broker {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.15rem;
+  gap: var(--space-2);
+  margin-bottom: var(--space-1);
 }
 
 .broker-name {
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: var(--font-size-sm);
   color: var(--color-text-primary);
 }
 
@@ -79,7 +79,7 @@
 
 .currency-toggle-btn {
   flex: 1;
-  padding: 0.2rem 0.5rem;
+  padding: var(--space-1) var(--space-2);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background: var(--color-bg-elevated);
@@ -117,7 +117,7 @@
   font-size: var(--font-size-xs);
   font-weight: 600;
   color: var(--color-text-secondary);
-  margin-bottom: 0.2rem;
+  margin-bottom: var(--space-1);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -126,7 +126,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.2rem;
+  margin-bottom: var(--space-1);
 }
 
 .stat-label {
@@ -136,13 +136,13 @@
 }
 
 .stat-value {
-  font-size: 0.85rem;
+  font-size: var(--font-size-sm);
   font-weight: 700;
   color: var(--color-text-primary);
 }
 
 .stat-value.total-assets {
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   color: var(--color-rise);
 }
 
@@ -160,7 +160,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-2);
-  margin-bottom: 0.2rem;
+  margin-bottom: var(--space-1);
 }
 
 .account-profit {
@@ -181,22 +181,22 @@
 
 .account-status {
   display: flex;
-  gap: 0.3rem;
+  gap: var(--space-1);
   flex-wrap: wrap;
   flex: 1;
 }
 
 .account-actions {
   display: flex;
-  gap: 0.3rem;
+  gap: var(--space-1);
 }
 
 .action-button {
   background: none;
   border: none;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   cursor: pointer;
-  padding: 0.15rem 0.35rem;
+  padding: var(--space-1);
   border-radius: var(--radius-sm);
   transition: background-color 0.2s;
   line-height: 1;

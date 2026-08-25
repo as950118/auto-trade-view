@@ -13,7 +13,6 @@
 .stat-item {
   display: flex;
   flex-direction: column;
-  gap: 0.1rem;
 }
 
 .stat-label {
@@ -23,7 +22,7 @@
 }
 
 .stat-value {
-  font-size: 1.1rem;
+  font-size: var(--font-size-base);
   font-weight: 700;
 }
 
@@ -35,6 +34,8 @@
   color: var(--color-fall);
 }
 
+/* 컴포넌트 전용 고정 높이 — DS-0002 Dense Table 스크롤 높이(320~400px)와 같은 성격의
+   레이아웃 치수라 spacing/font 토큰 스케일 대상이 아님(디자인 토큰화 불필요). */
 .chart-wrapper {
   width: 100%;
   height: 190px;
