@@ -35,14 +35,15 @@
 }
 
 /* 컴포넌트 전용 고정 높이 — DS-0002 Dense Table 스크롤 높이(320~400px)와 같은 성격의
-   레이아웃 치수라 spacing/font 토큰 스케일 대상이 아님(디자인 토큰화 불필요). */
+   레이아웃 치수라 spacing/font 토큰 스케일 대상이 아님(디자인 토큰화 불필요). 전용 페이지로
+   분리돼(TASK-0014) 더 이상 대시보드 압축 제약을 받지 않아 여유 있게 잡음. */
 .chart-wrapper {
   width: 100%;
-  height: 190px;
+  height: 380px;
 }
 
 .chart-empty {
-  height: 190px;
+  height: 380px;
   display: flex;
   align-items: center;
   justify-content: center;

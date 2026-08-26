@@ -4,6 +4,7 @@ import LandingPage from './pages/LandingPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import SignupPage from './pages/SignupPage.jsx'
 import DashboardPage from './pages/DashboardPage.jsx'
+import DailyProfitPage from './pages/DailyProfitPage.jsx'
 import SymbolChartPage from './pages/SymbolChartPage.jsx'
 import TargetAllocationPage from './pages/TargetAllocationPage.jsx'
 import AlertStrategyPage from './pages/AlertStrategyPage.jsx'
@@ -32,6 +33,14 @@ function App() {
             }
           />
           <Route path="/chart" element={<SymbolChartPage />} />
+          <Route
+            path="/daily-profit"
+            element={
+              <ProtectedRoute>
+                <DailyProfitPage />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/fee-rebate" element={<FeeRebateComparisonPage />} />
           <Route
             path="/target-allocation"

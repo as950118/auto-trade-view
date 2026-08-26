@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import Navbar from '../components/Navbar'
 import Button from '../components/ui/Button'
+import Modal from '../components/ui/Modal'
 import AccountCard from '../components/dashboard/AccountCard'
 import HoldingsTable from '../components/dashboard/HoldingsTable'
-import DailyProfitChart from '../components/dashboard/DailyProfitChart'
 import SummaryStats from '../components/dashboard/SummaryStats'
 import AccountFormModal from '../components/dashboard/AccountFormModal'
 import BuyOrderModal from '../components/dashboard/BuyOrderModal'
@@ -15,7 +15,6 @@ const DashboardPage = () => {
   const { user } = useAuth()
   const [accounts, setAccounts] = useState([])
   const [holdings, setHoldings] = useState([])
-  const [dailyProfits, setDailyProfits] = useState([])
   const [profitSummary, setProfitSummary] = useState(null)
   const [selectedAccount, setSelectedAccount] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -23,6 +22,7 @@ const DashboardPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingAccount, setEditingAccount] = useState(null)
   const [buyModalOpen, setBuyModalOpen] = useState(false)
+  const [accountsModalOpen, setAccountsModalOpen] = useState(false)
 
   useEffect(() => {
     loadDashboardData()
@@ -34,16 +34,14 @@ const DashboardPage = () => {
       setError(null)
 
       // 병렬로 데이터 로드 - 모든 holdings를 가져옴 (필터링은 클라이언트에서)
-      const [accountsData, holdingsData, profitsData, summaryData] = await Promise.all([
+      const [accountsData, holdingsData, summaryData] = await Promise.all([
         dashboardAPI.getAccounts(),
         dashboardAPI.getHoldings(null), // 항상 전체 데이터 가져오기
-        dashboardAPI.getDailyProfits({ ordering: '-date' }),
         dashboardAPI.getProfitSummary(),
       ])
 
       setAccounts(accountsData.results || accountsData)
       setHoldings(holdingsData.results || holdingsData)
-      setDailyProfits(profitsData.results || profitsData)
       setProfitSummary(summaryData)
     } catch (err) {
       console.error('Dashboard data load error:', err)
@@ -153,7 +151,7 @@ const DashboardPage = () => {
           <p className="dashboard-subtitle">안녕하세요, {user?.displayName || user?.username}님</p>
         </div>
 
-        {/* 요약 통계 */}
+        {/* 요약 통계 — 항상 한 줄 */}
         {profitSummary && (
           <SummaryStats
             summary={profitSummary}
@@ -166,71 +164,11 @@ const DashboardPage = () => {
           />
         )}
 
-        <div className="dashboard-row-2col">
-          {/* 계좌 목록 */}
-          <section className="dashboard-section">
-            <div className="section-header-row">
-              <h2 className="section-title">계좌 목록</h2>
-              <Button variant="primary" size="sm" onClick={handleAddAccount}>
-                + 계좌 등록
-              </Button>
-            </div>
-            <div className="accounts-scroll">
-              <div className="accounts-grid">
-                {accounts.length > 0 ? (
-                  accounts.map((account) => (
-                    <AccountCard
-                      key={account.id}
-                      account={account}
-                      holdings={holdings}
-                      onClick={() => handleAccountFilter(account.id)}
-                      onEdit={() => handleEditAccount(account)}
-                      onDelete={() => handleDeleteAccount(account.id)}
-                      isSelected={selectedAccount === account.id}
-                    />
-                  ))
-                ) : (
-                <div className="empty-state">
-                  <p>등록된 계좌가 없습니다.</p>
-                  <Button variant="primary" onClick={handleAddAccount}>
-                    계좌 등록하기
-                  </Button>
-                </div>
-              )}
-              </div>
-            </div>
-            {selectedAccount && (
-              <Button
-                variant="secondary"
-                size="sm"
-                className="filter-clear-button"
-                onClick={() => handleAccountFilter('all')}
-              >
-                전체 보기
-              </Button>
-            )}
-          </section>
-
-          {/* 일일 수익률 차트 */}
-          <section className="dashboard-section">
-            <h2 className="section-title">일일 수익률 추이</h2>
-            <DailyProfitChart
-              data={dailyProfits}
-              selectedAccount={selectedAccount}
-            />
-          </section>
+        <div className="dashboard-toolbar">
+          <Button variant="secondary" size="sm" onClick={() => setAccountsModalOpen(true)}>
+            계좌 목록 ({accounts.length})
+          </Button>
         </div>
-
-        {/* 계좌 등록/수정 모달 */}
-        <AccountFormModal
-          isOpen={isModalOpen}
-          onClose={() => {
-            setIsModalOpen(false)
-            setEditingAccount(null)
-          }}
-          onSuccess={handleModalSuccess}
-          account={editingAccount}
-        />
 
         {/* 보유종목 */}
         <section className="dashboard-section">
@@ -245,11 +183,6 @@ const DashboardPage = () => {
               >
                 매수
               </Button>
-              {selectedAccount && (
-                <span className="filter-badge">
-                  계좌 필터 적용됨
-                </span>
-              )}
             </div>
           </div>
           <HoldingsTable
@@ -260,6 +193,58 @@ const DashboardPage = () => {
             onSellSuccess={loadDashboardData}
           />
         </section>
+
+        {/* 계좌 목록 모달 */}
+        <Modal
+          isOpen={accountsModalOpen}
+          onClose={() => setAccountsModalOpen(false)}
+          title="계좌 목록"
+          size="lg"
+        >
+          <div className="accounts-modal-body">
+            <div className="accounts-modal-toolbar">
+              <Button variant="primary" size="sm" onClick={handleAddAccount}>
+                + 계좌 등록
+              </Button>
+            </div>
+            <div className="accounts-grid">
+              {accounts.length > 0 ? (
+                accounts.map((account) => (
+                  <AccountCard
+                    key={account.id}
+                    account={account}
+                    holdings={holdings}
+                    onClick={() => {
+                      handleAccountFilter(account.id)
+                      setAccountsModalOpen(false)
+                    }}
+                    onEdit={() => handleEditAccount(account)}
+                    onDelete={() => handleDeleteAccount(account.id)}
+                    isSelected={selectedAccount === account.id}
+                  />
+                ))
+              ) : (
+                <div className="empty-state">
+                  <p>등록된 계좌가 없습니다.</p>
+                  <Button variant="primary" onClick={handleAddAccount}>
+                    계좌 등록하기
+                  </Button>
+                </div>
+              )}
+            </div>
+          </div>
+        </Modal>
+
+        {/* 계좌 등록/수정 모달 */}
+        <AccountFormModal
+          isOpen={isModalOpen}
+          onClose={() => {
+            setIsModalOpen(false)
+            setEditingAccount(null)
+          }}
+          onSuccess={handleModalSuccess}
+          account={editingAccount}
+        />
 
         {/* 매수 주문 모달 */}
         <BuyOrderModal

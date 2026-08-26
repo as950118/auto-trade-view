@@ -2,10 +2,13 @@
   margin-bottom: var(--space-3);
 }
 
+/* 총자산/평가손익 등은 항상 한 줄로 — 카드 그리드가 wrap되면 총 실현 손익이 다음 줄로
+   밀려나는 문제가 있어(Operator 지적), 줄바꿈 대신 좁을 때만 가로 스크롤로 대응한다. */
 .stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  display: flex;
+  flex-wrap: nowrap;
   gap: var(--space-2);
+  overflow-x: auto;
 }
 
 .stat-card {
@@ -16,6 +19,13 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
+  flex: 1 1 0;
+  /* 카드 폭 하한/상한 — 텍스트 토큰이 아니라 레이아웃 치수(DailyProfitChart.css의
+     190px→380px 변경과 같은 성격). 하한 150px(모바일 130px)은 라벨/값이 줄바꿈 없이
+     들어갈 최소폭, 상한 320px은 통화 조건에 따라 카드가 1개만 남는 극단 케이스에서
+     그 카드가 컨테이너 전체 폭까지 늘어나며 비어 보이는 문제를 막기 위함(Reviewer 지적). */
+  min-width: 150px;
+  max-width: 320px;
   transition: all 0.3s ease;
 }
 
@@ -63,16 +73,9 @@
 }
 
 @media (max-width: 768px) {
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-
   .stat-card {
     padding: var(--space-2) var(--space-3);
-  }
-
-  .stat-value {
-    font-size: var(--font-size-base);
+    min-width: 130px;
   }
 }
 
