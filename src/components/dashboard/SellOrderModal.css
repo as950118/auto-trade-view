@@ -74,7 +74,7 @@
 .order-type-tab.active {
   background: var(--color-fall);
   border-color: var(--color-fall);
-  color: white;
+  color: var(--color-on-fall);
 }
 
 .quantity-value-group {
@@ -106,7 +106,7 @@
 .percent-btn.active {
   background: var(--color-fall);
   border-color: var(--color-fall);
-  color: white;
+  color: var(--color-on-fall);
 }
 
 .sell-order-form .form-input,
@@ -122,8 +122,8 @@
 .sell-order-form .form-input:focus,
 .sell-order-form .form-select:focus {
   outline: none;
-  border-color: var(--color-fall);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-fall) 10%, transparent);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-accent) 10%, transparent);
 }
 
 .amount-input-wrap,

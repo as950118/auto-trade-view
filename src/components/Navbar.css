@@ -18,7 +18,7 @@
 
 .navbar-brand {
   text-decoration: none;
-  color: var(--color-rise);
+  color: var(--color-accent);
   font-size: 1.5rem;
   font-weight: bold;
   z-index: var(--z-modal);
@@ -111,7 +111,7 @@
 }
 
 .navbar-link:hover {
-  color: var(--color-rise);
+  color: var(--color-accent);
 }
 
 .navbar-user {
@@ -120,8 +120,8 @@
 }
 
 .navbar-button {
-  background-color: var(--color-rise);
-  color: white;
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
   border: none;
   padding: 0.5rem 1.5rem;
   border-radius: var(--radius-md);
@@ -134,7 +134,7 @@
 }
 
 .navbar-button:hover {
-  background-color: var(--color-rise-hover);
+  background-color: var(--color-accent-hover);
 }
 
 @media (max-width: 768px) {

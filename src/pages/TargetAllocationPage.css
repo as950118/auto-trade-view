@@ -151,11 +151,11 @@
 
 .btn-delete {
   background: var(--color-status-danger-bg);
-  color: var(--color-rise);
+  color: var(--color-status-danger-fg);
 }
 
 .btn-delete:hover {
-  background: color-mix(in srgb, var(--color-rise) 25%, white);
+  background: var(--color-status-danger-bg);
 }
 
 .target-allocation-loading,
@@ -173,7 +173,7 @@
   width: 40px;
   height: 40px;
   border: 3px solid var(--color-border);
-  border-top-color: var(--color-rise);
+  border-top-color: var(--color-accent);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }

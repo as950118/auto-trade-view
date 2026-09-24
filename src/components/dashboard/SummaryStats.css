@@ -32,7 +32,7 @@
 .stat-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-1);
-  border-color: var(--color-rise);
+  border-color: var(--color-accent);
 }
 
 .stat-icon {
@@ -61,7 +61,7 @@
 }
 
 .stat-value.primary {
-  color: var(--color-rise);
+  color: var(--color-text-primary);
 }
 
 .stat-value.positive {

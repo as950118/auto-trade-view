@@ -75,14 +75,14 @@
 }
 
 .target-allocation-form .order-type-tab:hover {
-  border-color: var(--color-rise);
-  color: var(--color-rise);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 
 .target-allocation-form .order-type-tab.active {
-  background-color: var(--color-rise);
-  border-color: var(--color-rise);
-  color: white;
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-on-accent);
 }
 
 .target-allocation-form .symbol-placeholder {

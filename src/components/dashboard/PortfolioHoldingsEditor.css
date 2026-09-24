@@ -100,7 +100,7 @@
 }
 
 .weight-sum-row.over {
-  color: var(--color-rise);
+  color: var(--color-status-danger-fg);
 }
 
 .holdings-editor-actions {

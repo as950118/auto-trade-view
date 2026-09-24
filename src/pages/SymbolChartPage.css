@@ -61,8 +61,8 @@
 
 .chart-symbol-select:focus {
   outline: none;
-  border-color: var(--color-rise);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-rise) 15%, transparent);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-accent) 15%, transparent);
 }
 
 .chart-ticker-input {
@@ -84,8 +84,8 @@
 
 .chart-ticker-input:focus {
   outline: none;
-  border-color: var(--color-rise);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-rise) 15%, transparent);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-accent) 15%, transparent);
 }
 
 .chart-stats-inline {

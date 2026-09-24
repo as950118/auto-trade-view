@@ -10,8 +10,8 @@
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(135deg, var(--color-rise) 0%, var(--color-rise-hover) 100%);
-  color: white;
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
+  color: var(--color-on-accent);
   padding: 6rem 2rem;
   text-align: center;
   position: relative;
@@ -44,11 +44,11 @@
 }
 
 .hero-logo .logo {
-  color: white;
+  color: var(--color-on-accent);
 }
 
 .hero-logo .logo-text {
-  color: white;
+  color: var(--color-on-accent);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -61,7 +61,7 @@
   font-weight: bold;
   margin-bottom: 1.5rem;
   line-height: 1.2;
-  color: white;
+  color: var(--color-on-accent);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   animation: fadeInUp 0.8s ease-out 0.2s both;
 }
@@ -99,8 +99,8 @@
 }
 
 .btn-primary {
-  background-color: white;
-  color: var(--color-rise);
+  background-color: var(--color-bg-elevated);
+  color: var(--color-accent);
 }
 
 .btn-primary:hover {
@@ -111,8 +111,8 @@
 
 .btn-secondary {
   background-color: transparent;
-  color: white;
-  border-color: white;
+  color: var(--color-on-accent);
+  border-color: var(--color-on-accent);
 }
 
 .btn-secondary:hover {
@@ -188,7 +188,7 @@
 .feature-card:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-2);
-  border-color: var(--color-rise);
+  border-color: var(--color-accent);
 }
 
 .feature-icon-wrapper {
@@ -250,7 +250,7 @@
   left: 0;
   width: 4px;
   height: 100%;
-  background: var(--color-rise);
+  background: var(--color-accent);
   transform: scaleY(0);
   transition: transform 0.3s ease;
 }
@@ -260,14 +260,14 @@
 }
 
 .tech-card:hover {
-  box-shadow: 0 8px 24px color-mix(in srgb, var(--color-rise) 10%, transparent);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--color-accent) 10%, transparent);
   transform: translateX(4px);
 }
 
 .tech-number {
   font-size: 3rem;
   font-weight: 700;
-  color: var(--color-rise);
+  color: var(--color-accent);
   opacity: 0.2;
   margin-bottom: 1rem;
   line-height: 1;
@@ -289,8 +289,8 @@
 /* CTA Section */
 .cta-section {
   padding: 5rem 2rem;
-  background: linear-gradient(135deg, var(--color-rise) 0%, var(--color-rise-hover) 100%);
-  color: white;
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
+  color: var(--color-on-accent);
   text-align: center;
 }
 
@@ -303,7 +303,7 @@
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: white;
+  color: var(--color-on-accent);
 }
 
 .cta-description {
@@ -322,7 +322,7 @@
 /* Footer */
 .landing-footer {
   background-color: var(--color-text-primary);
-  color: white;
+  color: var(--color-on-accent);
   padding: 2rem;
   text-align: center;
 }

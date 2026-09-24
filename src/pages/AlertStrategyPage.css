@@ -132,7 +132,7 @@
 }
 
 .btn-link.danger {
-  color: var(--color-rise);
+  color: var(--color-status-danger-fg);
 }
 
 .webhook-cell,
@@ -194,7 +194,7 @@
   width: 40px;
   height: 40px;
   border: 3px solid var(--color-border);
-  border-top-color: var(--color-rise);
+  border-top-color: var(--color-accent);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }

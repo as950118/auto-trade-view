@@ -19,7 +19,7 @@
 
 .nav-dropdown-trigger:hover,
 .nav-dropdown-trigger.is-active {
-  color: var(--color-rise);
+  color: var(--color-accent);
 }
 
 .nav-dropdown-caret {
@@ -69,7 +69,7 @@
 
 .nav-dropdown-item:hover {
   background-color: var(--color-bg-page);
-  color: var(--color-rise);
+  color: var(--color-accent);
 }
 
 @media (max-width: 768px) {

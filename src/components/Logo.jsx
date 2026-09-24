@@ -2,10 +2,12 @@ import './Logo.css'
 
 const Logo = ({ size = 'medium', showText = true, color = 'red' }) => {
   const sizeClass = `logo-${size}`
-  const iconColor = color === 'white' ? '#ffffff' : '#dc2626'
-  
+  // 색은 CSS 토큰이 정한다(Logo.css): 기본은 --color-accent, 'white'는 accent 바탕 위용 --color-on-accent
+  const iconColor = 'currentColor'
+  const toneClass = color === 'white' ? 'logo-on-accent' : ''
+
   return (
-    <div className={`logo ${sizeClass}`}>
+    <div className={`logo ${sizeClass} ${toneClass}`.trim()}>
       <svg
         className="logo-icon"
         viewBox="0 0 100 100"

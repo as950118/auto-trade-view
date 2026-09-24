@@ -1,6 +1,6 @@
 import './Badge.css'
 
-const VARIANTS = ['success', 'warning', 'danger']
+const VARIANTS = ['success', 'warning', 'danger', 'neutral']
 
 function Badge({ variant = 'success', pill = true, className = '', children }) {
   const variantClass = VARIANTS.includes(variant) ? variant : 'success'

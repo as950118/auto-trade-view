@@ -22,7 +22,7 @@
   gap: 1rem;
   padding: 0.75rem 1rem;
   background: var(--color-status-danger-bg);
-  border: 1px solid var(--color-rise);
+  border: 1px solid var(--color-accent);
   border-radius: var(--radius-md);
   margin-bottom: 0.5rem;
 }
@@ -41,8 +41,8 @@
   height: 24px;
   border: none;
   border-radius: 50%;
-  background: var(--color-rise);
-  color: white;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
@@ -51,7 +51,7 @@
 }
 
 .clear-filter-btn:hover {
-  background: var(--color-rise-hover);
+  background: var(--color-accent-hover);
   transform: scale(1.1);
 }
 
@@ -97,8 +97,8 @@
 .filter-select:focus,
 .filter-input:focus {
   outline: none;
-  border-color: var(--color-rise);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-rise) 10%, transparent);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-accent) 10%, transparent);
 }
 
 .filter-input {
@@ -145,8 +145,8 @@
 }
 
 .toggle-btn.active {
-  background: var(--color-rise);
-  color: white;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
 }
 
 .exchange-rate-badge {
@@ -166,7 +166,7 @@
 }
 
 .summary-text strong {
-  color: var(--color-rise);
+  color: var(--color-text-primary);
   font-weight: 700;
 }
 
@@ -274,7 +274,7 @@
 }
 
 .holdings-table th.sortable:hover {
-  background-color: color-mix(in srgb, var(--color-rise) 10%, transparent);
+  background-color: color-mix(in srgb, var(--color-accent) 10%, transparent);
 }
 
 .sort-icon {
@@ -287,7 +287,7 @@
 
 .holdings-table th.sortable:hover .sort-icon {
   opacity: 1;
-  color: var(--color-rise);
+  color: var(--color-accent);
 }
 
 .holdings-table td {
@@ -328,7 +328,7 @@
 
 .total-value {
   font-weight: 700;
-  color: var(--color-rise);
+  color: var(--color-text-primary);
 }
 
 .profit {

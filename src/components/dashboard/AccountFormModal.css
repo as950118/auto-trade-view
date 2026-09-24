@@ -29,8 +29,8 @@
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: var(--color-rise);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-rise) 10%, transparent);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 10%, transparent);
 }
 
 .form-group input:disabled,
@@ -56,7 +56,7 @@
   width: 20px;
   height: 20px;
   cursor: pointer;
-  accent-color: var(--color-rise);
+  accent-color: var(--color-accent);
 }
 
 .form-actions {

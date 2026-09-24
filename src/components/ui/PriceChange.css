@@ -1,0 +1,36 @@
+/* DS-0003 PriceChange — 두 클래스 셀렉터로 .stat-value 등 호출부 색 지정보다 우선한다 */
+.price-change {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.price-change.price-change--rise {
+  color: var(--color-rise);
+}
+
+.price-change.price-change--fall {
+  color: var(--color-fall);
+}
+
+.price-change.price-change--flat {
+  color: var(--color-text-secondary);
+}
+
+.price-change.price-change--chip {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+}
+
+.price-change--chip.price-change--rise {
+  background-color: var(--color-rise-bg);
+}
+
+.price-change--chip.price-change--fall {
+  background-color: var(--color-fall-bg);
+}
+
+.price-change--chip.price-change--flat {
+  background-color: var(--color-bg-subtle);
+}

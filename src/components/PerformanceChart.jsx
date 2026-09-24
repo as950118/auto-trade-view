@@ -1,7 +1,10 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts'
 import './PerformanceChart.css'
+import { useChartTheme } from '../hooks/useTokenColors'
+import { formatSignedPercent } from '../utils/priceChange'
 
 const PerformanceChart = () => {
+  const chart = useChartTheme()
   // 일별 수익률 데이터
   const dailyData = []
   for (let i = 6; i >= 0; i--) {
@@ -24,32 +27,27 @@ const PerformanceChart = () => {
       <div className="chart-wrapper">
         <ResponsiveContainer width="100%" height={250}>
           <BarChart data={dailyData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+            <CartesianGrid strokeDasharray="3 3" stroke={chart.grid} />
             <XAxis 
               dataKey="day" 
-              stroke="#6b7280"
+              stroke={chart.axis}
               style={{ fontSize: '12px' }}
             />
             <YAxis 
-              stroke="#6b7280"
+              stroke={chart.axis}
               style={{ fontSize: '12px' }}
               label={{ value: '수익률 (%)', angle: -90, position: 'insideLeft' }}
             />
             <Tooltip 
-              contentStyle={{ 
-                backgroundColor: '#fff', 
-                border: '1px solid #e5e7eb',
-                borderRadius: '8px',
-                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
-              }}
-              formatter={(value) => [`${value > 0 ? '+' : ''}${value}%`, '수익률']}
+              contentStyle={chart.tooltipStyle}
+              formatter={(value) => [formatSignedPercent(value), '수익률']}
               labelFormatter={(label, payload) => payload[0]?.payload.date || label}
             />
             <Bar dataKey="profit" radius={[8, 8, 0, 0]}>
               {dailyData.map((entry, index) => (
                 <Cell 
                   key={`cell-${index}`} 
-                  fill={entry.profit >= 0 ? '#dc2626' : '#059669'} 
+                  fill={entry.profit > 0 ? chart.rise : entry.profit < 0 ? chart.fall : chart.axis} 
                 />
               ))}
             </Bar>
