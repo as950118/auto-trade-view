@@ -1,0 +1,110 @@
+/* DS-0003 Tabs */
+.ui-tabs {
+  display: flex;
+  gap: var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+  overflow-x: auto;
+}
+
+.ui-tab {
+  font: inherit;
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 600;
+  background: none;
+  border: 0;
+  padding: var(--space-3) 0;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: inset 0 -2px 0 transparent;
+}
+
+.ui-tab[aria-selected='true'] {
+  color: var(--color-text-primary);
+  box-shadow: inset 0 -2px 0 var(--color-accent);
+}
+
+.ui-segment {
+  display: inline-flex;
+  background: var(--color-bg-subtle);
+  border-radius: var(--radius-md);
+  padding: 3px;
+  gap: 2px;
+}
+
+.ui-segment-block {
+  display: flex;
+}
+
+.ui-segment-block > button {
+  flex: 1;
+}
+
+.ui-segment > button {
+  font: inherit;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-secondary);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ui-segment-lg > button {
+  font-size: 15px;
+  line-height: 22px;
+  padding: 8px 12px;
+}
+
+.ui-segment > button[aria-pressed='true'] {
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-1);
+}
+
+.ui-segment > button.ui-segment-rise[aria-pressed='true'] {
+  background: var(--color-rise-bg);
+  color: var(--color-rise);
+  box-shadow: none;
+}
+
+.ui-segment > button.ui-segment-fall[aria-pressed='true'] {
+  background: var(--color-fall-bg);
+  color: var(--color-fall);
+  box-shadow: none;
+}
+
+.ui-segment > button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ui-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.ui-chip {
+  font: inherit;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  border: 0;
+  background: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+.ui-chip[aria-pressed='true'] {
+  background: var(--color-accent-bg);
+  color: var(--color-accent);
+  font-weight: 600;
+}

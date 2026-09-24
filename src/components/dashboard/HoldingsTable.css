@@ -117,37 +117,9 @@
   flex-wrap: wrap;
 }
 
-.toggle-group {
-  display: flex;
-  gap: var(--space-1);
-  background: var(--color-bg-elevated);
-  padding: var(--space-1);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
-}
 
-.toggle-btn {
-  padding: var(--space-1) var(--space-3);
-  border: none;
-  border-radius: var(--radius-sm);
-  background: transparent;
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-xs);
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-  white-space: nowrap;
-}
 
-.toggle-btn:hover {
-  background: var(--color-bg-page);
-  color: var(--color-text-primary);
-}
 
-.toggle-btn.active {
-  background: var(--color-accent);
-  color: var(--color-on-accent);
-}
 
 .exchange-rate-badge {
   font-size: 0.85rem;
@@ -241,24 +213,28 @@
   border-spacing: 0;
 }
 
+/* DS-0003 DataTable: 헤더는 label 스타일(13px·500·보조색)에 bg-subtle, sticky */
 .holdings-table thead {
-  background-color: var(--color-bg-page);
+  background-color: var(--color-bg-subtle);
 }
 
 .holdings-table th {
-  padding: var(--space-1) var(--space-2);
+  padding: 10px var(--space-3);
   text-align: left;
-  font-weight: 700;
-  color: var(--color-text-primary);
-  font-size: var(--font-size-xs);
-  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  line-height: 18px;
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);
-  background-color: var(--color-bg-page);
-  letter-spacing: 0.5px;
-  border-bottom: 2px solid var(--color-border);
+  background-color: var(--color-bg-subtle);
+  border-bottom: 1px solid var(--color-border);
   white-space: nowrap;
+}
+
+.holdings-table th.text-right {
+  text-align: right;
 }
 
 .holdings-table th.sortable {
@@ -268,7 +244,7 @@
 }
 
 .holdings-table th.sortable:hover {
-  background-color: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  color: var(--color-text-primary);
 }
 
 .sort-icon {
@@ -284,15 +260,18 @@
   color: var(--color-accent);
 }
 
+/* DS-0003 DataTable: 13px·tabular-nums, 행 높이 44px 안팎, 수치 열 오른쪽 정렬 */
 .holdings-table td {
-  padding: var(--space-1) var(--space-2);
+  padding: 13px var(--space-3);
   border-bottom: 1px solid var(--color-border);
   color: var(--color-text-primary);
-  font-size: var(--font-size-sm);
+  font-size: 13px;
+  line-height: 18px;
+  font-variant-numeric: tabular-nums;
 }
 
 .holdings-table tbody tr:hover {
-  background-color: var(--color-bg-page);
+  background-color: var(--color-bg-subtle);
 }
 
 .text-right {

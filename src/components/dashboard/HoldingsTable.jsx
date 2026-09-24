@@ -3,8 +3,15 @@ import { exchangeRateAPI } from '../../services/exchangeRateAPI'
 import Button from '../ui/Button'
 import Badge from '../ui/Badge'
 import PriceChange from '../ui/PriceChange'
-import SellOrderModal from './SellOrderModal'
+import { SegmentedControl } from '../ui/Tabs'
+import OrderModal from './OrderModal'
 import './HoldingsTable.css'
+
+const DISPLAY_CURRENCY_OPTIONS = [
+  { value: 'original', label: '원래 화폐' },
+  { value: 'KRW', label: '원화' },
+  { value: 'USD', label: '달러' },
+]
 
 const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilter, onSellSuccess }) => {
   const [displayCurrency, setDisplayCurrency] = useState('original') // 'original', 'KRW', 'USD'
@@ -392,29 +399,12 @@ const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilt
         
         {/* 환율 변환 컨트롤 */}
         <div className="currency-converter-toggle">
-          <div className="toggle-group">
-            <button
-              className={`toggle-btn ${displayCurrency === 'original' ? 'active' : ''}`}
-              onClick={() => setDisplayCurrency('original')}
-              title="원래 화폐단위로 표시"
-            >
-              원래 화폐
-            </button>
-            <button
-              className={`toggle-btn ${displayCurrency === 'KRW' ? 'active' : ''}`}
-              onClick={() => setDisplayCurrency('KRW')}
-              title="모든 종목을 원화로 변환"
-            >
-              원화
-            </button>
-            <button
-              className={`toggle-btn ${displayCurrency === 'USD' ? 'active' : ''}`}
-              onClick={() => setDisplayCurrency('USD')}
-              title="모든 종목을 달러로 변환"
-            >
-              달러
-            </button>
-          </div>
+          <SegmentedControl
+            ariaLabel="표시 통화"
+            options={DISPLAY_CURRENCY_OPTIONS}
+            value={displayCurrency}
+            onChange={setDisplayCurrency}
+          />
           {loadingRate ? (
             <span className="exchange-rate-badge">환율 로딩 중...</span>
           ) : (
@@ -500,37 +490,37 @@ const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilt
                     종목 {getSortIcon('ticker')}
                   </th>
                   <th 
-                    className="sortable"
+                    className="sortable text-right"
                     onClick={() => handleSort('quantity')}
                   >
                     보유 수량 {getSortIcon('quantity')}
                   </th>
                   <th 
-                    className="sortable"
+                    className="sortable text-right"
                     onClick={() => handleSort('averagePrice')}
                   >
                     평균 단가 {getSortIcon('averagePrice')}
                   </th>
                   <th 
-                    className="sortable"
+                    className="sortable text-right"
                     onClick={() => handleSort('currentPrice')}
                   >
                     현재가 {getSortIcon('currentPrice')}
                   </th>
                   <th 
-                    className="sortable"
+                    className="sortable text-right"
                     onClick={() => handleSort('totalValue')}
                   >
                     총 가치 {getSortIcon('totalValue')}
                   </th>
                   <th 
-                    className="sortable"
+                    className="sortable text-right"
                     onClick={() => handleSort('profitLoss')}
                   >
                     평가 손익 {getSortIcon('profitLoss')}
                   </th>
                   <th 
-                    className="sortable"
+                    className="sortable text-right"
                     onClick={() => handleSort('profitRate')}
                   >
                     수익률 {getSortIcon('profitRate')}
@@ -661,12 +651,14 @@ const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilt
       )}
       </div>
 
-      <SellOrderModal
+      <OrderModal
         isOpen={sellModalOpen}
         onClose={closeSellModal}
         onSuccess={onSellSuccess}
-        holdingGroup={sellModalHolding}
         accounts={accounts}
+        holdings={holdings}
+        initialSide="SELL"
+        initialSymbol={sellModalHolding?.symbol ?? null}
         currency={sellModalCurrency}
       />
     </div>

@@ -113,48 +113,24 @@
   gap: 0.5rem;
 }
 
-.filter-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  border: 1.5px solid var(--color-border);
-  background: var(--color-bg-elevated);
-  color: var(--color-text-secondary);
-  font-size: 0.82rem;
-  font-weight: 600;
-  padding: 0.4rem 0.85rem;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
 
-.filter-chip:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
 
-.filter-chip.active {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: var(--color-on-accent);
-}
 
+/* FilterChips(ui/Tabs) 안의 개수 뱃지 */
 .filter-chip-count {
-  background: rgba(0, 0, 0, 0.08);
+  margin-left: var(--space-1);
+  background: var(--color-bg-elevated);
   border-radius: 999px;
   font-size: 0.72rem;
   padding: 0.05rem 0.4rem;
 }
 
-.filter-chip.active .filter-chip-count {
-  background: rgba(255, 255, 255, 0.25);
+.ui-chip[aria-pressed='true'] .filter-chip-count {
+  background: var(--color-bg-elevated);
+  color: var(--color-accent);
 }
 
-.filter-chip-secondary {
-  font-size: 0.78rem;
-  padding: 0.35rem 0.75rem;
-  color: var(--color-text-secondary);
-}
+
 
 /* --- Portfolio card grid --- */
 

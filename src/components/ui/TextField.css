@@ -1,0 +1,73 @@
+/* DS-0003 TextField */
+.ui-field {
+  display: grid;
+  gap: 6px;
+}
+
+.ui-field-label {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.ui-field-box {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--color-bg-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: inset 0 0 0 1px transparent;
+  padding: 0 var(--space-3);
+}
+
+.ui-field-box:focus-within {
+  box-shadow: inset 0 0 0 2px var(--color-accent);
+}
+
+.ui-field-input {
+  font: inherit;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-primary);
+  padding: 11px 0;
+}
+
+.ui-field-input-right {
+  text-align: right;
+}
+
+.ui-field-input:focus {
+  outline: none;
+}
+
+.ui-field-input::placeholder {
+  color: var(--color-text-tertiary);
+  font-weight: 400;
+}
+
+.ui-field-unit {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+}
+
+.ui-field-help {
+  margin: 0;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-text-tertiary);
+}
+
+.ui-field-error .ui-field-box {
+  box-shadow: inset 0 0 0 1px var(--color-status-danger-fg);
+}
+
+.ui-field-error .ui-field-help {
+  color: var(--color-status-danger-fg);
+}

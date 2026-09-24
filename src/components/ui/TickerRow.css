@@ -1,0 +1,98 @@
+/* DS-0003 TickerRow */
+.ui-ticker {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 44px;
+  padding: 10px var(--space-4);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-md);
+  font: inherit;
+  color: var(--color-text-primary);
+  text-align: left;
+}
+
+.ui-ticker-button {
+  cursor: pointer;
+}
+
+.ui-ticker-button:hover,
+.ui-ticker.is-selected {
+  background: var(--color-bg-subtle);
+}
+
+.ui-ticker-lead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.ui-ticker-rank {
+  width: 20px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.ui-ticker-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex: none;
+}
+
+.ui-ticker-button:hover .ui-ticker-avatar,
+.ui-ticker.is-selected .ui-ticker-avatar {
+  background: var(--color-bg-elevated);
+}
+
+.ui-ticker-main {
+  display: grid;
+  min-width: 0;
+}
+
+.ui-ticker-name {
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ui-ticker-meta {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-text-tertiary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ui-ticker-side {
+  display: grid;
+  justify-items: end;
+  text-align: right;
+}
+
+.ui-ticker-price {
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ui-ticker-change {
+  font-size: 13px;
+  line-height: 18px;
+}

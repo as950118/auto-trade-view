@@ -1,6 +1,7 @@
 import { useMemo, useState, useEffect } from 'react'
 import Badge from '../ui/Badge'
 import PriceChange from '../ui/PriceChange'
+import { SegmentedControl } from '../ui/Tabs'
 import './AccountCard.css'
 
 const AccountCard = ({ account, onClick, onEdit, onDelete, isSelected, holdings = [] }) => {
@@ -153,25 +154,18 @@ const AccountCard = ({ account, onClick, onEdit, onDelete, isSelected, holdings 
       <div className="account-card-body">
         {/* 통화 전환 버튼 (원화와 달러 둘 다 있을 때만) */}
         {showCurrencyToggle && (
-          <div className="currency-toggle-buttons">
-            <button
-              className={`currency-toggle-btn ${currentDisplayCurrency === 'KRW' ? 'active' : ''}`}
-              onClick={(e) => {
-                e.stopPropagation()
-                setDisplayCurrency('KRW')
-              }}
-            >
-              원화
-            </button>
-            <button
-              className={`currency-toggle-btn ${currentDisplayCurrency === 'USD' ? 'active' : ''}`}
-              onClick={(e) => {
-                e.stopPropagation()
-                setDisplayCurrency('USD')
-              }}
-            >
-              달러
-            </button>
+          <div className="currency-toggle-buttons" onClick={(e) => e.stopPropagation()}>
+            {/* 카드 선택(onClick)으로 번지지 않게 클릭 전파를 막는다 */}
+            <SegmentedControl
+              ariaLabel="표시 통화"
+              options={[
+                { value: 'KRW', label: '원화' },
+                { value: 'USD', label: '달러' },
+              ]}
+              value={currentDisplayCurrency}
+              onChange={setDisplayCurrency}
+              block
+            />
           </div>
         )}
 
