@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { dashboardAPI } from '../services/dashboardAPI'
-import Badge from './ui/Badge'
+import PriceChange from './ui/PriceChange'
 import './DisclosureEarningsPanel.css'
 
 const REPORT_LABELS = {
@@ -22,17 +22,8 @@ const YoyBadge = ({ pct }) => {
   if (pct === null || pct === undefined) {
     return <span className="kr-yoy-empty">—</span>
   }
-  // DS-0001: 수익률류 지표는 국내 증시 관례(상승=--color-rise, 하락=--color-fall)를 따른다.
-  // Badge의 success/danger(일반 상태색)는 의미가 달라 그대로 쓰지 않고 rise/fall로 오버라이드한다.
-  const rising = pct >= 0
-  return (
-    <Badge
-      variant={rising ? 'success' : 'danger'}
-      className={rising ? 'ui-badge kr-yoy-rise' : 'ui-badge kr-yoy-fall'}
-    >
-      {rising ? '+' : ''}{pct.toFixed(1)}%
-    </Badge>
-  )
+  // DS-0003: 수익률류 지표는 국내 증시 관례(상승=빨강, 하락=파랑)를 따르는 PriceChange chip으로 표시한다.
+  return <PriceChange value={pct} digits={1} chip className="kr-yoy" />
 }
 
 /**

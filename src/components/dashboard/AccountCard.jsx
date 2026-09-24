@@ -1,5 +1,6 @@
 import { useMemo, useState, useEffect } from 'react'
 import Badge from '../ui/Badge'
+import PriceChange from '../ui/PriceChange'
 import './AccountCard.css'
 
 const AccountCard = ({ account, onClick, onEdit, onDelete, isSelected, holdings = [] }) => {
@@ -87,14 +88,7 @@ const AccountCard = ({ account, onClick, onEdit, onDelete, isSelected, holdings 
     }).format(value)
   }
 
-  const formatPercent = (value) => {
-    const num = parseFloat(value || 0)
-    const sign = num >= 0 ? '+' : ''
-    return `${sign}${num.toFixed(2)}%`
-  }
-
   const profitRate = parseFloat(account.profit_rate || 0)
-  const isPositive = profitRate >= 0
 
   // 필드가 존재하는지 확인
   const hasKRWField = account.total_assets_krw !== undefined && account.total_assets_krw !== null
@@ -208,15 +202,11 @@ const AccountCard = ({ account, onClick, onEdit, onDelete, isSelected, holdings 
             <div className="account-stats-row">
               <div className="account-stat">
                 <span className="stat-label">평가손익</span>
-                <span className={`stat-value ${parseFloat(account.profit_loss_krw || 0) >= 0 ? 'positive' : 'negative'}`}>
-                  {formatCurrency(parseFloat(account.profit_loss_krw || 0), 'KRW')}
-                </span>
+                <PriceChange className="stat-value" value={parseFloat(account.profit_loss_krw || 0)} formatAbs={(v) => formatCurrency(v, 'KRW')} digits={0} />
               </div>
               <div className="account-stat">
                 <span className="stat-label">수익률</span>
-                <span className={`stat-value profit-rate ${parseFloat(account.profit_rate_krw || 0) >= 0 ? 'positive' : 'negative'}`}>
-                  {formatPercent(account.profit_rate_krw)}
-                </span>
+                <PriceChange className="stat-value profit-rate" value={account.profit_rate_krw} />
               </div>
             </div>
           </div>
@@ -252,15 +242,11 @@ const AccountCard = ({ account, onClick, onEdit, onDelete, isSelected, holdings 
             <div className="account-stats-row">
               <div className="account-stat">
                 <span className="stat-label">평가손익</span>
-                <span className={`stat-value ${parseFloat(account.profit_loss_usd || 0) >= 0 ? 'positive' : 'negative'}`}>
-                  {formatCurrency(parseFloat(account.profit_loss_usd || 0), 'USD')}
-                </span>
+                <PriceChange className="stat-value" value={parseFloat(account.profit_loss_usd || 0)} formatAbs={(v) => formatCurrency(v, 'USD')} digits={2} />
               </div>
               <div className="account-stat">
                 <span className="stat-label">수익률</span>
-                <span className={`stat-value profit-rate ${parseFloat(account.profit_rate_usd || 0) >= 0 ? 'positive' : 'negative'}`}>
-                  {formatPercent(account.profit_rate_usd)}
-                </span>
+                <PriceChange className="stat-value profit-rate" value={account.profit_rate_usd} />
               </div>
             </div>
           </div>
@@ -292,15 +278,11 @@ const AccountCard = ({ account, onClick, onEdit, onDelete, isSelected, holdings 
             <div className="account-stats-row">
               <div className="account-stat">
                 <span className="stat-label">평가손익</span>
-                <span className={`stat-value ${parseFloat(account.profit_loss || 0) >= 0 ? 'positive' : 'negative'}`}>
-                  {formatCurrency(parseFloat(account.profit_loss || 0), 'KRW')}
-                </span>
+                <PriceChange className="stat-value" value={parseFloat(account.profit_loss || 0)} formatAbs={(v) => formatCurrency(v, 'KRW')} digits={0} />
               </div>
               <div className="account-stat">
                 <span className="stat-label">수익률</span>
-                <span className={`stat-value profit-rate ${isPositive ? 'positive' : 'negative'}`}>
-                  {formatPercent(profitRate)}
-                </span>
+                <PriceChange className="stat-value profit-rate" value={profitRate} />
               </div>
             </div>
           </>

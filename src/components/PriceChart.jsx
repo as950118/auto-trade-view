@@ -1,7 +1,10 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts'
 import './PriceChart.css'
+import PriceChange from './ui/PriceChange'
+import { useChartTheme } from '../hooks/useTokenColors'
 
 const PriceChart = () => {
+  const chart = useChartTheme()
   // 샘플 차트 데이터 생성 (실제 가격 변동 시뮬레이션)
   const generateChartData = () => {
     const data = []
@@ -30,7 +33,6 @@ const PriceChart = () => {
   const currentPrice = chartData[chartData.length - 1].price
   const startPrice = chartData[0].price
   const change = ((currentPrice - startPrice) / startPrice * 100).toFixed(2)
-  const isPositive = change >= 0
 
   return (
     <div className="price-chart-container">
@@ -42,9 +44,7 @@ const PriceChart = () => {
         <div className="chart-stats">
           <div className="stat-item">
             <span className="stat-label">현재 수익률</span>
-            <span className={`stat-value ${isPositive ? 'positive' : 'negative'}`}>
-              {isPositive ? '+' : ''}{change}%
-            </span>
+            <PriceChange className="stat-value" value={change} />
           </div>
         </div>
       </div>
@@ -53,34 +53,29 @@ const PriceChart = () => {
           <AreaChart data={chartData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
             <defs>
               <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#dc2626" stopOpacity={0.3}/>
-                <stop offset="95%" stopColor="#dc2626" stopOpacity={0}/>
+                <stop offset="5%" stopColor={chart.accent} stopOpacity={0.3}/>
+                <stop offset="95%" stopColor={chart.accent} stopOpacity={0}/>
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+            <CartesianGrid strokeDasharray="3 3" stroke={chart.grid} />
             <XAxis 
               dataKey="date" 
-              stroke="#6b7280"
+              stroke={chart.axis}
               style={{ fontSize: '12px' }}
             />
             <YAxis 
-              stroke="#6b7280"
+              stroke={chart.axis}
               style={{ fontSize: '12px' }}
               domain={['auto', 'auto']}
             />
             <Tooltip 
-              contentStyle={{ 
-                backgroundColor: '#fff', 
-                border: '1px solid #e5e7eb',
-                borderRadius: '8px',
-                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
-              }}
+              contentStyle={chart.tooltipStyle}
               formatter={(value) => [`${value}%`, '수익률']}
             />
             <Area 
               type="monotone" 
               dataKey="price" 
-              stroke="#dc2626" 
+              stroke={chart.accent} 
               strokeWidth={2}
               fillOpacity={1}
               fill="url(#colorPrice)"

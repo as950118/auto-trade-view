@@ -49,13 +49,7 @@
   font-weight: 700;
 }
 
-.stat-value.positive {
-  color: var(--color-rise);
-}
 
-.stat-value.negative {
-  color: var(--color-fall);
-}
 
 .chart-wrapper {
   width: 100%;

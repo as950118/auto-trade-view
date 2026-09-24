@@ -18,7 +18,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: var(--color-rise);
+  background: var(--color-accent);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.25s ease;
@@ -27,7 +27,7 @@
 .portfolio-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-1);
-  border-color: var(--brand-red-light);
+  border-color: var(--color-accent);
 }
 
 .portfolio-card:hover::before,
@@ -36,8 +36,8 @@
 }
 
 .portfolio-card.is-selected {
-  border-color: var(--color-rise);
-  box-shadow: 0 6px 16px color-mix(in srgb, var(--color-rise) 15%, transparent);
+  border-color: var(--color-accent);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--color-accent) 15%, transparent);
 }
 
 .portfolio-card-badges {
@@ -106,8 +106,8 @@
 }
 
 .status-dot.on {
-  background: var(--color-fall);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-fall) 15%, transparent);
+  background: var(--color-status-success-fg);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-status-success-fg) 15%, transparent);
 }
 
 .status-dot.off {
@@ -126,7 +126,7 @@
 }
 
 .portfolio-card-title:hover {
-  color: var(--color-rise);
+  color: var(--color-accent);
 }
 
 .portfolio-card-desc {
@@ -227,23 +227,23 @@
 }
 
 .card-btn:hover {
-  border-color: var(--color-rise);
-  color: var(--color-rise);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 
 .card-btn.danger:hover {
-  border-color: var(--color-rise);
-  color: var(--color-rise);
+  border-color: var(--color-status-danger-fg);
+  color: var(--color-status-danger-fg);
   background: var(--color-status-danger-bg);
 }
 
 .card-btn.primary {
-  background: var(--color-rise);
-  border-color: var(--color-rise);
-  color: white;
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-on-accent);
 }
 
 .card-btn.primary:hover {
-  background: var(--color-rise-hover);
-  color: white;
+  background: var(--color-accent-hover);
+  color: var(--color-on-accent);
 }

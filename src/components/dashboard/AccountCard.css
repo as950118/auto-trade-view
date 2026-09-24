@@ -16,7 +16,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: var(--color-rise);
+  background: var(--color-accent);
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
@@ -24,7 +24,7 @@
 .account-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-2);
-  border-color: var(--color-rise);
+  border-color: var(--color-accent);
 }
 
 .account-card:hover::before {
@@ -32,8 +32,8 @@
 }
 
 .account-card.selected {
-  border-color: var(--color-rise);
-  box-shadow: 0 4px 12px color-mix(in srgb, var(--color-rise) 20%, transparent);
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--color-accent) 20%, transparent);
 }
 
 .account-card.selected::before {
@@ -91,15 +91,15 @@
 }
 
 .currency-toggle-btn:hover {
-  border-color: var(--color-rise);
+  border-color: var(--color-accent);
   background: var(--color-bg-page);
   color: var(--color-text-primary);
 }
 
 .currency-toggle-btn.active {
-  background: var(--color-rise);
-  color: white;
-  border-color: var(--color-rise);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  border-color: var(--color-accent);
 }
 
 .currency-section {
@@ -143,18 +143,12 @@
 
 .stat-value.total-assets {
   font-size: var(--font-size-base);
-  color: var(--color-rise);
+  color: var(--color-text-primary);
 }
 
 .stat-value.profit-rate.positive,
-.stat-value.positive {
-  color: var(--color-rise);
-}
 
 .stat-value.profit-rate.negative,
-.stat-value.negative {
-  color: var(--color-fall);
-}
 
 .account-stats-row {
   display: grid;

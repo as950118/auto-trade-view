@@ -1,10 +1,12 @@
 import { useMemo } from 'react'
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts'
 import './PortfolioWeightChart.css'
+import { useChartTheme } from '../../hooks/useTokenColors'
 
 const COLORS = ['#dc2626', '#2563eb', '#16a34a', '#d97706', '#7c3aed', '#0891b2', '#db2777', '#65a30d']
 
 const PortfolioWeightChart = ({ holdings = [] }) => {
+  const chart = useChartTheme()
   const chartData = useMemo(() => {
     const data = (holdings || []).map((h) => ({
       name: h.symbol?.ticker || `#${h.symbol_id}`,
@@ -43,17 +45,12 @@ const PortfolioWeightChart = ({ holdings = [] }) => {
             {chartData.map((entry, index) => (
               <Cell
                 key={entry.name}
-                fill={entry.isCash ? '#e5e7eb' : COLORS[index % COLORS.length]}
+                fill={entry.isCash ? chart.neutral : COLORS[index % COLORS.length]}
               />
             ))}
           </Pie>
           <Tooltip
-            contentStyle={{
-              backgroundColor: '#fff',
-              border: '1px solid #e5e7eb',
-              borderRadius: '8px',
-              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-            }}
+            contentStyle={chart.tooltipStyle}
             formatter={(value, name) => [`${Number(value).toFixed(2)}%`, name]}
           />
           <Legend />

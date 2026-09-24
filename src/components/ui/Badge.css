@@ -25,3 +25,8 @@
   background-color: var(--color-status-danger-bg);
   color: var(--color-status-danger-fg);
 }
+
+.ui-badge-neutral {
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+}

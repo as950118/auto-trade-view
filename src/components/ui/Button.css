@@ -12,11 +12,11 @@
 
 .ui-btn:disabled {
   cursor: not-allowed;
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 .ui-btn:focus-visible {
-  outline: 2px solid var(--color-rise);
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
 
@@ -36,17 +36,17 @@
 }
 
 .ui-btn-primary {
-  background-color: var(--color-rise);
-  color: white;
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
 }
 
 .ui-btn-primary:hover:not(:disabled) {
-  background-color: var(--color-rise-hover);
+  background-color: var(--color-accent-hover);
 }
 
 .ui-btn-buy {
   background-color: var(--color-rise);
-  color: white;
+  color: var(--color-on-rise);
 }
 
 .ui-btn-buy:hover:not(:disabled) {
@@ -55,7 +55,7 @@
 
 .ui-btn-sell {
   background-color: var(--color-fall);
-  color: white;
+  color: var(--color-on-fall);
 }
 
 .ui-btn-sell:hover:not(:disabled) {
@@ -65,11 +65,11 @@
 .ui-btn-secondary {
   background-color: var(--color-bg-elevated);
   color: var(--color-text-primary);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-border-strong);
 }
 
 .ui-btn-secondary:hover:not(:disabled) {
-  background-color: var(--color-bg-page);
+  background-color: var(--color-bg-subtle);
 }
 
 .ui-btn-ghost {

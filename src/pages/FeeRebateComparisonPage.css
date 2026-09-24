@@ -81,7 +81,7 @@
 }
 
 .fee-rebate-table th.sorted {
-  color: var(--color-rise);
+  color: var(--color-accent);
 }
 
 .fee-rebate-table td {
@@ -141,7 +141,7 @@
   width: 40px;
   height: 40px;
   border: 3px solid var(--color-border);
-  border-top-color: var(--color-rise);
+  border-top-color: var(--color-accent);
   border-radius: 50%;
   animation: fee-rebate-spin 0.8s linear infinite;
 }

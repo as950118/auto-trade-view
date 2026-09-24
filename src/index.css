@@ -5,12 +5,23 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-sans);
+  /* DS-0003: 시세 화면은 숫자가 세로로 맞아야 하므로 전역으로 고정폭 숫자를 쓴다 */
+  font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--color-text-primary);
   background-color: var(--color-bg-page);
+}
+
+/* DS-0003: 모든 인터랙티브 요소의 공통 포커스 링 (--color-accent, 모든 바탕에서 3:1 이상) */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
 }
 
 code {

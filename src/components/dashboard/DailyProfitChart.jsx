@@ -1,8 +1,11 @@
 import { useMemo } from 'react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts'
 import './DailyProfitChart.css'
+import PriceChange from '../ui/PriceChange'
+import { useChartTheme } from '../../hooks/useTokenColors'
 
 const DailyProfitChart = ({ data, selectedAccount }) => {
+  const chart = useChartTheme()
   const chartData = useMemo(() => {
     // 최근 30일 데이터만 사용
     const sortedData = [...data].sort((a, b) => 
@@ -33,18 +36,16 @@ const DailyProfitChart = ({ data, selectedAccount }) => {
       <div className="chart-stats">
         <div className="stat-item">
           <span className="stat-label">총 실현 손익</span>
-          <span className={`stat-value ${totalProfit >= 0 ? 'positive' : 'negative'}`}>
-            {new Intl.NumberFormat('ko-KR', {
-              style: 'currency',
-              currency: 'KRW',
-            }).format(totalProfit)}
-          </span>
+          <PriceChange
+            className="stat-value"
+            value={totalProfit}
+            formatAbs={(v) => new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(v)}
+            digits={0}
+          />
         </div>
         <div className="stat-item">
           <span className="stat-label">평균 수익률</span>
-          <span className={`stat-value ${avgProfitRate >= 0 ? 'positive' : 'negative'}`}>
-            {avgProfitRate >= 0 ? '+' : ''}{avgProfitRate.toFixed(2)}%
-          </span>
+          <PriceChange className="stat-value" value={avgProfitRate} />
         </div>
       </div>
       
@@ -54,18 +55,18 @@ const DailyProfitChart = ({ data, selectedAccount }) => {
             <AreaChart data={chartData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorProfit" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#dc2626" stopOpacity={0.3}/>
-                  <stop offset="95%" stopColor="#dc2626" stopOpacity={0}/>
+                  <stop offset="5%" stopColor={chart.accent} stopOpacity={0.3}/>
+                  <stop offset="95%" stopColor={chart.accent} stopOpacity={0}/>
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+              <CartesianGrid strokeDasharray="3 3" stroke={chart.grid} />
               <XAxis 
                 dataKey="date" 
-                stroke="#6b7280"
+                stroke={chart.axis}
                 style={{ fontSize: '12px' }}
               />
               <YAxis 
-                stroke="#6b7280"
+                stroke={chart.axis}
                 style={{ fontSize: '12px' }}
                 tickFormatter={(value) => {
                   if (value >= 1000000) return `${(value / 1000000).toFixed(1)}M`
@@ -74,12 +75,7 @@ const DailyProfitChart = ({ data, selectedAccount }) => {
                 }}
               />
               <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: '#fff', 
-                  border: '1px solid #e5e7eb',
-                  borderRadius: '8px',
-                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
-                }}
+                contentStyle={chart.tooltipStyle}
                 formatter={(value, name) => {
                   if (name === 'profit') {
                     return [
@@ -96,7 +92,7 @@ const DailyProfitChart = ({ data, selectedAccount }) => {
               <Area 
                 type="monotone" 
                 dataKey="profit" 
-                stroke="#dc2626" 
+                stroke={chart.accent} 
                 strokeWidth={2}
                 fillOpacity={1}
                 fill="url(#colorProfit)"

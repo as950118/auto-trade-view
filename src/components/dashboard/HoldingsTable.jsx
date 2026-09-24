@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from 'react'
 import { exchangeRateAPI } from '../../services/exchangeRateAPI'
 import Button from '../ui/Button'
 import Badge from '../ui/Badge'
+import PriceChange from '../ui/PriceChange'
 import SellOrderModal from './SellOrderModal'
 import './HoldingsTable.css'
 
@@ -252,12 +253,6 @@ const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilt
     }).format(value)
   }
 
-  const formatPercent = (value) => {
-    const num = parseFloat(value || 0)
-    const sign = num >= 0 ? '+' : ''
-    return `${sign}${num.toFixed(2)}%`
-  }
-
   const getAccountName = (accountId) => {
     const account = accounts.find((acc) => acc.id === accountId)
     return account ? `${account.broker?.name} (${account.account_number})` : '알 수 없음'
@@ -489,13 +484,9 @@ const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilt
                   {formatCurrency(totalValue, displayCurr)}
                 </span>
                 <span className="summary-label">평가 손익:</span>
-                <span className={`summary-value ${totalProfitRate >= 0 ? 'profit' : 'loss'}`}>
-                  {formatCurrency(totalProfitLoss, displayCurr)}
-                </span>
+                <PriceChange className="summary-value" value={totalProfitLoss} formatAbs={(v) => formatCurrency(v, displayCurr)} digits={displayCurr === 'KRW' ? 0 : 2} />
                 <span className="summary-label">수익률:</span>
-                <span className={`summary-value ${totalProfitRate >= 0 ? 'profit' : 'loss'}`}>
-                  {formatPercent(totalProfitRate)}
-                </span>
+                <PriceChange className="summary-value" value={totalProfitRate} />
               </div>
             </div>
             
@@ -553,7 +544,6 @@ const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilt
                   const avgPrice = holding.totalQuantity > 0 
                     ? holding.totalCost / holding.totalQuantity 
                     : 0
-                  const isPositive = holding.averageProfitRate >= 0
 
                   // 변환된 값 계산
                   const displayAvgPrice = displayCurrency === 'original'
@@ -622,16 +612,16 @@ const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilt
                           </span>
                         )}
                       </td>
-                      <td className={`text-right ${isPositive ? 'profit' : 'loss'}`}>
-                        {formatCurrency(displayProfitLoss, displayCurr)}
+                      <td className="text-right">
+                        <PriceChange value={displayProfitLoss} formatAbs={(v) => formatCurrency(v, displayCurr)} digits={displayCurr === 'KRW' ? 0 : 2} />
                         {displayCurrency !== 'original' && (
                           <span className="original-value">
                             ({formatCurrency(holding.totalProfitLoss, currencyGroup.currency)})
                           </span>
                         )}
                       </td>
-                      <td className={`text-right ${isPositive ? 'profit' : 'loss'}`}>
-                        {formatPercent(holding.averageProfitRate)}
+                      <td className="text-right">
+                        <PriceChange value={holding.averageProfitRate} />
                       </td>
                       <td>
                         <div className="accounts-list">

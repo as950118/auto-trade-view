@@ -27,7 +27,7 @@
 
 .logo-text {
   font-weight: bold;
-  color: var(--color-rise);
+  color: inherit;
   font-size: 1.25rem;
   letter-spacing: -0.5px;
   white-space: nowrap;
@@ -55,3 +55,12 @@
   }
 }
 
+
+/* DS-0003: 로고 색은 브랜드 강조(--color-accent). accent 바탕(랜딩 히어로) 위에서는 --color-on-accent */
+.logo {
+  color: var(--color-accent);
+}
+
+.logo.logo-on-accent {
+  color: var(--color-on-accent);
+}

@@ -1,4 +1,5 @@
 import './SummaryStats.css'
+import PriceChange from '../ui/PriceChange'
 
 const SummaryStats = ({
   summary,
@@ -16,12 +17,6 @@ const SummaryStats = ({
       minimumFractionDigits: currency === 'KRW' ? 0 : 2,
       maximumFractionDigits: currency === 'KRW' ? 0 : 2,
     }).format(value)
-  }
-
-  const formatPercent = (value) => {
-    const num = parseFloat(value || 0)
-    const sign = num >= 0 ? '+' : ''
-    return `${sign}${num.toFixed(2)}%`
   }
 
   const realizedProfit = parseFloat(summary?.total_realized_profit || 0)
@@ -44,18 +39,14 @@ const SummaryStats = ({
               <div className="stat-icon">📉</div>
               <div className="stat-content">
                 <span className="stat-label">평가손익 (KRW)</span>
-                <span className={`stat-value ${totalProfitLossKrw >= 0 ? 'positive' : 'negative'}`}>
-                  {formatCurrency(totalProfitLossKrw, 'KRW')}
-                </span>
+                <PriceChange className="stat-value" value={totalProfitLossKrw} formatAbs={(v) => formatCurrency(v, 'KRW')} digits={0} />
               </div>
             </div>
             <div className="stat-card">
               <div className="stat-icon">📈</div>
               <div className="stat-content">
                 <span className="stat-label">수익률 (KRW)</span>
-                <span className={`stat-value ${totalProfitRateKrw >= 0 ? 'positive' : 'negative'}`}>
-                  {formatPercent(totalProfitRateKrw)}
-                </span>
+                <PriceChange className="stat-value" value={totalProfitRateKrw} />
               </div>
             </div>
           </>
@@ -74,18 +65,14 @@ const SummaryStats = ({
               <div className="stat-icon">📉</div>
               <div className="stat-content">
                 <span className="stat-label">평가손익 (USD)</span>
-                <span className={`stat-value ${totalProfitLossUsd >= 0 ? 'positive' : 'negative'}`}>
-                  {formatCurrency(totalProfitLossUsd, 'USD')}
-                </span>
+                <PriceChange className="stat-value" value={totalProfitLossUsd} formatAbs={(v) => formatCurrency(v, 'USD')} digits={2} />
               </div>
             </div>
             <div className="stat-card">
               <div className="stat-icon">📈</div>
               <div className="stat-content">
                 <span className="stat-label">수익률 (USD)</span>
-                <span className={`stat-value ${totalProfitRateUsd >= 0 ? 'positive' : 'negative'}`}>
-                  {formatPercent(totalProfitRateUsd)}
-                </span>
+                <PriceChange className="stat-value" value={totalProfitRateUsd} />
               </div>
             </div>
           </>
@@ -95,9 +82,7 @@ const SummaryStats = ({
           <div className="stat-icon">🧾</div>
           <div className="stat-content">
             <span className="stat-label">총 실현 손익</span>
-            <span className={`stat-value ${realizedProfit >= 0 ? 'positive' : 'negative'}`}>
-              {formatCurrency(realizedProfit, 'KRW')}
-            </span>
+            <PriceChange className="stat-value" value={realizedProfit} formatAbs={(v) => formatCurrency(v, 'KRW')} digits={0} />
           </div>
         </div>
       </div>

@@ -1,24 +1,54 @@
-/* Design Tokens — DS-0001 (.company-os/projects/auto-trade-platform/design/DS-0001-design-system.md) */
+/*
+ * Design Tokens — DS-0003 v2 (.company-os/projects/auto-trade-platform/design/DS-0003-design-system-v2-market-data.md)
+ * 기준 아티팩트: https://claude.ai/artifact/KxgseS4NCZ3M9HsHf8BPHM (tokens.json)
+ *
+ * v1(DS-0001) 토큰 이름은 모두 유지하고 값만 바꿨다. 국내 시세 관례: 상승·매수 = --color-rise(빨강),
+ * 하락·매도 = --color-fall(파랑). 브랜드 강조는 --color-accent(청록)이며 시세 색을 강조용으로 쓰지 않는다.
+ */
+
+@font-face {
+  font-family: 'Pretendard Variable';
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  src: url('../assets/fonts/PretendardVariable.woff2') format('woff2-variations'),
+    url('../assets/fonts/PretendardVariable.woff2') format('woff2');
+}
 
 :root {
-  --color-rise: #dc2626;
-  --color-rise-hover: #b91c1c;
-  --color-fall: #16a34a;
-  --color-fall-hover: #15803d;
+  --color-rise: #d01f33;
+  --color-rise-hover: #b01629;
+  --color-rise-bg: #fdeef0;
+  --color-on-rise: #ffffff;
+  --color-fall: #1d63dc;
+  --color-fall-hover: #1650b8;
+  --color-fall-bg: #ebf2fe;
+  --color-on-fall: #ffffff;
 
-  --color-text-primary: #1f2937;
-  --color-text-secondary: #6b7280;
+  --color-accent: #0a7d6d;
+  --color-accent-hover: #086a5c;
+  --color-accent-bg: #e3f4f1;
+  --color-on-accent: #ffffff;
 
-  --color-bg-page: #f5f5f5;
+  --color-text-primary: #1a1d23;
+  --color-text-secondary: #5b6270;
+  --color-text-tertiary: #676e7a;
+
+  --color-bg-page: #f2f4f6;
   --color-bg-elevated: #ffffff;
-  --color-border: #e5e7eb;
+  --color-bg-subtle: #f7f8fa;
+  --color-border: #e6e8eb;
+  --color-border-strong: #868d98;
 
-  --color-status-success-bg: #d1fae5;
-  --color-status-success-fg: #065f46;
-  --color-status-warning-bg: #fef3c7;
-  --color-status-warning-fg: #92400e;
-  --color-status-danger-bg: #fee2e2;
-  --color-status-danger-fg: #991b1b;
+  --color-status-success-bg: #e3f6ef;
+  --color-status-success-fg: #0d6e4f;
+  --color-status-warning-bg: #fff3dc;
+  --color-status-warning-fg: #8a5300;
+  --color-status-danger-bg: #fdeef0;
+  --color-status-danger-fg: #b01c2b;
+
+  --font-sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo',
+    'Noto Sans KR', 'Malgun Gothic', sans-serif;
 
   --space-1: 4px;
   --space-2: 8px;
@@ -26,15 +56,17 @@
   --space-4: 16px;
   --space-5: 24px;
   --space-6: 32px;
+  --space-7: 48px;
 
-  --radius-sm: 4px;
+  --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
+  --radius-full: 999px;
 
-  --shadow-1: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --shadow-2: 0 8px 24px rgba(0, 0, 0, 0.1);
-  --shadow-3: 0 20px 60px rgba(0, 0, 0, 0.3);
+  --shadow-1: 0 1px 2px rgba(20, 24, 31, 0.06);
+  --shadow-2: 0 6px 20px rgba(20, 24, 31, 0.1);
+  --shadow-3: 0 16px 48px rgba(20, 24, 31, 0.18);
 
   --font-size-xs: 12px;
   --font-size-sm: 14px;
@@ -53,58 +85,83 @@
  * ThemeContext(src/contexts/ThemeContext.jsx)가 초기 렌더 시 시스템 설정(matchMedia)을 읽어
  * <html data-theme="..."> 속성을 항상 명시적으로 세팅하므로, 아래 [data-theme='dark']가
  * 사실상의 SSOT다. prefers-color-scheme 미디어쿼리는 JS 비활성 등 예외 상황의 안전망이며,
- * 명시적으로 data-theme="light"가 세팅된 경우(시스템은 다크인데 사용자가 라이트를 선택)에는
- * 미디어쿼리보다 우선한다 (DS-0001 Open Questions #6, 전체 컴포넌트 토큰화 완료로 자동감지
- * 재활성화 조건 충족).
+ * 명시적으로 data-theme="light"가 세팅된 경우에는 미디어쿼리보다 우선한다.
+ * 두 블록의 값은 같게 유지한다.
  */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --color-rise: #f87171;
-    --color-rise-hover: #ef4444;
-    --color-fall: #4ade80;
-    --color-fall-hover: #22c55e;
+    color-scheme: dark;
+    --color-rise: #ff5f6a;
+    --color-rise-hover: #ff7c85;
+    --color-rise-bg: #3a1d22;
+    --color-on-rise: #101216;
+    --color-fall: #5c9dff;
+    --color-fall-hover: #7db1ff;
+    --color-fall-bg: #17263f;
+    --color-on-fall: #101216;
 
-    --color-text-primary: #f9fafb;
-    --color-text-secondary: #9ca3af;
+    --color-accent: #34c3aa;
+    --color-accent-hover: #52d1bb;
+    --color-accent-bg: #11302b;
+    --color-on-accent: #06231e;
 
-    --color-bg-page: #111827;
-    --color-bg-elevated: #1f2937;
-    --color-border: #374151;
+    --color-text-primary: #eceef1;
+    --color-text-secondary: #a4abb6;
+    --color-text-tertiary: #8a919c;
 
-    --color-status-success-bg: #064e3b;
-    --color-status-success-fg: #6ee7b7;
-    --color-status-warning-bg: #78350f;
-    --color-status-warning-fg: #fcd34d;
-    --color-status-danger-bg: #7f1d1d;
-    --color-status-danger-fg: #fca5a5;
+    --color-bg-page: #101216;
+    --color-bg-elevated: #1b1e24;
+    --color-bg-subtle: #23272e;
+    --color-border: #2c3038;
+    --color-border-strong: #6b727e;
 
-    --shadow-1: 0 2px 4px rgba(0, 0, 0, 0.4);
-    --shadow-2: 0 8px 24px rgba(0, 0, 0, 0.4);
-    --shadow-3: 0 20px 60px rgba(0, 0, 0, 0.6);
+    --color-status-success-bg: #0f3329;
+    --color-status-success-fg: #6fd7b0;
+    --color-status-warning-bg: #3a2a0c;
+    --color-status-warning-fg: #f5c46b;
+    --color-status-danger-bg: #3a1d22;
+    --color-status-danger-fg: #ff8a92;
+
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-2: 0 6px 20px rgba(0, 0, 0, 0.5);
+    --shadow-3: 0 16px 48px rgba(0, 0, 0, 0.6);
   }
 }
 
 :root[data-theme='dark'] {
-  --color-rise: #f87171;
-  --color-rise-hover: #ef4444;
-  --color-fall: #4ade80;
-  --color-fall-hover: #22c55e;
+  color-scheme: dark;
+  --color-rise: #ff5f6a;
+  --color-rise-hover: #ff7c85;
+  --color-rise-bg: #3a1d22;
+  --color-on-rise: #101216;
+  --color-fall: #5c9dff;
+  --color-fall-hover: #7db1ff;
+  --color-fall-bg: #17263f;
+  --color-on-fall: #101216;
 
-  --color-text-primary: #f9fafb;
-  --color-text-secondary: #9ca3af;
+  --color-accent: #34c3aa;
+  --color-accent-hover: #52d1bb;
+  --color-accent-bg: #11302b;
+  --color-on-accent: #06231e;
 
-  --color-bg-page: #111827;
-  --color-bg-elevated: #1f2937;
-  --color-border: #374151;
+  --color-text-primary: #eceef1;
+  --color-text-secondary: #a4abb6;
+  --color-text-tertiary: #8a919c;
 
-  --color-status-success-bg: #064e3b;
-  --color-status-success-fg: #6ee7b7;
-  --color-status-warning-bg: #78350f;
-  --color-status-warning-fg: #fcd34d;
-  --color-status-danger-bg: #7f1d1d;
-  --color-status-danger-fg: #fca5a5;
+  --color-bg-page: #101216;
+  --color-bg-elevated: #1b1e24;
+  --color-bg-subtle: #23272e;
+  --color-border: #2c3038;
+  --color-border-strong: #6b727e;
 
-  --shadow-1: 0 2px 4px rgba(0, 0, 0, 0.4);
-  --shadow-2: 0 8px 24px rgba(0, 0, 0, 0.4);
-  --shadow-3: 0 20px 60px rgba(0, 0, 0, 0.6);
+  --color-status-success-bg: #0f3329;
+  --color-status-success-fg: #6fd7b0;
+  --color-status-warning-bg: #3a2a0c;
+  --color-status-warning-fg: #f5c46b;
+  --color-status-danger-bg: #3a1d22;
+  --color-status-danger-fg: #ff8a92;
+
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-2: 0 6px 20px rgba(0, 0, 0, 0.5);
+  --shadow-3: 0 16px 48px rgba(0, 0, 0, 0.6);
 }

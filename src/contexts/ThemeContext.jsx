@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState, useLayoutEffect } from 'react'
 
 const ThemeContext = createContext(null)
 
@@ -20,7 +20,8 @@ const getInitialTheme = () => {
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(getInitialTheme)
 
-  useEffect(() => {
+  // 레이아웃 이펙트로 속성을 먼저 바꿔, 자식의 useEffect(useTokenColors)가 새 테마의 토큰 값을 읽게 한다
+  useLayoutEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
     localStorage.setItem('theme', theme)
   }, [theme])
