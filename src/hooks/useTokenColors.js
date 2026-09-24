@@ -29,7 +29,7 @@ const CHART_TOKENS = [
   '--color-accent',
   '--color-rise',
   '--color-fall',
-  '--color-bg-subtle',
+  '--color-border-strong',
 ]
 
 /** Recharts 공용 색(격자·축·툴팁·시리즈). 테마 전환 시 다시 계산된다. */
@@ -41,7 +41,8 @@ export function useChartTheme() {
     accent: c['--color-accent'],
     rise: c['--color-rise'],
     fall: c['--color-fall'],
-    muted: c['--color-bg-subtle'],
+    // 파이 차트의 '현금' 조각처럼 중립 영역. 카드 바탕 위에서 3:1 이상
+    neutral: c['--color-border-strong'],
     // 툴팁은 HTML이라 var()를 그대로 써도 테마를 따른다
     tooltipStyle: {
       backgroundColor: 'var(--color-bg-elevated)',

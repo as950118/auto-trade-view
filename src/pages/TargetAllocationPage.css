@@ -155,7 +155,8 @@
 }
 
 .btn-delete:hover {
-  background: var(--color-status-danger-bg);
+  background: var(--color-status-danger-fg);
+  color: var(--color-bg-elevated);
 }
 
 .target-allocation-loading,

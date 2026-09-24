@@ -105,4 +105,7 @@
 /* DS-0003: YoY 등락은 PriceChange chip(ui/PriceChange.css)으로 표시하고, 여기서는 간격만 준다. */
 .kr-yoy {
   margin-left: var(--space-2);
+  /* 기존 배지와 같은 크기로 두어 실적 테이블 행 높이가 바뀌지 않게 한다 */
+  font-size: var(--font-size-xs);
+  line-height: 1;
 }

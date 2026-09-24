@@ -3,6 +3,7 @@ import Badge from '../ui/Badge'
 import { dashboardAPI } from '../../services/dashboardAPI'
 import { buildTargetComparisonRows, computeAccountWeights } from '../../utils/portfolioComparison'
 import './PortfolioComparisonPanel.css'
+import { MINUS } from '../../utils/priceChange'
 
 const getAccountLabel = (account) => {
   if (!account) return '-'
@@ -12,7 +13,7 @@ const getAccountLabel = (account) => {
 const formatPercent = (value, digits = 1) => `${Number(value).toFixed(digits)}%`
 
 const formatSignedPercentPoint = (value) => {
-  const sign = value > 0 ? '+' : value < 0 ? '-' : ''
+  const sign = value > 0 ? '+' : value < 0 ? MINUS : ''
   return `${sign}${Math.abs(value).toFixed(1)}%p`
 }
 

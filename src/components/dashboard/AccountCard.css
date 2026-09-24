@@ -147,14 +147,8 @@
 }
 
 .stat-value.profit-rate.positive,
-.stat-value.positive {
-  color: var(--color-rise);
-}
 
 .stat-value.profit-rate.negative,
-.stat-value.negative {
-  color: var(--color-fall);
-}
 
 .account-stats-row {
   display: grid;

@@ -322,7 +322,7 @@
 /* Footer */
 .landing-footer {
   background-color: var(--color-text-primary);
-  color: var(--color-on-accent);
+  color: var(--color-bg-page);
   padding: 2rem;
   text-align: center;
 }

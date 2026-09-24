@@ -484,7 +484,7 @@ const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilt
                   {formatCurrency(totalValue, displayCurr)}
                 </span>
                 <span className="summary-label">평가 손익:</span>
-                <PriceChange className="summary-value" value={totalProfitLoss} formatAbs={(v) => formatCurrency(v, displayCurr)} />
+                <PriceChange className="summary-value" value={totalProfitLoss} formatAbs={(v) => formatCurrency(v, displayCurr)} digits={displayCurr === 'KRW' ? 0 : 2} />
                 <span className="summary-label">수익률:</span>
                 <PriceChange className="summary-value" value={totalProfitRate} />
               </div>
@@ -613,7 +613,7 @@ const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilt
                         )}
                       </td>
                       <td className="text-right">
-                        <PriceChange value={displayProfitLoss} formatAbs={(v) => formatCurrency(v, displayCurr)} />
+                        <PriceChange value={displayProfitLoss} formatAbs={(v) => formatCurrency(v, displayCurr)} digits={displayCurr === 'KRW' ? 0 : 2} />
                         {displayCurrency !== 'original' && (
                           <span className="original-value">
                             ({formatCurrency(holding.totalProfitLoss, currencyGroup.currency)})

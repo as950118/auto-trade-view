@@ -45,7 +45,7 @@ const PortfolioWeightChart = ({ holdings = [] }) => {
             {chartData.map((entry, index) => (
               <Cell
                 key={entry.name}
-                fill={entry.isCash ? chart.muted : COLORS[index % COLORS.length]}
+                fill={entry.isCash ? chart.neutral : COLORS[index % COLORS.length]}
               />
             ))}
           </Pie>

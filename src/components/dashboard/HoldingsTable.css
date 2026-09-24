@@ -21,7 +21,7 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 0.75rem 1rem;
-  background: var(--color-status-danger-bg);
+  background: var(--color-accent-bg);
   border: 1px solid var(--color-accent);
   border-radius: var(--radius-md);
   margin-bottom: 0.5rem;
@@ -30,7 +30,7 @@
 .badge-label {
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--color-status-danger-fg);
+  color: var(--color-text-primary);
 }
 
 .clear-filter-btn {
@@ -231,13 +231,7 @@
   color: var(--color-text-primary);
 }
 
-.summary-value.profit {
-  color: var(--color-rise);
-}
 
-.summary-value.loss {
-  color: var(--color-fall);
-}
 
 .holdings-table {
   width: 100%;
@@ -331,13 +325,8 @@
   color: var(--color-text-primary);
 }
 
-.profit {
-  color: var(--color-rise);
-  font-weight: 600;
-}
-
-.loss {
-  color: var(--color-fall);
+/* 평가손익·수익률 셀(PriceChange)은 기존 .profit/.loss와 같은 굵기를 유지한다 */
+.holdings-table td .price-change {
   font-weight: 600;
 }
 
