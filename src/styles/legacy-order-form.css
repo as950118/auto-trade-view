@@ -1,0 +1,172 @@
+/*
+ * 옛 BuyOrderModal.css / SellOrderModal.css에 있던 범위 없는(전역) 규칙 중, 다른 화면이 암묵적으로 의존하던 것만
+ * 원문 그대로 옮겼다(TASK-0018 2단계에서 두 모달을 OrderModal로 합치며 파일을 삭제). 목표비율 모달의 종목 검색 목록,
+ * 여러 폼 모달의 .form-hint 등이 이 규칙에 기대고 있다. 해당 화면을 DS-0003 컴포넌트로 옮기면 이 파일을 지운다.
+ */
+
+/* from BuyOrderModal.css */
+.symbol-placeholder {
+  padding: 0.75rem 1rem;
+  background: var(--color-bg-page);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+/* from BuyOrderModal.css */
+.form-hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+/* from BuyOrderModal.css */
+.selected-symbol-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* from BuyOrderModal.css */
+.selected-symbol-row .selected-symbol-display {
+  flex: 1;
+}
+
+/* from BuyOrderModal.css */
+.btn-clear-symbol-inline {
+  padding: 0.4rem 0.65rem;
+  font-size: 0.85rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+/* from BuyOrderModal.css */
+.btn-clear-symbol-inline:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* from BuyOrderModal.css */
+.selected-symbol-display {
+  padding: 0.65rem 0.75rem;
+  background: var(--color-bg-page);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+}
+
+/* from BuyOrderModal.css */
+.symbol-search-loading {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-top: 0.35rem;
+}
+
+/* from BuyOrderModal.css */
+.symbol-results-list {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  max-height: 220px;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+}
+
+/* from BuyOrderModal.css */
+.symbol-result-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--color-border);
+  transition: background 0.15s;
+}
+
+/* from BuyOrderModal.css */
+.symbol-result-item:last-child {
+  border-bottom: none;
+}
+
+/* from BuyOrderModal.css */
+.symbol-result-item:hover {
+  background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+}
+
+/* from BuyOrderModal.css */
+.symbol-result-ticker {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  min-width: 4rem;
+}
+
+/* from BuyOrderModal.css */
+.symbol-result-name {
+  flex: 1;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* from BuyOrderModal.css */
+.symbol-result-currency {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+/* from SellOrderModal.css */
+.quantity-type-tabs,
+.order-type-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/* from SellOrderModal.css */
+.quantity-type-tab,
+.order-type-tab {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* from SellOrderModal.css */
+.quantity-type-tab:hover,
+.order-type-tab:hover {
+  border-color: var(--color-fall);
+  color: var(--color-fall);
+}
+
+/* from SellOrderModal.css */
+.quantity-type-tab.active,
+.order-type-tab.active {
+  background: var(--color-fall);
+  border-color: var(--color-fall);
+  color: var(--color-on-fall);
+}
+
+/* from SellOrderModal.css */
+.amount-input-wrap .form-input,
+.price-input-wrap .form-input {
+  flex: 1;
+}

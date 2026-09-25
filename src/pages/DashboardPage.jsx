@@ -7,7 +7,7 @@ import AccountCard from '../components/dashboard/AccountCard'
 import HoldingsTable from '../components/dashboard/HoldingsTable'
 import SummaryStats from '../components/dashboard/SummaryStats'
 import AccountFormModal from '../components/dashboard/AccountFormModal'
-import BuyOrderModal from '../components/dashboard/BuyOrderModal'
+import OrderModal from '../components/dashboard/OrderModal'
 import { dashboardAPI } from '../services/dashboardAPI'
 import './DashboardPage.css'
 
@@ -247,11 +247,13 @@ const DashboardPage = () => {
         />
 
         {/* 매수 주문 모달 */}
-        <BuyOrderModal
+        <OrderModal
           isOpen={buyModalOpen}
           onClose={() => setBuyModalOpen(false)}
           onSuccess={handleModalSuccess}
           accounts={accounts}
+          holdings={holdings}
+          initialSide="BUY"
         />
       </div>
     </div>

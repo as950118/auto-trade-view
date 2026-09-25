@@ -70,37 +70,15 @@
 }
 
 .currency-toggle-buttons {
-  display: flex;
+  display: block;
   gap: var(--space-1);
   margin-bottom: var(--space-1);
   padding-bottom: var(--space-1);
   border-bottom: 1px solid var(--color-border);
 }
 
-.currency-toggle-btn {
-  flex: 1;
-  padding: var(--space-1) var(--space-2);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background: var(--color-bg-elevated);
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-xs);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
 
-.currency-toggle-btn:hover {
-  border-color: var(--color-accent);
-  background: var(--color-bg-page);
-  color: var(--color-text-primary);
-}
 
-.currency-toggle-btn.active {
-  background: var(--color-accent);
-  color: var(--color-on-accent);
-  border-color: var(--color-accent);
-}
 
 .currency-section {
   margin-bottom: var(--space-1);

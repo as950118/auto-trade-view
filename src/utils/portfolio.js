@@ -1,5 +1,5 @@
 // PRD-0003: 포트폴리오/종목 자산군(주식·코인)과 계좌 브로커 자산군 간 정합성 판단 공용 유틸.
-// PortfolioLinkFormModal / TargetAllocationPlan 생성 폼 / BuyOrderModal에서 공유한다.
+// PortfolioLinkFormModal / TargetAllocationPlan 생성 폼 / OrderModal에서 공유한다.
 
 export const getAssetType = (portfolio) => {
   const holdings = portfolio.holdings || []

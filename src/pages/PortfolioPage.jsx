@@ -10,6 +10,7 @@ import PortfolioComparisonPanel from '../components/dashboard/PortfolioCompariso
 import PortfolioCard, { getAssetType } from '../components/dashboard/PortfolioCard'
 import { dashboardAPI } from '../services/dashboardAPI'
 import './PortfolioPage.css'
+import { FilterChips } from '../components/ui/Tabs'
 
 const OWNERSHIP_TABS = [
   { value: 'ALL', label: '전체' },
@@ -212,32 +213,23 @@ const PortfolioPage = () => {
               )}
             </div>
 
-            <div className="filter-row">
-              {OWNERSHIP_TABS.map((tab) => (
-                <button
-                  key={tab.value}
-                  type="button"
-                  className={`filter-chip${ownershipFilter === tab.value ? ' active' : ''}`}
-                  onClick={() => setOwnershipFilter(tab.value)}
-                >
-                  {tab.label}
-                  <span className="filter-chip-count">{ownershipCounts[tab.value]}</span>
-                </button>
-              ))}
-            </div>
+            <FilterChips
+              className="filter-row"
+              ariaLabel="소유 구분"
+              options={OWNERSHIP_TABS.map((tab) => ({
+                value: tab.value,
+                label: (
+                  <>
+                    {tab.label}
+                    <span className="filter-chip-count">{ownershipCounts[tab.value]}</span>
+                  </>
+                ),
+              }))}
+              value={ownershipFilter}
+              onChange={setOwnershipFilter}
+            />
 
-            <div className="filter-row">
-              {ASSET_TABS.map((tab) => (
-                <button
-                  key={tab.value}
-                  type="button"
-                  className={`filter-chip filter-chip-secondary${assetFilter === tab.value ? ' active' : ''}`}
-                  onClick={() => setAssetFilter(tab.value)}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
+            <FilterChips className="filter-row" ariaLabel="자산 구분" options={ASSET_TABS} value={assetFilter} onChange={setAssetFilter} />
           </div>
 
           {portfolios.length === 0 ? (
