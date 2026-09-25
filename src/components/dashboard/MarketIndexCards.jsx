@@ -6,7 +6,8 @@ import './MarketIndexCards.css'
 
 /**
  * DS-0003 MarketIndexCard — 주요 지수 요약 카드 줄 (TASK-0018 2단계, ADR-0005).
- * 값은 백엔드 캐시(10분) 기준이고, 추이는 최근 30거래일 일봉 종가다.
+ * 값은 백엔드 스케줄러가 10분마다 갱신한 캐시 기준이고, 추이는 최근 30거래일 일봉 종가다.
+ * 갱신에 실패한 지수(stale)는 직전 값에 '지연'을 붙여 보여준다.
  * 지수 조회가 실패하면 이 줄만 조용히 숨긴다(대시보드 본문을 막지 않는다).
  */
 const formatIndex = (v) => Number(v).toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
@@ -71,7 +72,11 @@ function MarketIndexCards() {
         <article key={idx.code} className="market-index">
           <div className="market-index-head">
             <span className="market-index-name">{idx.name}</span>
-            <span className="market-index-asof">{formatAsOf(idx.as_of)}</span>
+            <span className="market-index-asof">
+              {formatAsOf(idx.as_of)}
+              {/* 백엔드 갱신이 실패해 직전 값을 보여주는 중(ADR-0005) */}
+              {idx.stale && ' · 지연'}
+            </span>
           </div>
           <div className="market-index-value">{formatIndex(idx.value)}</div>
           <span className="market-index-change">
