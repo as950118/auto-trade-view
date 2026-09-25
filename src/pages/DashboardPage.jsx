@@ -6,6 +6,7 @@ import Modal from '../components/ui/Modal'
 import AccountCard from '../components/dashboard/AccountCard'
 import HoldingsTable from '../components/dashboard/HoldingsTable'
 import SummaryStats from '../components/dashboard/SummaryStats'
+import MarketIndexCards from '../components/dashboard/MarketIndexCards'
 import AccountFormModal from '../components/dashboard/AccountFormModal'
 import OrderModal from '../components/dashboard/OrderModal'
 import { dashboardAPI } from '../services/dashboardAPI'
@@ -150,6 +151,9 @@ const DashboardPage = () => {
           <h1 className="dashboard-title">대시보드</h1>
           <p className="dashboard-subtitle">안녕하세요, {user?.displayName || user?.username}님</p>
         </div>
+
+        {/* 주요 지수 (DS-0003 MarketIndexCard, 조회 실패 시 숨김) */}
+        <MarketIndexCards />
 
         {/* 요약 통계 — 항상 한 줄 */}
         {profitSummary && (

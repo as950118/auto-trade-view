@@ -128,6 +128,12 @@ export const dashboardAPI = {
     return response.data
   },
 
+  // 주요 지수 요약 (코스피·코스닥·나스닥·S&P 500, 10분 캐시) — ADR-0005
+  getMarketIndices: async () => {
+    const response = await api.get('/api/market/indices/')
+    return response.data
+  },
+
   // 목표 비율 자동매매 계획
   getTargetAllocationPlans: async (params = {}) => {
     const response = await api.get('/api/target-allocation-plans/', { params })
