@@ -125,7 +125,9 @@ const OrderModal = ({
     setOrderType('MARKET')
     setPrice('')
     setError('')
-  }, [isOpen, initialSide, initialSymbol])
+    // initialSymbol 객체가 새로 만들어져도 같은 종목이면 입력을 지우지 않도록 id로 비교한다
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen, initialSide, initialSymbol?.id])
 
   // 선택 계좌가 현재 방향의 계좌 목록에 없으면 첫 계좌로 맞춘다
   useEffect(() => {
@@ -177,12 +179,10 @@ const OrderModal = ({
 
   const handleAccountChange = (accountId) => {
     setSelectedAccountId(accountId ? Number(accountId) : null)
-    // 매수에서 종목을 검색으로 고른 경우, 계좌(거래소)가 바뀌면 종목을 다시 고른다
-    if (isBuy && !initialSymbol) {
-      setSelectedSymbol(null)
-      setSymbolSearch('')
-      setSymbolResults([])
-    }
+    // 계좌(거래소)가 바뀌면 이전 거래소 기준 검색 결과를 지운다. 종목이 정해진 상태의 계좌 목록은
+    // 이미 그 종목을 거래할 수 있는 계좌뿐이므로 종목은 그대로 둔다.
+    setSymbolSearch('')
+    setSymbolResults([])
   }
 
   const clearSymbol = () => {
@@ -291,9 +291,6 @@ const OrderModal = ({
 
   const renderSymbolSection = () => {
     if (isBuy) {
-      if (!selectedAccount) {
-        return <p className="order-empty">매수할 수 있는 계좌가 없어요. 계좌 설정에서 매수를 허용해 주세요.</p>
-      }
       if (selectedSymbol) {
         return (
           <TickerRow
@@ -304,6 +301,9 @@ const OrderModal = ({
             trailing={changeButton}
           />
         )
+      }
+      if (!selectedAccount) {
+        return <p className="order-empty">매수할 수 있는 계좌가 없어요. 계좌 설정에서 매수를 허용해 주세요.</p>
       }
       return (
         <div className="order-search">
@@ -318,7 +318,7 @@ const OrderModal = ({
           />
           {symbolSearching && <p className="order-empty">검색 중...</p>}
           {!symbolSearching && symbolResults.length > 0 && (
-            <div className="order-symbol-list" role="listbox" aria-label="종목 검색 결과">
+            <div className="order-symbol-list" role="group" aria-label="종목 검색 결과">
               {symbolResults.map((sym) => (
                 <TickerRow
                   key={sym.id}
@@ -355,7 +355,7 @@ const OrderModal = ({
       return <p className="order-empty">매도할 보유 종목이 없어요.</p>
     }
     return (
-      <div className="order-symbol-list" role="listbox" aria-label="보유 종목">
+      <div className="order-symbol-list" role="group" aria-label="보유 종목">
         {heldSymbols.map((g) => (
           <TickerRow
             key={g.symbol.id}
@@ -464,7 +464,7 @@ const OrderModal = ({
           <p className="order-empty">이 종목을 매수할 수 있는 계좌가 없어요.</p>
         )}
 
-        {selectedSymbol && (
+        {selectedSymbol && selectedAccountId && (
           <>
             <div className="order-group">
               <span className="order-label">수량 지정</span>

@@ -286,6 +286,13 @@ const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilt
   }
 
   // 사용 가능한 화폐단위 목록 추출
+  // 계좌 필터가 걸려 있으면 주문 모달에도 그 계좌의 보유만 넘긴다. 옛 SellOrderModal은 필터가 적용된
+  // holdingGroup.holdings를 받았으므로, 전체 보유를 넘기면 다른 계좌가 기본 선택돼 엉뚱한 계좌를 매도할 수 있다.
+  const orderHoldings = useMemo(
+    () => (selectedAccount ? holdings.filter((h) => h.account?.id === selectedAccount) : holdings),
+    [holdings, selectedAccount]
+  )
+
   const availableCurrencies = useMemo(() => {
     const currencies = new Set()
     holdings.forEach(holding => {
@@ -656,7 +663,7 @@ const HoldingsTable = ({ holdings, accounts, selectedAccount, onClearAccountFilt
         onClose={closeSellModal}
         onSuccess={onSellSuccess}
         accounts={accounts}
-        holdings={holdings}
+        holdings={orderHoldings}
         initialSide="SELL"
         initialSymbol={sellModalHolding?.symbol ?? null}
         currency={sellModalCurrency}
