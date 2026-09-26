@@ -8,13 +8,18 @@ import './MarketIndexCards.css'
  * DS-0003 MarketIndexCard — 주요 지수 요약 카드 줄 (TASK-0018 2단계, ADR-0005).
  * 값은 백엔드 스케줄러가 10분마다 갱신한 캐시 기준이고, 추이는 최근 30거래일 일봉 종가다.
  * 갱신에 실패한 지수(stale)는 직전 값에 '지연'을 붙여 보여준다.
- * 지수 조회가 실패하면 이 줄만 조용히 숨긴다(대시보드 본문을 막지 않는다).
+ * 불러오는 중이거나 조회가 실패하거나 결과가 비면 이 줄 자체를 그리지 않는다(대시보드 본문을 막지 않고,
+ * 스켈레톤이 곧 사라져 생기는 레이아웃 흔들림도 피한다).
  */
-const formatIndex = (v) => Number(v).toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+const formatIndex = (v) => {
+  const n = Number(v)
+  return Number.isFinite(n) ? n.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '-'
+}
 
 const formatAsOf = (iso) => {
-  if (!iso) return ''
-  const [, m, d] = iso.split('-').map(Number)
+  if (!iso || typeof iso !== 'string') return ''
+  const [, m, d] = iso.slice(0, 10).split('-').map(Number)
+  if (!m || !d) return ''
   return `${m}월 ${d}일 기준`
 }
 
@@ -24,9 +29,13 @@ function Sparkline({ series, tone }) {
   const h = 36
   const min = Math.min(...series)
   const max = Math.max(...series)
-  const span = max - min || 1
+  const flat = max === min
+  const span = flat ? 1 : max - min
   const points = series
-    .map((v, i) => `${((i / (series.length - 1)) * w).toFixed(1)},${(h - 2 - ((v - min) / span) * (h - 4)).toFixed(1)}`)
+    .map((v, i) => {
+      const y = flat ? h / 2 : h - 2 - ((v - min) / span) * (h - 4)
+      return `${((i / (series.length - 1)) * w).toFixed(1)},${y.toFixed(1)}`
+    })
     .join(' ')
   return (
     <svg className="market-index-spark" viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" aria-hidden="true">
@@ -36,8 +45,7 @@ function Sparkline({ series, tone }) {
 }
 
 function MarketIndexCards() {
-  const [indices, setIndices] = useState(null)
-  const [failed, setFailed] = useState(false)
+  const [indices, setIndices] = useState([])
 
   useEffect(() => {
     let cancelled = false
@@ -47,24 +55,14 @@ function MarketIndexCards() {
         if (!cancelled) setIndices(data.indices || [])
       })
       .catch(() => {
-        if (!cancelled) setFailed(true)
+        // 조회 실패는 빈 배열과 동일하게 취급한다 — 이 줄만 조용히 숨긴다
       })
     return () => {
       cancelled = true
     }
   }, [])
 
-  if (failed || (indices && indices.length === 0)) return null
-
-  if (!indices) {
-    return (
-      <div className="market-indices" aria-busy="true" aria-label="주요 지수 불러오는 중">
-        {[0, 1, 2, 3].map((i) => (
-          <div key={i} className="market-index market-index-skeleton" />
-        ))}
-      </div>
-    )
-  }
+  if (indices.length === 0) return null
 
   return (
     <section className="market-indices" aria-label="주요 지수">

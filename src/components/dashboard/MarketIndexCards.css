@@ -1,7 +1,8 @@
 /* DS-0003 MarketIndexCard */
 .market-indices {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  /* 좁은 화면(320px)에서도 최소 두 칸은 나오도록 최소 폭을 줄인다 */
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: var(--space-3);
   margin-bottom: var(--space-4);
 }
@@ -21,6 +22,7 @@
   justify-content: space-between;
   align-items: baseline;
   gap: var(--space-2);
+  min-width: 0;
 }
 
 .market-index-name {
@@ -28,6 +30,10 @@
   line-height: 18px;
   font-weight: 500;
   color: var(--color-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
 }
 
 .market-index-asof {
@@ -35,6 +41,7 @@
   line-height: 16px;
   color: var(--color-text-tertiary);
   white-space: nowrap;
+  flex: none;
 }
 
 .market-index-value {
@@ -74,25 +81,4 @@
 
 .market-index-spark-flat {
   stroke: var(--color-text-tertiary);
-}
-
-.market-index-skeleton {
-  height: 132px;
-  background: var(--color-bg-subtle);
-  border-color: transparent;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .market-index-skeleton {
-    animation: market-index-pulse 1.2s ease-in-out infinite alternate;
-  }
-}
-
-@keyframes market-index-pulse {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0.55;
-  }
 }
