@@ -1,0 +1,84 @@
+/* DS-0003 MarketIndexCard */
+.market-indices {
+  display: grid;
+  /* 좁은 화면(320px)에서도 최소 두 칸은 나오도록 최소 폭을 줄인다 */
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.market-index {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  display: grid;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.market-index-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.market-index-name {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.market-index-asof {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-text-tertiary);
+  white-space: nowrap;
+  flex: none;
+}
+
+.market-index-value {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.market-index-change {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+}
+
+.market-index-spark {
+  width: 100%;
+  height: 36px;
+  display: block;
+  margin-top: var(--space-2);
+}
+
+.market-index-spark-line {
+  fill: none;
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.market-index-spark-rise {
+  stroke: var(--color-rise);
+}
+
+.market-index-spark-fall {
+  stroke: var(--color-fall);
+}
+
+.market-index-spark-flat {
+  stroke: var(--color-text-tertiary);
+}
